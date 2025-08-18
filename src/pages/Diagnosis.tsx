@@ -13,6 +13,19 @@ interface Disease {
   probability: number;
   treatment: string;
   cost: number;
+  type?: string;
+  guideline?: string[];
+  chemicals?: Chemical[];
+  videos?: string[];
+}
+
+interface Chemical {
+  name: string;
+  dosePerAcre: number;
+  unit: string;
+  pricePerUnit: number;
+  note?: string;
+  type: string;
 }
 
 const Diagnosis = () => {
@@ -38,16 +51,138 @@ const Diagnosis = () => {
 
   const mockDiseases: Record<string, Disease[]> = {
     rice: [
-      { name: "ব্লাস্ট রোগ", probability: 78, treatment: "ট্রাইসাইক্লাজোল স্প্রে", cost: 450 },
-      { name: "ব্যাকটেরিয়াল লিফ ব্লাইট", probability: 65, treatment: "কপার অক্সিক্লোরাইড", cost: 320 }
+      { 
+        name: "ব্লাস্ট রোগ (ছত্রাক)", 
+        probability: 78, 
+        treatment: "ট্রাইসাইক্লাজোল স্প্রে", 
+        cost: 450,
+        type: "ছত্রাক রোগ",
+        guideline: [
+          "সংক্রমিত গাছ/ছিটে অংশ অপসারণ করুন",
+          "জমিতে অতিরিক্ত নাইট্রোজেন এড়িয়ে চলুন",
+          "পর্যাপ্ত পানি নিষ্কাশন নিশ্চিত করুন",
+          "লেবেল মেনে ফাঙ্গিসাইড প্রয়োগ করুন"
+        ],
+        chemicals: [
+          { name: "ট্রাইসাইক্লাজোল 75WP", dosePerAcre: 0.12, unit: "কেজি", pricePerUnit: 1200, note: "পানি ২০০ লিটার", type: "fungicide" },
+          { name: "আজক্সিস্ট্রোবিন 250SC", dosePerAcre: 0.08, unit: "লিটার", pricePerUnit: 2200, note: "পানি ২০০ লিটার", type: "fungicide" }
+        ],
+        videos: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
+      },
+      { 
+        name: "ব্যাকটেরিয়াল লিফ ব্লাইট", 
+        probability: 65, 
+        treatment: "কপার অক্সিক্লোরাইড", 
+        cost: 320,
+        type: "ব্যাকটেরিয়া রোগ",
+        guideline: [
+          "সেচের পানি নিয়ন্ত্রণ, ক্ষেতে হাঁটা কমান",
+          "তামাযুক্ত (Copper) প্রোডাক্ট লেবেলমতো ব্যবহার"
+        ],
+        chemicals: [
+          { name: "কপার অক্সিক্লোরাইড 50WP", dosePerAcre: 0.6, unit: "কেজি", pricePerUnit: 550, note: "২০০ লিটার পানি", type: "bactericide" }
+        ],
+        videos: ["https://www.youtube.com/watch?v=3GwjfUFyY6M"]
+      }
     ],
     tomato: [
-      { name: "লেট ব্লাইট", probability: 82, treatment: "ম্যানকোজেব স্প্রে", cost: 380 },
-      { name: "আর্লি ব্লাইট", probability: 58, treatment: "ক্লোরোথালোনিল", cost: 420 }
+      { 
+        name: "লেট ব্লাইট (Phytophthora)", 
+        probability: 82, 
+        treatment: "ম্যানকোজেব স্প্রে", 
+        cost: 380,
+        type: "ছত্রাক রোগ",
+        guideline: [
+          "সংক্রমিত পাতা/ফল অপসারণ",
+          "ভোর/সন্ধ্যায় স্প্রে; পাতা ভালোমতো ভিজবে"
+        ],
+        chemicals: [
+          { name: "ম্যানকোজেব 80WP", dosePerAcre: 1.0, unit: "কেজি", pricePerUnit: 450, note: "২০০–২৪০ লিটার পানি", type: "fungicide" },
+          { name: "মেটাল্যাক্সিল + ম্যানকোজেব", dosePerAcre: 0.8, unit: "কেজি", pricePerUnit: 800, note: "২০০ লিটার পানি", type: "fungicide" }
+        ],
+        videos: ["https://www.youtube.com/watch?v=oHg5SJYRHA0"]
+      },
+      { 
+        name: "লিফ কার্ল (ভাইরাস)", 
+        probability: 60, 
+        treatment: "ইমিডাক্লোপ্রিড স্প্রে", 
+        cost: 420,
+        type: "ভাইরাস রোগ",
+        guideline: [
+          "ভেক্টর পোকা (সাদা মাছি) নিয়ন্ত্রণ",
+          "সংক্রমিত গাছ তুলে ফেলুন"
+        ],
+        chemicals: [
+          { name: "ইমিডাক্লোপ্রিড 17.8SL", dosePerAcre: 0.08, unit: "লিটার", pricePerUnit: 1500, note: "সাদা মাছির জন্য", type: "insecticide" }
+        ],
+        videos: ["https://www.youtube.com/watch?v=DLzxrzFCyOs"]
+      }
     ],
     potato: [
-      { name: "আর্লি ব্লাইট", probability: 75, treatment: "ম্যানকোজেব + কপার", cost: 350 },
-      { name: "লেট ব্লাইট", probability: 68, treatment: "মেটাল্যাক্সিল", cost: 480 }
+      { 
+        name: "আর্লি ব্লাইট", 
+        probability: 75, 
+        treatment: "ক্লোরোথালোনিল", 
+        cost: 350,
+        type: "ছত্রাক রোগ",
+        guideline: [
+          "ফসল ঘনত্ব কমান",
+          "ফাঙ্গিসাইড রোটেশন অনুসরণ"
+        ],
+        chemicals: [
+          { name: "ক্লোরোথালোনিল 75WP", dosePerAcre: 1.0, unit: "কেজি", pricePerUnit: 650, note: "২০০ লিটার পানি", type: "fungicide" }
+        ],
+        videos: ["https://www.youtube.com/watch?v=ub82Xb1C8os"]
+      },
+      { 
+        name: "লেট ব্লাইট", 
+        probability: 68, 
+        treatment: "মেটাল্যাক্সিল", 
+        cost: 480,
+        type: "ছত্রাক রোগ",
+        guideline: [
+          "সংক্রমিত অংশ পুড়িয়ে ফেলুন",
+          "আর্দ্রতা কমান, বায়ু চলাচল বাড়ান"
+        ],
+        chemicals: [
+          { name: "মেটাল্যাক্সিল 25WP", dosePerAcre: 0.8, unit: "কেজি", pricePerUnit: 850, note: "২০০ লিটার পানি", type: "fungicide" }
+        ],
+        videos: []
+      }
+    ],
+    eggplant: [
+      { 
+        name: "ফোমপসিস ফল পচা", 
+        probability: 65, 
+        treatment: "কারবেনডাজিম", 
+        cost: 280,
+        type: "ছত্রাক রোগ",
+        guideline: [
+          "সংক্রমিত ফল তুলে ফেলুন",
+          "স্প্রে ইন্টারভাল ৭–১০ দিন"
+        ],
+        chemicals: [
+          { name: "কারবেনডাজিম 50WP", dosePerAcre: 0.2, unit: "কেজি", pricePerUnit: 900, note: "২০০ লিটার পানি", type: "fungicide" }
+        ],
+        videos: []
+      }
+    ],
+    cucumber: [
+      { 
+        name: "পাউডারি মিলডিউ", 
+        probability: 70, 
+        treatment: "সালফার স্প্রে", 
+        cost: 200,
+        type: "ছত্রাক রোগ",
+        guideline: [
+          "পাতা শুকনো রাখুন",
+          "ভোর/বিকেল স্প্রে"
+        ],
+        chemicals: [
+          { name: "সালফার 80WP", dosePerAcre: 1.0, unit: "কেজি", pricePerUnit: 300, note: "২০০ লিটার পানি", type: "fungicide" }
+        ],
+        videos: []
+      }
     ]
   };
 
@@ -273,7 +408,7 @@ const Diagnosis = () => {
               {results.map((disease, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-3 space-y-2"
+                  className="border rounded-lg p-3 space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold">{disease.name}</h3>
@@ -281,12 +416,71 @@ const Diagnosis = () => {
                       {disease.probability}% সম্ভাবনা
                     </Badge>
                   </div>
+                  
+                  {disease.type && (
+                    <Badge variant="outline">{disease.type}</Badge>
+                  )}
+                  
                   <p className="text-sm text-muted-foreground">
                     <strong>চিকিৎসা:</strong> {disease.treatment}
                   </p>
-                  <p className="text-sm">
-                    <strong>প্রতি একর খরচ:</strong> ৳{disease.cost}
-                  </p>
+                  
+                  {disease.guideline && (
+                    <div className="space-y-1">
+                      <strong className="text-sm">নির্দেশনা:</strong>
+                      <ul className="text-sm space-y-1 ml-4">
+                        {disease.guideline.map((guide, idx) => (
+                          <li key={idx}>• {guide}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {disease.chemicals && area && (
+                    <div className="space-y-2">
+                      <strong className="text-sm">প্রস্তাবিত ঔষধ:</strong>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs border-collapse border border-border">
+                          <thead>
+                            <tr className="bg-muted">
+                              <th className="border border-border p-2 text-left">ঔষধ</th>
+                              <th className="border border-border p-2 text-left">পরিমাণ</th>
+                              <th className="border border-border p-2 text-left">খরচ</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {disease.chemicals.map((chem, idx) => {
+                              const areaInAcre = unit === "acre" ? parseFloat(area) : 
+                                               unit === "bigha" ? parseFloat(area) * 0.33 :
+                                               parseFloat(area) / 100;
+                              const qty = chem.dosePerAcre * areaInAcre;
+                              const cost = qty * chem.pricePerUnit;
+                              
+                              return (
+                                <tr key={idx}>
+                                  <td className="border border-border p-2">{chem.name}</td>
+                                  <td className="border border-border p-2">{qty.toFixed(2)} {chem.unit}</td>
+                                  <td className="border border-border p-2">৳{cost.toLocaleString('bn-BD')}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {disease.videos && disease.videos.length > 0 && (
+                    <div className="space-y-1">
+                      <strong className="text-sm">ভিডিও গাইড:</strong>
+                      {disease.videos.map((video, idx) => (
+                        <a key={idx} href={video} target="_blank" rel="noopener noreferrer" 
+                           className="block text-xs text-blue-600 hover:underline break-all">
+                          {video}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </CardContent>

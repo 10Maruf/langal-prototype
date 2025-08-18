@@ -4,6 +4,7 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import SocialFeed from "./SocialFeed";
 import Marketplace from "./Marketplace";
 import Diagnosis from "./Diagnosis";
+import Recommendation from "./Recommendation";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("feed");
@@ -17,12 +18,7 @@ const Index = () => {
       case "diagnosis":
         return <Diagnosis />;
       case "recommendation":
-        return (
-          <div className="p-4 pb-20 text-center">
-            <h2 className="text-xl font-bold mb-4">ফসল সুপারিশ</h2>
-            <p className="text-muted-foreground">শীঘ্রই আসছে...</p>
-          </div>
-        );
+        return <Recommendation />;
       case "chat":
         return (
           <div className="p-4 pb-20 text-center">
