@@ -5,6 +5,7 @@ import SocialFeed from "./SocialFeed";
 import Marketplace from "./Marketplace";
 import Diagnosis from "./Diagnosis";
 import Recommendation from "./Recommendation";
+import WeatherPlanning from "./WeatherPlanning";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("feed");
@@ -19,13 +20,8 @@ const Index = () => {
         return <Diagnosis />;
       case "recommendation":
         return <Recommendation />;
-      case "chat":
-        return (
-          <div className="p-4 pb-20 text-center">
-            <h2 className="text-xl font-bold mb-4">চ্যাট</h2>
-            <p className="text-muted-foreground">শীঘ্রই আসছে...</p>
-          </div>
-        );
+      case "weather":
+        return <WeatherPlanning />;
       default:
         return <SocialFeed />;
     }

@@ -52,8 +52,8 @@ const Recommendation = () => {
         profit: 486000,
         breakdown: { seed: 1800, fert: 5200, labor: 7000, irrigation: 1800, other: 2200 },
         plan: [
-          { phase: "মাঠ প্রস্তুতি", window: "Day -10 to -1", actions: ["আগাছা পরিষ্কার, চাষ+মাঠ সমতল", "জৈব সার ১ টন/একর (সম্ভব হলে)"] },
-          { phase: "রোপণ/বপন", window: "Day 0", actions: ["চারা ২৫–৩০ দিন বয়সে রোপণ", "বপনে ২০–২৫ কেজি বীজ/একর"] },
+          { phase: "মাঠ প্রস্তুতি", window: "Day -10 to -1", actions: ["আগাছা পরিষ্কার, চাষ+মাঠ সমতল","জৈব সার ১ টন/একর (সম্ভব হলে)"] },
+          { phase: "রোপণ/বপন", window: "Day 0", actions: ["চারা ২৫–৩০ দিন বয়সে রোপণ","বপনে ২০–২৫ কেজি বীজ/একর"] },
           { phase: "সার (বেসাল)", window: "Day 0", actions: ["ইউরিয়া ২০ কেজি, টিএসপি ১৬ কেজি, এমওপি ১২ কেজি"] },
           { phase: "টপড্রেস", window: "Day 35–40", actions: ["ইউরিয়া ১৮ কেজি"] },
           { phase: "হারভেস্ট", window: "Day 120–130", actions: ["৮৫% পাকা হলে কাটা"] }
@@ -74,6 +74,39 @@ const Recommendation = () => {
           { phase: "বেসাল", window: "Day 0", actions: ["টিএসপি 8 কেজি, এমওপি 6 কেজি"] },
           { phase: "পাতলা করা", window: "Day 15–20", actions: ["গাছ ১০–১২ সেমি দূরে রাখুন"] },
           { phase: "হারভেস্ট", window: "Day 90–100", actions: ["ফল ফেটে যাওয়ার আগে সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "চিনাবাদাম",
+        cost: 12000,
+        yield: 1.2,
+        price: 140,
+        duration: 110,
+        easy: true,
+        quick: false,
+        profit: 156000,
+        breakdown: { seed: 2500, fert: 2000, labor: 4500, irrigation: 1200, other: 1800 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["লাইন দূরত্ব ৩০ সেমি, গাছ ১৫ সেমি"] },
+          { phase: "সার প্রয়োগ", window: "Day 0", actions: ["টিএসপি 12 কেজি, এমওপি 8 কেজি"] },
+          { phase: "আগাছা দমন", window: "Day 20–25", actions: ["নিড়ানি দিয়ে আগাছা পরিষ্কার"] },
+          { phase: "হারভেস্ট", window: "Day 105–115", actions: ["পাতা হলুদ হলে উত্তোলন"] }
+        ]
+      },
+      {
+        name: "কালো জিরা",
+        cost: 5500,
+        yield: 0.4,
+        price: 300,
+        duration: 100,
+        easy: false,
+        quick: true,
+        profit: 114500,
+        breakdown: { seed: 800, fert: 1200, labor: 2200, irrigation: 500, other: 800 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["সারিতে বপন, গভীরতা ২-৩ সেমি"] },
+          { phase: "সেচ", window: "প্রতি ১০ দিনে", actions: ["হালকা সেচ, জলাবদ্ধতা এড়ান"] },
+          { phase: "হারভেস্ট", window: "Day 95–105", actions: ["ফল পাকলে সংগ্রহ"] }
         ]
       }
     ],
@@ -112,6 +145,54 @@ const Recommendation = () => {
           { phase: "টপড্রেস-২", window: "Day 45–50", actions: ["ইউরিয়া 12 কেজি"] },
           { phase: "হারভেস্ট", window: "Day 105–115", actions: ["শস্য কঠিন হলে কাটা"] }
         ]
+      },
+      {
+        name: "মসুর ডাল",
+        cost: 6500,
+        yield: 0.7,
+        price: 160,
+        duration: 100,
+        easy: true,
+        quick: true,
+        profit: 105500,
+        breakdown: { seed: 1200, fert: 1000, labor: 2800, irrigation: 700, other: 800 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["লাইন দূরত্ব ২৫ সেমি"] },
+          { phase: "সার", window: "Day 0", actions: ["টিএসপি 8 কেজি, এমওপি 4 কেজি"] },
+          { phase: "হারভেস্ট", window: "Day 95–105", actions: ["শুঁটি শুকিয়ে গেলে সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "মটর",
+        cost: 9000,
+        yield: 1.5,
+        price: 80,
+        duration: 85,
+        easy: true,
+        quick: true,
+        profit: 111000,
+        breakdown: { seed: 2000, fert: 1500, labor: 3500, irrigation: 1000, other: 1000 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["লাইন দূরত্ব ৩০ সেমি, গাছ ১০ সেমি"] },
+          { phase: "মাচা", window: "Day 15–20", actions: ["মাচা তৈরি বা সাপোর্ট দিন"] },
+          { phase: "হারভেস্ট", window: "Day 75–90", actions: ["কচি শুঁটি সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "রসুন",
+        cost: 18000,
+        yield: 3,
+        price: 120,
+        duration: 120,
+        easy: false,
+        quick: false,
+        profit: 342000,
+        breakdown: { seed: 12000, fert: 2000, labor: 2500, irrigation: 800, other: 700 },
+        plan: [
+          { phase: "রোপণ", window: "Day 0", actions: ["কোয়া ৫ সেমি গভীরে রোপণ"] },
+          { phase: "সেচ", window: "সপ্তাহে ২ বার", actions: ["নিয়মিত সেচ, জলাবদ্ধতা এড়ান"] },
+          { phase: "হারভেস্ট", window: "Day 115–125", actions: ["পাতা শুকিয়ে গেলে উত্তোলন"] }
+        ]
       }
     ],
     "Dec-Feb": [
@@ -149,7 +230,7 @@ const Recommendation = () => {
           { phase: "বেসাল", window: "Day 0", actions: ["টিএসপি 16 কেজি, এমওপি 8 কেজি"] },
           { phase: "টপড্রেস-১", window: "Day 20–25", actions: ["ইউরিয়া 12 কেজি"] },
           { phase: "টপড্রেস-২", window: "Day 45–50", actions: ["ইউরিয়া 12 কেজি"] },
-          { phase: "হারভেস্ট", window: "Day 105–115", actions: ["শস্য কঠিন হলে কাটা"] }
+          { phase: "হারভেস্ট", window: "Day 90–100", actions: ["কন্দ পরিপক্ক হলে উত্তোলন"] }
         ]
       },
       {
@@ -168,6 +249,57 @@ const Recommendation = () => {
           { phase: "সার ব্যবস্থাপনা", window: "প্রতি ১৫ দিনে", actions: ["ঝাড়ে গোবর/কম্পোস্ট, প্রয়োজনে সামান্য ইউরিয়া"] },
           { phase: "সেচ", window: "৫–৭ দিনে", actions: ["মাটি স্যাঁতসেঁতে রাখুন"] },
           { phase: "হারভেস্ট", window: "Day 60–80", actions: ["বাজার উপযোগী আকার হলে তোলা"] }
+        ]
+      },
+      {
+        name: "টমেটো",
+        cost: 16000,
+        yield: 12,
+        price: 35,
+        duration: 110,
+        easy: false,
+        quick: false,
+        profit: 404000,
+        breakdown: { seed: 1500, fert: 4000, labor: 6500, irrigation: 2000, other: 2000 },
+        plan: [
+          { phase: "চারা তৈরি", window: "Day -20 to -1", actions: ["নার্সারিতে চারা তৈরি"] },
+          { phase: "রোপণ", window: "Day 0", actions: ["৪০x৬০ সেমি দূরত্বে রোপণ"] },
+          { phase: "সাপোর্ট", window: "Day 15–20", actions: ["খুঁটি বা সাপোর্ট দিন"] },
+          { phase: "প্রুনিং", window: "Day 30–40", actions: ["অতিরিক্ত ডাল ছাঁটাই"] },
+          { phase: "হারভেস্ট", window: "Day 100–120", actions: ["পাকা টমেটো সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "বেগুন",
+        cost: 14000,
+        yield: 8,
+        price: 45,
+        duration: 120,
+        easy: true,
+        quick: false,
+        profit: 346000,
+        breakdown: { seed: 1200, fert: 3500, labor: 5500, irrigation: 1800, other: 2000 },
+        plan: [
+          { phase: "চারা তৈরি", window: "Day -25 to -1", actions: ["নার্সারিতে চারা প্রস্তুত"] },
+          { phase: "রোপণ", window: "Day 0", actions: ["৬০x৬০ সেমি দূরত্বে"] },
+          { phase: "সার প্রয়োগ", window: "প্রতি ২০ দিনে", actions: ["জৈব সার ও রাসায়নিক সার"] },
+          { phase: "হারভেস্ট", window: "Day 110–130", actions: ["কচি বেগুন সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "ফুলকপি",
+        cost: 12000,
+        yield: 6,
+        price: 40,
+        duration: 90,
+        easy: true,
+        quick: true,
+        profit: 228000,
+        breakdown: { seed: 800, fert: 3000, labor: 4500, irrigation: 1500, other: 2200 },
+        plan: [
+          { phase: "চারা রোপণ", window: "Day 0", actions: ["৫০x৫০ সেমি দূরত্বে"] },
+          { phase: "সেচ", window: "নিয়মিত", actions: ["মাটি আর্দ্র রাখুন"] },
+          { phase: "হারভেস্ট", window: "Day 80–95", actions: ["ফুল শক্ত হলে কাটুন"] }
         ]
       }
     ],
@@ -189,6 +321,70 @@ const Recommendation = () => {
           { phase: "টপড্রেস-২", window: "Day 40–45", actions: ["ইউরিয়া 12 কেজি, এমওপি 8 কেজি"] },
           { phase: "সেচ", window: "১০–১২ দিনে একবার", actions: ["ফুল আসা সময়ে আর্দ্রতা জরুরি"] },
           { phase: "হারভেস্ট", window: "Day 100–115", actions: ["শস্য ২৫–৩০% আর্দ্রতায় সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "চা শিম",
+        cost: 8000,
+        yield: 2.5,
+        price: 60,
+        duration: 85,
+        easy: true,
+        quick: true,
+        profit: 142000,
+        breakdown: { seed: 1200, fert: 1800, labor: 3000, irrigation: 1200, other: 800 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["লাইন দূরত্ব ৪০ সেমি"] },
+          { phase: "মাচা", window: "Day 15–20", actions: ["৬ ফুট উচ্চতায় মাচা"] },
+          { phase: "হারভেস্ট", window: "Day 75–90", actions: ["কচি শিম নিয়মিত তোলা"] }
+        ]
+      },
+      {
+        name: "ধুন্দুল",
+        cost: 7500,
+        yield: 4,
+        price: 25,
+        duration: 80,
+        easy: true,
+        quick: true,
+        profit: 92500,
+        breakdown: { seed: 600, fert: 1500, labor: 3200, irrigation: 1200, other: 1000 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["৩x৩ মিটার দূরত্বে"] },
+          { phase: "মাচা", window: "Day 10–15", actions: ["মাচা বা সাপোর্ট"] },
+          { phase: "হারভেস্ট", window: "Day 70–85", actions: ["কচি ধুন্দুল সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "পানি কচু",
+        cost: 6000,
+        yield: 8,
+        price: 20,
+        duration: 90,
+        easy: true,
+        quick: true,
+        profit: 154000,
+        breakdown: { seed: 2000, fert: 1200, labor: 1800, irrigation: 600, other: 400 },
+        plan: [
+          { phase: "রোপণ", window: "Day 0", actions: ["জলাভূমিতে চারা রোপণ"] },
+          { phase: "পানি ব্যবস্থাপনা", window: "নিয়মিত", actions: ["৫-১০ সেমি পানি রাখুন"] },
+          { phase: "হারভেস্ট", window: "Day 80–95", actions: ["পাতা ও কন্দ সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "ঢেঁড়স",
+        cost: 10000,
+        yield: 3,
+        price: 50,
+        duration: 95,
+        easy: true,
+        quick: false,
+        profit: 140000,
+        breakdown: { seed: 800, fert: 2500, labor: 4000, irrigation: 1500, other: 1200 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["৪০x৩০ সেমি দূরত্বে"] },
+          { phase: "সার প্রয়োগ", window: "প্রতি ১৫ দিনে", actions: ["জৈব ও রাসায়নিক সার"] },
+          { phase: "হারভেস্ট", window: "Day 85–100", actions: ["কচি ঢেঁড়স নিয়মিত তোলা"] }
         ]
       }
     ]
