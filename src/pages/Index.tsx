@@ -5,7 +5,7 @@ import SocialFeed from "./SocialFeed";
 import Marketplace from "./Marketplace";
 import Diagnosis from "./Diagnosis";
 import Recommendation from "./Recommendation";
-import WeatherPlanning from "./WeatherPlanning";
+import Others from "./Others";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("feed");
@@ -20,8 +20,8 @@ const Index = () => {
         return <Diagnosis />;
       case "recommendation":
         return <Recommendation />;
-      case "weather":
-        return <WeatherPlanning />;
+      case "others":
+        return <Others />;
       default:
         return <SocialFeed />;
     }

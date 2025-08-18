@@ -13,7 +13,7 @@ export const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
     { id: "marketplace", label: "বাজার", icon: ShoppingCart, labelEn: "Market" },
     { id: "diagnosis", label: "রোগ", icon: Stethoscope, labelEn: "Diagnosis" },
     { id: "recommendation", label: "ফসল", icon: Sprout, labelEn: "Crops" },
-    { id: "weather", label: "আবহাওয়া", icon: MessageSquare, labelEn: "Weather" },
+    { id: "others", label: "অন্যান্য", icon: MessageSquare, labelEn: "Others" },
   ];
 
   return (
