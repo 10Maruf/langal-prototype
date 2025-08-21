@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { BottomNav } from "@/components/layout/BottomNav";
+import { useAuth } from "@/contexts/AuthContext";
 import SocialFeed from "./SocialFeed";
 import Marketplace from "./Marketplace";
 import Diagnosis from "./Diagnosis";
@@ -9,6 +11,26 @@ import Others from "./Others";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("feed");
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirect based on user type
+    if (user) {
+      switch (user.type) {
+        case 'expert':
+          navigate('/expert-dashboard');
+          break;
+        case 'customer':
+          navigate('/customer-dashboard');
+          break;
+        case 'farmer':
+        default:
+          // Farmers stay on the main page
+          break;
+      }
+    }
+  }, [user, navigate]);
 
   const renderContent = () => {
     switch (activeTab) {

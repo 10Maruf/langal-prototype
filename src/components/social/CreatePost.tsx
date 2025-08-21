@@ -6,7 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Image, Tag, MapPin, ShoppingCart, X } from "lucide-react";
+import { Image, Tag, MapPin, ShoppingCart, X, UserCheck } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface CreatePostProps {
   onPost: (postData: any) => void;
@@ -14,8 +15,9 @@ interface CreatePostProps {
 }
 
 export const CreatePost = ({ onPost, onCancel }: CreatePostProps) => {
+  const { user } = useAuth();
   const [content, setContent] = useState("");
-  const [postType, setPostType] = useState("general");
+  const [postType, setPostType] = useState(user?.type === 'expert' ? "expert_advice" : "general");
   const [tags, setTags] = useState<string[]>([]);
   const [currentTag, setCurrentTag] = useState("");
   const [images, setImages] = useState<File[]>([]);
@@ -71,13 +73,27 @@ export const CreatePost = ({ onPost, onCancel }: CreatePostProps) => {
         {/* Author Info */}
         <div className="flex items-center space-x-3">
           <Avatar className="h-10 w-10">
-            <AvatarFallback>কৃ</AvatarFallback>
+            <AvatarFallback>
+              {user?.name ? user.name.charAt(0) : 'U'}
+            </AvatarFallback>
           </Avatar>
           <div>
-            <span className="font-semibold text-sm">কৃষক ভাই</span>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-sm">
+                {user?.name || 'ইউজার'}
+              </span>
+              {user?.type === 'expert' && (
+                <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                  <UserCheck className="h-3 w-3 mr-1" />
+                  বিশেষজ্ঞ
+                </Badge>
+              )}
+            </div>
             <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <MapPin className="h-3 w-3" />
-              <span>নোয়াখালী</span>
+              <span>
+                {user?.type === 'expert' ? 'কৃষি বিশ্ববিদ্যালয়' : 'বাংলাদেশ'}
+              </span>
             </div>
           </div>
         </div>
@@ -92,6 +108,14 @@ export const CreatePost = ({ onPost, onCancel }: CreatePostProps) => {
             <SelectItem value="marketplace">বিক্রয়/ভাড়া</SelectItem>
             <SelectItem value="question">প্রশ্ন</SelectItem>
             <SelectItem value="advice">পরামর্শ</SelectItem>
+            {user?.type === 'expert' && (
+              <SelectItem value="expert_advice">
+                <div className="flex items-center gap-2">
+                  <UserCheck className="h-4 w-4" />
+                  বিশেষজ্ঞ পরামর্শ
+                </div>
+              </SelectItem>
+            )}
           </SelectContent>
         </Select>
 
@@ -110,13 +134,13 @@ export const CreatePost = ({ onPost, onCancel }: CreatePostProps) => {
               <ShoppingCart className="h-4 w-4" />
               <span>বাজার তথ্য</span>
             </div>
-            
+
             <Input
               placeholder="পণ্যের নাম"
               value={marketplaceData.title}
               onChange={(e) => setMarketplaceData({ ...marketplaceData, title: e.target.value })}
             />
-            
+
             <div className="grid grid-cols-2 gap-2">
               <Input
                 placeholder="দাম (৳)"
@@ -124,8 +148,8 @@ export const CreatePost = ({ onPost, onCancel }: CreatePostProps) => {
                 value={marketplaceData.price}
                 onChange={(e) => setMarketplaceData({ ...marketplaceData, price: e.target.value })}
               />
-              <Select 
-                value={marketplaceData.category} 
+              <Select
+                value={marketplaceData.category}
                 onValueChange={(value) => setMarketplaceData({ ...marketplaceData, category: value })}
               >
                 <SelectTrigger>
@@ -156,13 +180,13 @@ export const CreatePost = ({ onPost, onCancel }: CreatePostProps) => {
               <Tag className="h-4 w-4" />
             </Button>
           </div>
-          
+
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {tags.map((tag, index) => (
                 <Badge key={index} variant="secondary" className="text-xs">
                   #{tag}
-                  <button 
+                  <button
                     onClick={() => handleRemoveTag(tag)}
                     className="ml-1 hover:text-destructive"
                   >
@@ -187,13 +211,13 @@ export const CreatePost = ({ onPost, onCancel }: CreatePostProps) => {
               className="hidden"
             />
           </label>
-          
+
           {images.length > 0 && (
             <div className="grid grid-cols-3 gap-2">
               {images.map((image, index) => (
                 <div key={index} className="relative aspect-square bg-muted rounded-lg overflow-hidden">
-                  <img 
-                    src={URL.createObjectURL(image)} 
+                  <img
+                    src={URL.createObjectURL(image)}
                     alt=""
                     className="w-full h-full object-cover"
                   />

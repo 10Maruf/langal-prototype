@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -52,8 +52,8 @@ const Recommendation = () => {
         profit: 486000,
         breakdown: { seed: 1800, fert: 5200, labor: 7000, irrigation: 1800, other: 2200 },
         plan: [
-          { phase: "মাঠ প্রস্তুতি", window: "Day -10 to -1", actions: ["আগাছা পরিষ্কার, চাষ+মাঠ সমতল","জৈব সার ১ টন/একর (সম্ভব হলে)"] },
-          { phase: "রোপণ/বপন", window: "Day 0", actions: ["চারা ২৫–৩০ দিন বয়সে রোপণ","বপনে ২০–২৫ কেজি বীজ/একর"] },
+          { phase: "মাঠ প্রস্তুতি", window: "Day -10 to -1", actions: ["আগাছা পরিষ্কার, চাষ+মাঠ সমতল", "জৈব সার ১ টন/একর (সম্ভব হলে)"] },
+          { phase: "রোপণ/বপন", window: "Day 0", actions: ["চারা ২৫–৩০ দিন বয়সে রোপণ", "বপনে ২০–২৫ কেজি বীজ/একর"] },
           { phase: "সার (বেসাল)", window: "Day 0", actions: ["ইউরিয়া ২০ কেজি, টিএসপি ১৬ কেজি, এমওপি ১২ কেজি"] },
           { phase: "টপড্রেস", window: "Day 35–40", actions: ["ইউরিয়া ১৮ কেজি"] },
           { phase: "হারভেস্ট", window: "Day 120–130", actions: ["৮৫% পাকা হলে কাটা"] }
@@ -401,6 +401,39 @@ const Recommendation = () => {
     { value: "Sep-Nov", label: "খরিপ ২ (সেপ্টেম্বর-নভেম্বর)" }
   ];
 
+  // Auto detect current season based on current date
+  const getCurrentSeason = () => {
+    const now = new Date();
+    const month = now.getMonth() + 1; // JavaScript months are 0-indexed
+
+    if (month >= 12 || month <= 2) {
+      return "Dec-Feb";
+    } else if (month >= 3 && month <= 6) {
+      return "Mar-Jun";
+    } else if (month >= 7 && month <= 8) {
+      return "Jul-Aug";
+    } else if (month >= 9 && month <= 11) {
+      return "Sep-Nov";
+    }
+    return "Dec-Feb";
+  };
+
+  const handleAutoSelectSeason = () => {
+    const currentSeason = getCurrentSeason();
+    setSeason(currentSeason);
+    const seasonLabel = seasons.find(s => s.value === currentSeason)?.label || "";
+    toast({
+      title: "মৌসুম অটো নির্বাচিত",
+      description: `বর্তমান মৌসুম: ${seasonLabel}`,
+    });
+  };
+
+  // Auto-select season on page load
+  useEffect(() => {
+    const currentSeason = getCurrentSeason();
+    setSeason(currentSeason);
+  }, []);
+
   const handleRecommend = () => {
     if (!location || !season) {
       toast({
@@ -414,16 +447,100 @@ const Recommendation = () => {
     const seasonCrops = cropDatabase[season] || [];
     setCrops(seasonCrops);
     setStep(2);
-    
+
     toast({
       title: "সুপারিশ প্রস্তুত",
       description: `${seasonCrops.length}টি ফসলের সুপারিশ পাওয়া গেছে।`,
     });
   };
 
+  const handleLocationFromGPS = () => {
+    if ('geolocation' in navigator) {
+      toast({
+        title: "GPS চালু করা হচ্ছে",
+        description: "অনুগ্রহ করে অপেক্ষা করুন...",
+      });
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+
+          try {
+            // Simple location detection based on coordinates
+            let detectedLocation = "Dhaka"; // Default
+
+            // Basic coordinate-based location detection for Bangladesh
+            if (latitude >= 22.0 && latitude <= 22.5 && longitude >= 91.0 && longitude <= 92.5) {
+              detectedLocation = "Chattogram";
+            } else if (latitude >= 23.4 && latitude <= 24.0 && longitude >= 90.0 && longitude <= 91.0) {
+              detectedLocation = "Dhaka";
+            } else if (latitude >= 22.3 && latitude <= 23.0 && longitude >= 90.0 && longitude <= 91.0) {
+              detectedLocation = "Noakhali";
+            } else if (latitude >= 24.0 && latitude <= 25.5 && longitude >= 88.0 && longitude <= 90.0) {
+              detectedLocation = "Rajshahi";
+            } else if (latitude >= 22.0 && latitude <= 23.0 && longitude >= 89.0 && longitude <= 90.5) {
+              detectedLocation = "Khulna";
+            } else if (latitude >= 22.0 && latitude <= 23.0 && longitude >= 90.0 && longitude <= 91.0) {
+              detectedLocation = "Barishal";
+            } else if (latitude >= 24.0 && latitude <= 25.5 && longitude >= 90.5 && longitude <= 92.5) {
+              detectedLocation = "Sylhet";
+            } else if (latitude >= 25.0 && latitude <= 26.5 && longitude >= 88.5 && longitude <= 90.0) {
+              detectedLocation = "Rangpur";
+            }
+
+            setLocation(detectedLocation);
+
+            toast({
+              title: "লোকেশন পাওয়া গেছে",
+              description: `আপনার অবস্থান: ${detectedLocation}`,
+            });
+          } catch (error) {
+            toast({
+              title: "ত্রুটি",
+              description: "লোকেশন নাম পেতে সমস্যা হয়েছে।",
+              variant: "destructive"
+            });
+          }
+        },
+        (error) => {
+          let errorMessage = "অজানা ত্রুটি।";
+
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = "GPS অনুমতি দেওয়া হয়নি।";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = "লোকেশন পাওয়া যাচ্ছে না।";
+              break;
+            case error.TIMEOUT:
+              errorMessage = "GPS সময় শেষ।";
+              break;
+          }
+
+          toast({
+            title: "GPS ত্রুটি",
+            description: errorMessage,
+            variant: "destructive"
+          });
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        }
+      );
+    } else {
+      toast({
+        title: "সাপোর্ট নেই",
+        description: "আপনার ব্রাউজার GPS সাপোর্ট করে না।",
+        variant: "destructive"
+      });
+    }
+  };
+
   const getFilteredCrops = () => {
     if (!activeFilter) return crops;
-    
+
     return crops.filter(crop => {
       switch (activeFilter) {
         case "lowCost":
@@ -469,7 +586,7 @@ const Recommendation = () => {
     return months.map(month => {
       const seasonCrops = cropDatabase[month.season] || [];
       const bestCrop = seasonCrops.sort((a, b) => b.profit - a.profit)[0];
-      
+
       return {
         month: month.key,
         crop: bestCrop?.name || "—",
@@ -516,8 +633,17 @@ const Recommendation = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLocationFromGPS}
+                  className="w-full"
+                >
+                  <MapPin className="h-4 w-4 mr-2" />
+                  GPS দিয়ে লোকেশন নিন
+                </Button>
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-sm font-medium flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
@@ -535,6 +661,15 @@ const Recommendation = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleAutoSelectSeason}
+                  className="w-full"
+                >
+                  <Calendar className="h-4 w-4 mr-2" />
+                  বর্তমান মৌসুম অটো সিলেক্ট
+                </Button>
               </div>
             </div>
 
@@ -542,8 +677,8 @@ const Recommendation = () => {
               <Button onClick={handleRecommend} className="flex-1">
                 সেরা ফসল দেখুন
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => {
                   setLocation("");
                   setSeason("");
@@ -576,11 +711,10 @@ const Recommendation = () => {
                   <button
                     key={filter.key}
                     onClick={() => setActiveFilter(activeFilter === filter.key ? null : filter.key)}
-                    className={`px-3 py-1 rounded-full text-sm border transition-colors ${
-                      activeFilter === filter.key
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background border-border hover:bg-muted"
-                    }`}
+                    className={`px-3 py-1 rounded-full text-sm border transition-colors ${activeFilter === filter.key
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-background border-border hover:bg-muted"
+                      }`}
                   >
                     {filter.label}
                   </button>
@@ -591,11 +725,10 @@ const Recommendation = () => {
               {getFilteredCrops().map((crop, index) => (
                 <div
                   key={index}
-                  className={`border rounded-lg p-4 transition-colors ${
-                    selectedCrops.has(crop.name)
-                      ? "border-primary bg-primary/5"
-                      : "border-border"
-                  }`}
+                  className={`border rounded-lg p-4 transition-colors ${selectedCrops.has(crop.name)
+                    ? "border-primary bg-primary/5"
+                    : "border-border"
+                    }`}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="font-semibold text-lg">{crop.name}</h3>
@@ -604,7 +737,7 @@ const Recommendation = () => {
                       {crop.quick && <Badge variant="secondary">⚡ দ্রুত</Badge>}
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
                     <div className="flex items-center gap-1">
                       <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -621,7 +754,7 @@ const Recommendation = () => {
                       <span>{crop.duration} দিন</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="text-lg font-bold text-green-600">
                       লাভ: ৳{crop.profit.toLocaleString('bn-BD')}

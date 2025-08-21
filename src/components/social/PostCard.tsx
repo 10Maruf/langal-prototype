@@ -2,7 +2,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Heart, MessageCircle, Share2, MoreHorizontal, MapPin, ExternalLink } from "lucide-react";
+import { Heart, MessageCircle, Share2, MoreHorizontal, MapPin, ExternalLink, UserCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface SocialPost {
@@ -12,11 +12,12 @@ export interface SocialPost {
     avatar?: string;
     location: string;
     verified?: boolean;
+    isExpert?: boolean;
   };
   content: string;
   images: string[];
   tags: string[];
-  type: "general" | "marketplace" | "question" | "advice";
+  type: "general" | "marketplace" | "question" | "advice" | "expert_advice";
   marketplaceLink?: {
     title: string;
     price: number;
@@ -37,25 +38,27 @@ interface PostCardProps {
   onMarketplaceClick?: (post: SocialPost) => void;
 }
 
-export const PostCard = ({ 
-  post, 
-  onLike, 
-  onComment, 
-  onShare, 
-  onMarketplaceClick 
+export const PostCard = ({
+  post,
+  onLike,
+  onComment,
+  onShare,
+  onMarketplaceClick
 }: PostCardProps) => {
   const typeColors = {
     general: "bg-blue-50 text-blue-700 border-blue-200",
     marketplace: "bg-green-50 text-green-700 border-green-200",
     question: "bg-yellow-50 text-yellow-700 border-yellow-200",
-    advice: "bg-purple-50 text-purple-700 border-purple-200"
+    advice: "bg-purple-50 text-purple-700 border-purple-200",
+    expert_advice: "bg-indigo-50 text-indigo-700 border-indigo-200"
   };
 
   const typeLabels = {
     general: "সাধারণ",
     marketplace: "বাজার",
     question: "প্রশ্ন",
-    advice: "পরামর্শ"
+    advice: "পরামর্শ",
+    expert_advice: "বিশেষজ্ঞ পরামর্শ"
   };
 
   const formatTime = (dateString: string) => {
@@ -87,6 +90,12 @@ export const PostCard = ({
                 <span className="font-semibold text-sm">{post.author.name}</span>
                 {post.author.verified && (
                   <span className="text-green-600 text-xs">✓</span>
+                )}
+                {post.author.isExpert && (
+                  <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                    <UserCheck className="h-3 w-3 mr-1" />
+                    বিশেষজ্ঞ
+                  </Badge>
                 )}
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -131,15 +140,15 @@ export const PostCard = ({
             post.images.length >= 3 && "grid-cols-2"
           )}>
             {post.images.slice(0, 4).map((image, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={cn(
                   "relative bg-muted aspect-square overflow-hidden",
                   post.images.length === 3 && index === 0 && "row-span-2"
                 )}
               >
-                <img 
-                  src={image} 
+                <img
+                  src={image}
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -167,8 +176,8 @@ export const PostCard = ({
                     {post.marketplaceLink.category}
                   </Badge>
                 </div>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => onMarketplaceClick?.(post)}
                 >
