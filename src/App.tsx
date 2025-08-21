@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import ExpertDashboard from "./pages/ExpertDashboard";
 import ExpertProfile from "./pages/ExpertProfile";
 import CustomerDashboard from "./pages/CustomerDashboard";
+import CustomerProfile from "./pages/CustomerProfile";
 
 const queryClient = new QueryClient();
 
@@ -96,6 +97,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <CustomerDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/customer-profile"
+              element={
+                <ProtectedRoute>
+                  <CustomerProfile />
                 </ProtectedRoute>
               }
             />

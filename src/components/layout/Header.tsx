@@ -38,7 +38,7 @@ export const Header = () => {
       case 'expert':
         return '/expert-profile';
       case 'customer':
-        return '/profile'; // Customer profile can be added later
+        return '/customer-profile';
       case 'farmer':
       default:
         return '/profile';
