@@ -96,9 +96,12 @@ const Login = () => {
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
-                    <div className="flex items-center justify-center space-x-2 mb-4">
-                        <img src="/img/Asset 3.png" alt="logo" className="h-12 w-12" />
-                        <h1 className="text-2xl font-bold text-primary">লাঙল</h1>
+                    <div className="flex flex-col items-center justify-center mb-4">
+                        <img src="/img/Asset 3.png" alt="logo" className="h-16 w-16 mb-2" />
+                        <h1 className="text-2xl font-bold text-primary mb-2">লাঙল</h1>
+                        <p className="text-sm text-gray-700 font-medium px-3 py-1 bg-green-50 rounded-md border-l-4 border-green-500">
+                            কৃষকের ডিজিটাল হাতিয়ার
+                        </p>
                     </div>
                     <CardTitle className="text-xl">লগইন করুন</CardTitle>
                     <CardDescription>
@@ -109,15 +112,36 @@ const Login = () => {
                 <CardContent>
                     <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as UserType)}>
                         <TabsList className="grid w-full grid-cols-3">
-                            <TabsTrigger value="farmer" className="flex items-center gap-1">
+                            <TabsTrigger 
+                                value="farmer" 
+                                className={`flex items-center gap-1 ${
+                                    activeTab === 'farmer' 
+                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500' 
+                                        : ''
+                                }`}
+                            >
                                 {getUserTypeIcon('farmer')}
                                 <span className="hidden sm:inline">কৃষক</span>
                             </TabsTrigger>
-                            <TabsTrigger value="expert" className="flex items-center gap-1">
+                            <TabsTrigger 
+                                value="expert" 
+                                className={`flex items-center gap-1 ${
+                                    activeTab === 'expert' 
+                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500' 
+                                        : ''
+                                }`}
+                            >
                                 {getUserTypeIcon('expert')}
                                 <span className="hidden sm:inline">বিশেষজ্ঞ</span>
                             </TabsTrigger>
-                            <TabsTrigger value="customer" className="flex items-center gap-1">
+                            <TabsTrigger 
+                                value="customer" 
+                                className={`flex items-center gap-1 ${
+                                    activeTab === 'customer' 
+                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500' 
+                                        : ''
+                                }`}
+                            >
                                 {getUserTypeIcon('customer')}
                                 <span className="hidden sm:inline">ক্রেতা</span>
                             </TabsTrigger>
@@ -172,7 +196,7 @@ const Login = () => {
                     </Tabs>
                 </CardContent>
 
-                <CardFooter>
+                <CardFooter className="flex flex-col space-y-4">
                     <Button
                         onClick={handleLogin}
                         className="w-full"
@@ -190,6 +214,17 @@ const Login = () => {
                             </>
                         )}
                     </Button>
+                    
+                    <div className="text-center text-sm text-gray-600">
+                        নতুন ব্যবহারকারী?{" "}
+                        <Button 
+                            variant="link" 
+                            className="p-0 text-green-600 hover:text-green-700 font-medium" 
+                            onClick={() => navigate('/register')}
+                        >
+                            নিবন্ধন করুন
+                        </Button>
+                    </div>
                 </CardFooter>
             </Card>
         </div>

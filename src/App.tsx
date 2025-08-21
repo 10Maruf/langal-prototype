@@ -13,6 +13,7 @@ import Marketplace from "./pages/Marketplace";
 import Diagnosis from "./pages/Diagnosis";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import ExpertDashboard from "./pages/ExpertDashboard";
 import ExpertProfile from "./pages/ExpertProfile";
 import CustomerDashboard from "./pages/CustomerDashboard";
@@ -33,6 +34,14 @@ const App = () => (
               element={
                 <ProtectedRoute requireAuth={false}>
                   <Login />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <ProtectedRoute requireAuth={false}>
+                  <Register />
                 </ProtectedRoute>
               }
             />

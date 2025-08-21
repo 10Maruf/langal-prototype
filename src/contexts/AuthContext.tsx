@@ -7,11 +7,15 @@ export interface User {
     name: string;
     type: UserType;
     email: string;
+    nidNumber?: string;
+    phone?: string;
+    profilePhoto?: string;
 }
 
 interface AuthContextType {
     user: User | null;
     login: (email: string, password: string, userType: UserType) => Promise<boolean>;
+    register: (userData: any, userType: UserType) => Promise<boolean>;
     logout: () => void;
     isAuthenticated: boolean;
 }
@@ -59,6 +63,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
     };
 
+    const register = async (userData: any, userType: UserType): Promise<boolean> => {
+        // Simulate API call for registration - in real app, this would be an actual API call
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                // Mock successful registration
+                console.log('Registration data:', userData, 'User type:', userType);
+                resolve(true);
+            }, 1000);
+        });
+    };
+
     const logout = () => {
         setUser(null);
         setIsAuthenticated(false);
@@ -66,7 +81,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+        <AuthContext.Provider value={{ user, login, register, logout, isAuthenticated }}>
             {children}
         </AuthContext.Provider>
     );
