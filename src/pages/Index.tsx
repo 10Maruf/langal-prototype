@@ -19,7 +19,7 @@ const Index = () => {
     if (user) {
       switch (user.type) {
         case 'expert':
-          navigate('/expert-dashboard');
+          navigate('/consultant-dashboard');
           break;
         case 'customer':
           navigate('/customer-dashboard');

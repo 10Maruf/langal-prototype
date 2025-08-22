@@ -46,7 +46,7 @@ const Login = () => {
                         navigate('/');
                         break;
                     case 'expert':
-                        navigate('/expert-dashboard');
+                        navigate('/consultant-dashboard');
                         break;
                     case 'customer':
                         navigate('/customer-dashboard');
@@ -84,7 +84,7 @@ const Login = () => {
             case 'farmer':
                 return 'কৃষক';
             case 'expert':
-                return 'কৃষি বিশেষজ্ঞ';
+                return 'বিশেষজ্ঞ';
             case 'customer':
                 return 'ক্রেতা';
             default:
@@ -115,8 +115,8 @@ const Login = () => {
                             <TabsTrigger
                                 value="farmer"
                                 className={`flex items-center gap-1 ${activeTab === 'farmer'
-                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
-                                        : ''
+                                    ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
+                                    : ''
                                     }`}
                             >
                                 {getUserTypeIcon('farmer')}
@@ -125,8 +125,8 @@ const Login = () => {
                             <TabsTrigger
                                 value="expert"
                                 className={`flex items-center gap-1 ${activeTab === 'expert'
-                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
-                                        : ''
+                                    ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
+                                    : ''
                                     }`}
                             >
                                 {getUserTypeIcon('expert')}
@@ -135,8 +135,8 @@ const Login = () => {
                             <TabsTrigger
                                 value="customer"
                                 className={`flex items-center gap-1 ${activeTab === 'customer'
-                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
-                                        : ''
+                                    ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
+                                    : ''
                                     }`}
                             >
                                 {getUserTypeIcon('customer')}

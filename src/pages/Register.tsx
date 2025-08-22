@@ -33,6 +33,12 @@ interface RegisterData {
     specialization?: string;
     experience_years?: string;
     certification?: File | null;
+    institution?: string;
+    division?: string;
+    district?: string;
+    consultationFee?: string;
+    availability?: string;
+    bio?: string;
 
     // Customer specific
     businessName?: string;
@@ -123,10 +129,11 @@ const Register = () => {
         }
 
         if (activeTab === 'expert') {
-            if (!registerData.qualification || !registerData.specialization || !registerData.experience_years || !registerData.certification) {
+            if (!registerData.qualification || !registerData.specialization || !registerData.experience_years ||
+                !registerData.certification || !registerData.institution || !registerData.division || !registerData.district) {
                 toast({
                     title: "ত্রুটি",
-                    description: "বিশেষজ্ঞের সব তথ্য ও সার্টিফিকেট পূরণ করুন",
+                    description: "বিশেষজ্ঞের সব প্রয়োজনীয় তথ্য ও সার্টিফিকেট পূরণ করুন",
                     variant: "destructive",
                 });
                 return false;
@@ -231,8 +238,8 @@ const Register = () => {
                             <TabsTrigger
                                 value="farmer"
                                 className={`flex items-center gap-1 ${activeTab === 'farmer'
-                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
-                                        : ''
+                                    ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
+                                    : ''
                                     }`}
                             >
                                 {getUserTypeIcon('farmer')}
@@ -241,8 +248,8 @@ const Register = () => {
                             <TabsTrigger
                                 value="expert"
                                 className={`flex items-center gap-1 ${activeTab === 'expert'
-                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
-                                        : ''
+                                    ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
+                                    : ''
                                     }`}
                             >
                                 {getUserTypeIcon('expert')}
@@ -251,8 +258,8 @@ const Register = () => {
                             <TabsTrigger
                                 value="customer"
                                 className={`flex items-center gap-1 ${activeTab === 'customer'
-                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
-                                        : ''
+                                    ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
+                                    : ''
                                     }`}
                             >
                                 {getUserTypeIcon('customer')}
@@ -520,6 +527,81 @@ const Register = () => {
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Additional Expert Fields */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="institution">প্রতিষ্ঠান *</Label>
+                                        <Input
+                                            id="institution"
+                                            type="text"
+                                            placeholder="যেমন: কৃষি বিশ্ববিদ্যালয়, কৃষি অফিস"
+                                            value={registerData.institution || ''}
+                                            onChange={(e) => handleInputChange('institution', e.target.value)}
+                                            className="border-blue-200 focus:border-blue-500"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="consultationFee">পরামর্শ ফি (টাকা)</Label>
+                                        <Input
+                                            id="consultationFee"
+                                            type="number"
+                                            placeholder="যেমন: 500"
+                                            value={registerData.consultationFee || ''}
+                                            onChange={(e) => handleInputChange('consultationFee', e.target.value)}
+                                            className="border-blue-200 focus:border-blue-500"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="division">বিভাগ *</Label>
+                                        <Input
+                                            id="division"
+                                            type="text"
+                                            placeholder="যেমন: ঢাকা, চট্টগ্রাম"
+                                            value={registerData.division || ''}
+                                            onChange={(e) => handleInputChange('division', e.target.value)}
+                                            className="border-blue-200 focus:border-blue-500"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="district">জেলা *</Label>
+                                        <Input
+                                            id="district"
+                                            type="text"
+                                            placeholder="যেমন: ঢাকা, ময়মনসিংহ"
+                                            value={registerData.district || ''}
+                                            onChange={(e) => handleInputChange('district', e.target.value)}
+                                            className="border-blue-200 focus:border-blue-500"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="availability">কাজের সময়</Label>
+                                    <Input
+                                        id="availability"
+                                        type="text"
+                                        placeholder="যেমন: সকাল ৯টা - বিকাল ৫টা"
+                                        value={registerData.availability || ''}
+                                        onChange={(e) => handleInputChange('availability', e.target.value)}
+                                        className="border-blue-200 focus:border-blue-500"
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="bio">সংক্ষিপ্ত পরিচয়</Label>
+                                    <Textarea
+                                        id="bio"
+                                        placeholder="আপনার কাজের অভিজ্ঞতা ও বিশেষত্ব সম্পর্কে লিখুন..."
+                                        value={registerData.bio || ''}
+                                        onChange={(e) => handleInputChange('bio', e.target.value)}
+                                        className="border-blue-200 focus:border-blue-500"
+                                        rows={4}
+                                    />
+                                </div>
                             </TabsContent>
 
                             <TabsContent value="customer" className="space-y-4 mt-6">
@@ -576,10 +658,10 @@ const Register = () => {
                     <Button
                         onClick={handleRegister}
                         className={`w-full ${activeTab === 'farmer'
-                                ? 'bg-green-600 hover:bg-green-700'
-                                : activeTab === 'expert'
-                                    ? 'bg-blue-600 hover:bg-blue-700'
-                                    : 'bg-purple-600 hover:bg-purple-700'
+                            ? 'bg-green-600 hover:bg-green-700'
+                            : activeTab === 'expert'
+                                ? 'bg-blue-600 hover:bg-blue-700'
+                                : 'bg-purple-600 hover:bg-purple-700'
                             }`}
                         disabled={isLoading}
                         size="lg"

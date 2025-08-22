@@ -18,6 +18,8 @@ import ExpertDashboard from "./pages/ExpertDashboard";
 import ExpertProfile from "./pages/ExpertProfile";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import CustomerProfile from "./pages/CustomerProfile";
+import ConsultantDashboard from "./pages/ConsultantDashboard";
+import ConsultantProfile from "./pages/ConsultantProfile";
 
 const queryClient = new QueryClient();
 
@@ -114,6 +116,22 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <CustomerProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/consultant-dashboard"
+              element={
+                <ProtectedRoute>
+                  <ConsultantDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/consultant-profile"
+              element={
+                <ProtectedRoute>
+                  <ConsultantProfile />
                 </ProtectedRoute>
               }
             />
