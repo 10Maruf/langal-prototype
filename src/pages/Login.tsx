@@ -112,35 +112,32 @@ const Login = () => {
                 <CardContent>
                     <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as UserType)}>
                         <TabsList className="grid w-full grid-cols-3">
-                            <TabsTrigger 
-                                value="farmer" 
-                                className={`flex items-center gap-1 ${
-                                    activeTab === 'farmer' 
-                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500' 
+                            <TabsTrigger
+                                value="farmer"
+                                className={`flex items-center gap-1 ${activeTab === 'farmer'
+                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 {getUserTypeIcon('farmer')}
                                 <span className="hidden sm:inline">কৃষক</span>
                             </TabsTrigger>
-                            <TabsTrigger 
-                                value="expert" 
-                                className={`flex items-center gap-1 ${
-                                    activeTab === 'expert' 
-                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500' 
+                            <TabsTrigger
+                                value="expert"
+                                className={`flex items-center gap-1 ${activeTab === 'expert'
+                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 {getUserTypeIcon('expert')}
                                 <span className="hidden sm:inline">বিশেষজ্ঞ</span>
                             </TabsTrigger>
-                            <TabsTrigger 
-                                value="customer" 
-                                className={`flex items-center gap-1 ${
-                                    activeTab === 'customer' 
-                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500' 
+                            <TabsTrigger
+                                value="customer"
+                                className={`flex items-center gap-1 ${activeTab === 'customer'
+                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 {getUserTypeIcon('customer')}
                                 <span className="hidden sm:inline">ক্রেতা</span>
@@ -214,12 +211,12 @@ const Login = () => {
                             </>
                         )}
                     </Button>
-                    
+
                     <div className="text-center text-sm text-gray-600">
                         নতুন ব্যবহারকারী?{" "}
-                        <Button 
-                            variant="link" 
-                            className="p-0 text-green-600 hover:text-green-700 font-medium" 
+                        <Button
+                            variant="link"
+                            className="p-0 text-green-600 hover:text-green-700 font-medium"
                             onClick={() => navigate('/register')}
                         >
                             নিবন্ধন করুন

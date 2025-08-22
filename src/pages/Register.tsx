@@ -22,18 +22,18 @@ interface RegisterData {
     nidPhoto: File | null;
     profilePhoto: File | null;
     address: string;
-    
+
     // Farmer specific
     farmSize?: string;
     farmType?: string;
     experience?: string;
-    
+
     // Expert specific
     qualification?: string;
     specialization?: string;
     experience_years?: string;
     certification?: File | null;
-    
+
     // Customer specific
     businessName?: string;
     businessType?: string;
@@ -72,8 +72,8 @@ const Register = () => {
 
     const validateForm = (): boolean => {
         // Common validation
-        if (!registerData.fullName || !registerData.email || !registerData.password || 
-            !registerData.confirmPassword || !registerData.phone || !registerData.nidNumber || 
+        if (!registerData.fullName || !registerData.email || !registerData.password ||
+            !registerData.confirmPassword || !registerData.phone || !registerData.nidNumber ||
             !registerData.nidPhoto || !registerData.profilePhoto || !registerData.address) {
             toast({
                 title: "ত্রুটি",
@@ -159,7 +159,7 @@ const Register = () => {
         try {
             // Call the register function from AuthContext
             const success = await registerUser(registerData, activeTab);
-            
+
             if (success) {
                 toast({
                     title: "সফল!",
@@ -228,35 +228,32 @@ const Register = () => {
                 <CardContent>
                     <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as UserType)}>
                         <TabsList className="grid w-full grid-cols-3">
-                            <TabsTrigger 
-                                value="farmer" 
-                                className={`flex items-center gap-1 ${
-                                    activeTab === 'farmer' 
-                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500' 
+                            <TabsTrigger
+                                value="farmer"
+                                className={`flex items-center gap-1 ${activeTab === 'farmer'
+                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 {getUserTypeIcon('farmer')}
                                 <span className="hidden sm:inline">কৃষক</span>
                             </TabsTrigger>
-                            <TabsTrigger 
-                                value="expert" 
-                                className={`flex items-center gap-1 ${
-                                    activeTab === 'expert' 
-                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500' 
+                            <TabsTrigger
+                                value="expert"
+                                className={`flex items-center gap-1 ${activeTab === 'expert'
+                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 {getUserTypeIcon('expert')}
                                 <span className="hidden sm:inline">বিশেষজ্ঞ</span>
                             </TabsTrigger>
-                            <TabsTrigger 
-                                value="customer" 
-                                className={`flex items-center gap-1 ${
-                                    activeTab === 'customer' 
-                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500' 
+                            <TabsTrigger
+                                value="customer"
+                                className={`flex items-center gap-1 ${activeTab === 'customer'
+                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 {getUserTypeIcon('customer')}
                                 <span className="hidden sm:inline">ক্রেতা</span>
@@ -413,7 +410,7 @@ const Register = () => {
                                         কৃষক হিসেবে নিবন্ধনের জন্য আপনার কৃষি সম্পর্কিত তথ্য প্রয়োজন
                                     </AlertDescription>
                                 </Alert>
-                                
+
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label htmlFor="farmSize">জমির পরিমাণ (একর) *</Label>
@@ -578,13 +575,12 @@ const Register = () => {
                 <CardFooter className="flex flex-col space-y-4">
                     <Button
                         onClick={handleRegister}
-                        className={`w-full ${
-                            activeTab === 'farmer' 
-                                ? 'bg-green-600 hover:bg-green-700' 
+                        className={`w-full ${activeTab === 'farmer'
+                                ? 'bg-green-600 hover:bg-green-700'
                                 : activeTab === 'expert'
-                                ? 'bg-blue-600 hover:bg-blue-700'
-                                : 'bg-purple-600 hover:bg-purple-700'
-                        }`}
+                                    ? 'bg-blue-600 hover:bg-blue-700'
+                                    : 'bg-purple-600 hover:bg-purple-700'
+                            }`}
                         disabled={isLoading}
                         size="lg"
                     >
@@ -600,7 +596,7 @@ const Register = () => {
                             </>
                         )}
                     </Button>
-                    
+
                     <div className="text-center text-sm text-gray-600">
                         ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
                         <Button variant="link" className="p-0" onClick={() => navigate('/login')}>
