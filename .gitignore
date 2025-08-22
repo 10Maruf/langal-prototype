@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Bot commit filtering
+HISTORY.md
+CLEAN_HISTORY.md

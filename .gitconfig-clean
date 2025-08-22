@@ -1,0 +1,18 @@
+# Git configuration to filter bot commits
+
+[alias]
+    # Show git log without bot commits
+    log-clean = !git log --format='%h %s (%an)' | grep -v '\\[bot\\]'
+    
+    # Show git log with only human commits
+    log-human = !git log --format='%h %s (%an)' | grep -v '\\[bot\\]'
+    
+    # Show only bot commits
+    log-bots = !git log --format='%h %s (%an)' | grep '\\[bot\\]'
+    
+    # Pretty log without bots
+    lg-clean = !git log --graph --format='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | grep -v '\\[bot\\]'
+
+[pretty]
+    # Custom format that highlights non-bot commits
+    clean = format:%C(yellow)%h%Creset %C(green)%s%Creset %C(blue)(%an)%Creset %C(red)%d%Creset

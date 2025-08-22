@@ -1,0 +1,50 @@
+name: Hide Bot Commits
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  filter-bot-commits:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Configure Git
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        
+    - name: Check for bot commits
+      id: check_bots
+      run: |
+        # Count bot commits in the current branch
+        BOT_COMMITS=$(git log --format="%an" | grep -c "\[bot\]" || echo "0")
+        echo "Found $BOT_COMMITS bot commits"
+        echo "bot_commits=$BOT_COMMITS" >> $GITHUB_OUTPUT
+        
+    - name: Display clean history (without bots)
+      run: |
+        echo "Git history without bot commits:"
+        git log --format="%h %s (%an)" -10 | grep -v "\[bot\]" || echo "No non-bot commits found"
+        
+    - name: Create clean history summary
+      run: |
+        echo "# Clean Commit History" > HISTORY.md
+        echo "" >> HISTORY.md
+        echo "This file shows the commit history excluding bot commits:" >> HISTORY.md
+        echo "" >> HISTORY.md
+        git log --format="- %h %s (%an)" -20 | grep -v "\[bot\]" >> HISTORY.md || echo "- No non-bot commits found" >> HISTORY.md
+        
+    - name: Update repository with clean history
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        if [ -f HISTORY.md ]; then
+          git add HISTORY.md
+          git commit -m "Update clean commit history (excluding bots)" --author="GitHub Actions <actions@github.com>" || echo "No changes to commit"
+        fi

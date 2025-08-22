@@ -71,3 +71,27 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Git History Management
+
+This repository includes tools to manage and filter bot commits from your git history display.
+
+### Hiding Bot Commits
+
+To hide automated bot commits (like copilot-swe-agent[bot]) from your git log:
+
+```bash
+# Quick setup - Configure git aliases
+./scripts/git-filter.sh setup
+
+# View git history without bot commits
+git log-clean
+
+# View detailed clean history with formatting
+git lg-clean
+
+# Show statistics about bot vs human commits
+./scripts/git-filter.sh stats
+```
+
+For detailed instructions, see: [docs/HIDING_BOT_COMMITS.md](docs/HIDING_BOT_COMMITS.md)
