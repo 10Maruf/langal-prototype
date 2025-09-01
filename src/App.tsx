@@ -20,6 +20,7 @@ import CustomerDashboard from "./pages/CustomerDashboard";
 import CustomerProfile from "./pages/CustomerProfile";
 import ConsultantDashboard from "./pages/ConsultantDashboard";
 import ConsultantProfile from "./pages/ConsultantProfile";
+import DataOperatorDashboard from "./pages/DataOperatorDashboard";
 
 const queryClient = new QueryClient();
 
@@ -134,6 +135,10 @@ const App = () => (
                   <ConsultantProfile />
                 </ProtectedRoute>
               }
+            />
+            <Route
+              path="/data-operator"
+              element={<DataOperatorDashboard />}
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

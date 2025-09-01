@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth, UserType } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Loader2, Users, User, UserCheck } from "lucide-react";
+import { Loader2, Users, User, UserCheck, Database } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
@@ -94,6 +94,18 @@ const Login = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+            {/* Data Operator Access Button */}
+            <div className="absolute top-4 right-4">
+                <Button
+                    onClick={() => navigate('/data-operator')}
+                    variant="outline"
+                    className="flex items-center space-x-2 bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-700"
+                >
+                    <Database className="h-4 w-4" />
+                    <span className="hidden sm:inline">ডাটা অপারেটর</span>
+                </Button>
+            </div>
+
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
                     <div className="flex flex-col items-center justify-center mb-4">
