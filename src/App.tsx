@@ -21,6 +21,13 @@ import CustomerProfile from "./pages/CustomerProfile";
 import ConsultantDashboard from "./pages/ConsultantDashboard";
 import ConsultantProfile from "./pages/ConsultantProfile";
 import DataOperatorDashboard from "./pages/DataOperatorDashboard";
+import DataOperatorHome from "./pages/DataOperatorHome";
+import DataOperatorProfileVerification from "./pages/DataOperatorProfileVerification";
+import DataOperatorCropVerification from "./pages/DataOperatorCropVerification";
+import DataOperatorRegisterFarmer from "./pages/DataOperatorRegisterFarmer";
+import DataOperatorFieldData from "./pages/DataOperatorFieldData";
+import DataOperatorReports from "./pages/DataOperatorReports";
+import DataOperatorStatistics from "./pages/DataOperatorStatistics";
 
 const queryClient = new QueryClient();
 
@@ -138,7 +145,35 @@ const App = () => (
             />
             <Route
               path="/data-operator"
+              element={<DataOperatorHome />}
+            />
+            <Route
+              path="/data-operator/dashboard"
               element={<DataOperatorDashboard />}
+            />
+            <Route
+              path="/data-operator/profile-verification"
+              element={<DataOperatorProfileVerification />}
+            />
+            <Route
+              path="/data-operator/crop-verification"
+              element={<DataOperatorCropVerification />}
+            />
+            <Route
+              path="/data-operator/register-farmer"
+              element={<DataOperatorRegisterFarmer />}
+            />
+            <Route
+              path="/data-operator/field-data"
+              element={<DataOperatorFieldData />}
+            />
+            <Route
+              path="/data-operator/reports"
+              element={<DataOperatorReports />}
+            />
+            <Route
+              path="/data-operator/statistics"
+              element={<DataOperatorStatistics />}
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
