@@ -127,8 +127,8 @@ const DataOperatorCropVerification = () => {
     ]);
 
     const handleCropStatusUpdate = (cropId: number, status: 'verified' | 'rejected') => {
-        setCropVerifications(prev => prev.map(crop => 
-            crop.id === cropId 
+        setCropVerifications(prev => prev.map(crop =>
+            crop.id === cropId
                 ? { ...crop, verificationStatus: status }
                 : crop
         ));
@@ -136,9 +136,9 @@ const DataOperatorCropVerification = () => {
 
     const handleAddCrop = (newCrop: any) => {
         setCropVerifications(prev => [
-            ...prev, 
-            { 
-                ...newCrop, 
+            ...prev,
+            {
+                ...newCrop,
                 id: prev.length + 1,
                 submissionDate: new Date().toLocaleDateString('bn-BD')
             }
@@ -146,8 +146,8 @@ const DataOperatorCropVerification = () => {
     };
 
     const handleUpdateCrop = (cropId: number, updatedData: any) => {
-        setCropVerifications(prev => prev.map(crop => 
-            crop.id === cropId 
+        setCropVerifications(prev => prev.map(crop =>
+            crop.id === cropId
                 ? { ...crop, ...updatedData }
                 : crop
         ));

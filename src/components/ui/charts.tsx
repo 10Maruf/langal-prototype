@@ -17,7 +17,7 @@ interface BarChartProps {
 
 export const BarChart = ({ data, height = 200, showValues = true }: BarChartProps) => {
     const maxValue = Math.max(...data.map(item => item.value));
-    
+
     return (
         <div className="space-y-4">
             <div className="flex items-end justify-between" style={{ height: `${height}px` }}>
@@ -32,9 +32,8 @@ export const BarChart = ({ data, height = 200, showValues = true }: BarChartProp
                                     </span>
                                 )}
                                 <div
-                                    className={`w-full max-w-12 rounded-t transition-all duration-500 ${
-                                        item.color || 'bg-blue-500'
-                                    }`}
+                                    className={`w-full max-w-12 rounded-t transition-all duration-500 ${item.color || 'bg-blue-500'
+                                        }`}
                                     style={{ height: `${barHeight}px`, minHeight: '4px' }}
                                 />
                             </div>
@@ -57,13 +56,13 @@ export const LineChart = ({ data, height = 200, color = "blue" }: LineChartProps
     const maxValue = Math.max(...data.map(item => item.value));
     const minValue = Math.min(...data.map(item => item.value));
     const range = maxValue - minValue || 1;
-    
+
     const points = data.map((item, index) => {
         const x = (index / (data.length - 1)) * 100;
         const y = 100 - ((item.value - minValue) / range) * 80;
         return `${x},${y}`;
     }).join(' ');
-    
+
     return (
         <div className="space-y-4">
             <div className="relative" style={{ height: `${height}px` }}>
@@ -71,18 +70,18 @@ export const LineChart = ({ data, height = 200, color = "blue" }: LineChartProps
                     {/* Grid lines */}
                     <defs>
                         <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" strokeWidth="0.5"/>
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" strokeWidth="0.5" />
                         </pattern>
                     </defs>
                     <rect width="100%" height="100%" fill="url(#grid)" />
-                    
+
                     {/* Area under curve */}
                     <polygon
                         points={`0,100 ${points} 100,100`}
                         fill={`url(#gradient-${color})`}
                         opacity="0.3"
                     />
-                    
+
                     {/* Line */}
                     <polyline
                         points={points}
@@ -91,7 +90,7 @@ export const LineChart = ({ data, height = 200, color = "blue" }: LineChartProps
                         strokeWidth="2"
                         vectorEffect="non-scaling-stroke"
                     />
-                    
+
                     {/* Data points */}
                     {data.map((item, index) => {
                         const x = (index / (data.length - 1)) * 100;
@@ -107,20 +106,20 @@ export const LineChart = ({ data, height = 200, color = "blue" }: LineChartProps
                             />
                         );
                     })}
-                    
+
                     {/* Gradients */}
                     <defs>
                         <linearGradient id="gradient-blue" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8"/>
-                            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.1"/>
+                            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
+                            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.1" />
                         </linearGradient>
                         <linearGradient id="gradient-green" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#10b981" stopOpacity="0.8"/>
-                            <stop offset="100%" stopColor="#10b981" stopOpacity="0.1"/>
+                            <stop offset="0%" stopColor="#10b981" stopOpacity="0.8" />
+                            <stop offset="100%" stopColor="#10b981" stopOpacity="0.1" />
                         </linearGradient>
                         <linearGradient id="gradient-purple" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.8"/>
-                            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.1"/>
+                            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.8" />
+                            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.1" />
                         </linearGradient>
                     </defs>
                 </svg>
@@ -143,11 +142,11 @@ interface PieChartProps {
 export const PieChart = ({ data, size = 200, showLabels = true }: PieChartProps) => {
     const total = data.reduce((sum, item) => sum + item.value, 0);
     let currentAngle = 0;
-    
+
     const radius = size / 2 - 20;
     const centerX = size / 2;
     const centerY = size / 2;
-    
+
     return (
         <div className="flex flex-col items-center space-y-4">
             <div className="relative" style={{ width: size, height: size }}>
@@ -156,24 +155,24 @@ export const PieChart = ({ data, size = 200, showLabels = true }: PieChartProps)
                         const angle = (item.value / total) * 360;
                         const startAngle = currentAngle;
                         currentAngle += angle;
-                        
+
                         const startAngleRad = (startAngle * Math.PI) / 180;
                         const endAngleRad = (currentAngle * Math.PI) / 180;
-                        
+
                         const x1 = centerX + radius * Math.cos(startAngleRad);
                         const y1 = centerY + radius * Math.sin(startAngleRad);
                         const x2 = centerX + radius * Math.cos(endAngleRad);
                         const y2 = centerY + radius * Math.sin(endAngleRad);
-                        
+
                         const largeArcFlag = angle > 180 ? 1 : 0;
-                        
+
                         const pathData = [
                             `M ${centerX} ${centerY}`,
                             `L ${x1} ${y1}`,
                             `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
                             'Z'
                         ].join(' ');
-                        
+
                         return (
                             <path
                                 key={index}
@@ -186,12 +185,12 @@ export const PieChart = ({ data, size = 200, showLabels = true }: PieChartProps)
                     })}
                 </svg>
             </div>
-            
+
             {showLabels && (
                 <div className="grid grid-cols-2 gap-2 text-sm">
                     {data.map((item, index) => (
                         <div key={index} className="flex items-center gap-2">
-                            <div 
+                            <div
                                 className={`w-3 h-3 rounded ${item.color}`}
                             />
                             <span>{item.name}: {item.value}%</span>
@@ -212,12 +211,12 @@ interface DonutChartProps {
 export const DonutChart = ({ data, size = 200, centerText }: DonutChartProps) => {
     const total = data.reduce((sum, item) => sum + item.value, 0);
     let currentAngle = 0;
-    
+
     const outerRadius = size / 2 - 20;
     const innerRadius = outerRadius * 0.6;
     const centerX = size / 2;
     const centerY = size / 2;
-    
+
     return (
         <div className="flex flex-col items-center space-y-4">
             <div className="relative" style={{ width: size, height: size }}>
@@ -226,22 +225,22 @@ export const DonutChart = ({ data, size = 200, centerText }: DonutChartProps) =>
                         const angle = (item.value / total) * 360;
                         const startAngle = currentAngle;
                         currentAngle += angle;
-                        
+
                         const startAngleRad = (startAngle * Math.PI) / 180;
                         const endAngleRad = (currentAngle * Math.PI) / 180;
-                        
+
                         const x1Outer = centerX + outerRadius * Math.cos(startAngleRad);
                         const y1Outer = centerY + outerRadius * Math.sin(startAngleRad);
                         const x2Outer = centerX + outerRadius * Math.cos(endAngleRad);
                         const y2Outer = centerY + outerRadius * Math.sin(endAngleRad);
-                        
+
                         const x1Inner = centerX + innerRadius * Math.cos(startAngleRad);
                         const y1Inner = centerY + innerRadius * Math.sin(startAngleRad);
                         const x2Inner = centerX + innerRadius * Math.cos(endAngleRad);
                         const y2Inner = centerY + innerRadius * Math.sin(endAngleRad);
-                        
+
                         const largeArcFlag = angle > 180 ? 1 : 0;
-                        
+
                         const pathData = [
                             `M ${x1Outer} ${y1Outer}`,
                             `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${x2Outer} ${y2Outer}`,
@@ -249,7 +248,7 @@ export const DonutChart = ({ data, size = 200, centerText }: DonutChartProps) =>
                             `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${x1Inner} ${y1Inner}`,
                             'Z'
                         ].join(' ');
-                        
+
                         const colorMap: { [key: string]: string } = {
                             'bg-green-500': '#10b981',
                             'bg-yellow-500': '#f59e0b',
@@ -259,7 +258,7 @@ export const DonutChart = ({ data, size = 200, centerText }: DonutChartProps) =>
                             'bg-orange-500': '#f97316',
                             'bg-gray-500': '#6b7280'
                         };
-                        
+
                         return (
                             <path
                                 key={index}
@@ -271,7 +270,7 @@ export const DonutChart = ({ data, size = 200, centerText }: DonutChartProps) =>
                         );
                     })}
                 </svg>
-                
+
                 {centerText && (
                     <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">

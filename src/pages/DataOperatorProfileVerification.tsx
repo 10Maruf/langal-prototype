@@ -90,15 +90,15 @@ const DataOperatorProfileVerification = () => {
     ]);
 
     const handleStatusUpdate = (farmerId: number, status: 'verified' | 'rejected') => {
-        setFarmers(prev => prev.map(farmer => 
-            farmer.id === farmerId 
+        setFarmers(prev => prev.map(farmer =>
+            farmer.id === farmerId
                 ? { ...farmer, profileVerificationStatus: status }
                 : farmer
         ));
     };
 
     const handleEditFarmer = (farmer: Farmer) => {
-        setFarmers(prev => prev.map(f => 
+        setFarmers(prev => prev.map(f =>
             f.id === farmer.id ? farmer : f
         ));
     };

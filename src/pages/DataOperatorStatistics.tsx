@@ -185,7 +185,7 @@ const DataOperatorStatistics = () => {
                                                     <span className="text-xs text-gray-500">লক্ষ্য: {metric.target}</span>
                                                 </div>
                                                 <div className="w-full bg-gray-200 rounded-full h-2">
-                                                    <div 
+                                                    <div
                                                         className={`h-2 rounded-full ${metric.trend === 'up' ? 'bg-green-500' : 'bg-blue-500'}`}
                                                         style={{ width: `${metric.percentage}%` }}
                                                     ></div>
@@ -373,8 +373,8 @@ const DataOperatorStatistics = () => {
                                     data={monthlyTrends.map(month => ({
                                         name: month.month.slice(0, 3),
                                         value: month.efficiency,
-                                        color: month.efficiency >= 90 ? "bg-green-500" : 
-                                               month.efficiency >= 85 ? "bg-yellow-500" : "bg-red-500"
+                                        color: month.efficiency >= 90 ? "bg-green-500" :
+                                            month.efficiency >= 85 ? "bg-yellow-500" : "bg-red-500"
                                     }))}
                                     height={300}
                                 />
@@ -427,10 +427,10 @@ const DataOperatorStatistics = () => {
                                                         </Badge>
                                                     </td>
                                                     <td className="p-2">
-                                                        <Badge variant={month.efficiency >= 90 ? "default" : 
-                                                                       month.efficiency >= 85 ? "secondary" : "destructive"}>
-                                                            {month.efficiency >= 90 ? "উৎকৃষ্ট" : 
-                                                             month.efficiency >= 85 ? "ভালো" : "উন্নতি প্রয়োজন"}
+                                                        <Badge variant={month.efficiency >= 90 ? "default" :
+                                                            month.efficiency >= 85 ? "secondary" : "destructive"}>
+                                                            {month.efficiency >= 90 ? "উৎকৃষ্ট" :
+                                                                month.efficiency >= 85 ? "ভালো" : "উন্নতি প্রয়োজন"}
                                                         </Badge>
                                                     </td>
                                                 </tr>
@@ -457,8 +457,8 @@ const DataOperatorStatistics = () => {
                                     data={regionalPerformance.map(region => ({
                                         name: region.region,
                                         value: region.efficiency,
-                                        color: region.rank <= 3 ? "bg-green-500" : 
-                                               region.rank <= 5 ? "bg-yellow-500" : "bg-red-500"
+                                        color: region.rank <= 3 ? "bg-green-500" :
+                                            region.rank <= 5 ? "bg-yellow-500" : "bg-red-500"
                                     }))}
                                     height={300}
                                 />
@@ -504,12 +504,11 @@ const DataOperatorStatistics = () => {
                                     {regionalPerformance.map((region, index) => (
                                         <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                                             <div className="flex items-center gap-4">
-                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg ${
-                                                    region.rank === 1 ? 'bg-yellow-500' :
-                                                    region.rank === 2 ? 'bg-gray-400' :
-                                                    region.rank === 3 ? 'bg-orange-600' :
-                                                    region.rank <= 5 ? 'bg-blue-500' : 'bg-red-400'
-                                                }`}>
+                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg ${region.rank === 1 ? 'bg-yellow-500' :
+                                                        region.rank === 2 ? 'bg-gray-400' :
+                                                            region.rank === 3 ? 'bg-orange-600' :
+                                                                region.rank <= 5 ? 'bg-blue-500' : 'bg-red-400'
+                                                    }`}>
                                                     {region.rank}
                                                 </div>
                                                 <div>
@@ -532,7 +531,7 @@ const DataOperatorStatistics = () => {
                                         </div>
                                     ))}
                                 </div>
-                                
+
                                 {/* Performance Summary */}
                                 <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                                     <h4 className="font-semibold mb-2">কর্মক্ষমতা সারসংক্ষেপ</h4>

@@ -462,7 +462,7 @@ const DataOperatorDashboard = () => {
                             <span className="hidden sm:inline">আবহাওয়া তথ্য</span>
                         </TabsTrigger>
                     </TabsList>          {/* কৃষকের প্রফাইল ভেরিফাই */}
-                    
+
                     {/* হোম ড্যাশবোর্ড */}
                     <TabsContent value="home-dashboard" className="space-y-6">
                         <div className="text-center mb-8">
@@ -572,7 +572,7 @@ const DataOperatorDashboard = () => {
                                         </div>
                                         <Badge className="bg-blue-500">নতুন</Badge>
                                     </div>
-                                    
+
                                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div className="flex items-center gap-3">
                                             <Sprout className="h-5 w-5 text-green-500" />
@@ -583,7 +583,7 @@ const DataOperatorDashboard = () => {
                                         </div>
                                         <Badge className="bg-green-500">সম্পন্ন</Badge>
                                     </div>
-                                    
+
                                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div className="flex items-center gap-3">
                                             <CloudSun className="h-5 w-5 text-orange-500" />

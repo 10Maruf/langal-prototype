@@ -35,150 +35,152 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/login"
-              element={
-                <ProtectedRoute requireAuth={false}>
-                  <Login />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <ProtectedRoute requireAuth={false}>
-                  <Register />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Index />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/feed"
-              element={
-                <ProtectedRoute>
-                  <SocialFeed />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/marketplace"
-              element={
-                <ProtectedRoute>
-                  <Marketplace />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/diagnosis"
-              element={
-                <ProtectedRoute>
-                  <Diagnosis />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/expert-dashboard"
-              element={
-                <ProtectedRoute>
-                  <ExpertDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/expert-profile"
-              element={
-                <ProtectedRoute>
-                  <ExpertProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/customer-dashboard"
-              element={
-                <ProtectedRoute>
-                  <CustomerDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/customer-profile"
-              element={
-                <ProtectedRoute>
-                  <CustomerProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/consultant-dashboard"
-              element={
-                <ProtectedRoute>
-                  <ConsultantDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/consultant-profile"
-              element={
-                <ProtectedRoute>
-                  <ConsultantProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/data-operator"
-              element={<DataOperatorHome />}
-            />
-            <Route
-              path="/data-operator/dashboard"
-              element={<DataOperatorDashboard />}
-            />
-            <Route
-              path="/data-operator/profile-verification"
-              element={<DataOperatorProfileVerification />}
-            />
-            <Route
-              path="/data-operator/crop-verification"
-              element={<DataOperatorCropVerification />}
-            />
-            <Route
-              path="/data-operator/register-farmer"
-              element={<DataOperatorRegisterFarmer />}
-            />
-            <Route
-              path="/data-operator/field-data"
-              element={<DataOperatorFieldData />}
-            />
-            <Route
-              path="/data-operator/reports"
-              element={<DataOperatorReports />}
-            />
-            <Route
-              path="/data-operator/statistics"
-              element={<DataOperatorStatistics />}
-            />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <NotificationProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/login"
+                element={
+                  <ProtectedRoute requireAuth={false}>
+                    <Login />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <ProtectedRoute requireAuth={false}>
+                    <Register />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Index />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/feed"
+                element={
+                  <ProtectedRoute>
+                    <SocialFeed />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/marketplace"
+                element={
+                  <ProtectedRoute>
+                    <Marketplace />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/diagnosis"
+                element={
+                  <ProtectedRoute>
+                    <Diagnosis />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/expert-dashboard"
+                element={
+                  <ProtectedRoute>
+                    <ExpertDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/expert-profile"
+                element={
+                  <ProtectedRoute>
+                    <ExpertProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/customer-dashboard"
+                element={
+                  <ProtectedRoute>
+                    <CustomerDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/customer-profile"
+                element={
+                  <ProtectedRoute>
+                    <CustomerProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/consultant-dashboard"
+                element={
+                  <ProtectedRoute>
+                    <ConsultantDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/consultant-profile"
+                element={
+                  <ProtectedRoute>
+                    <ConsultantProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/data-operator"
+                element={<DataOperatorHome />}
+              />
+              <Route
+                path="/data-operator/dashboard"
+                element={<DataOperatorDashboard />}
+              />
+              <Route
+                path="/data-operator/profile-verification"
+                element={<DataOperatorProfileVerification />}
+              />
+              <Route
+                path="/data-operator/crop-verification"
+                element={<DataOperatorCropVerification />}
+              />
+              <Route
+                path="/data-operator/register-farmer"
+                element={<DataOperatorRegisterFarmer />}
+              />
+              <Route
+                path="/data-operator/field-data"
+                element={<DataOperatorFieldData />}
+              />
+              <Route
+                path="/data-operator/reports"
+                element={<DataOperatorReports />}
+              />
+              <Route
+                path="/data-operator/statistics"
+                element={<DataOperatorStatistics />}
+              />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </NotificationProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
