@@ -502,7 +502,7 @@ const DataOperatorDashboard = () => {
                                         <div>
                                             <p className="text-purple-100">অনুমোদিত প্রোফাইল</p>
                                             <p className="text-3xl font-bold">
-                                                {farmers.filter(f => f.profileVerificationStatus === 'pending').length}
+                                                {farmers.filter(f => f.profileVerificationStatus === 'verified').length}
                                             </p>
                                         </div>
                                         <CheckCircle className="h-12 w-12 text-purple-200" />
@@ -619,7 +619,11 @@ const DataOperatorDashboard = () => {
 
                     {/* কৃষক নিবন্ধন */}
                     <TabsContent value="register-farmer" className="space-y-4">
-                        <RegisterFarmer />
+                        <RegisterFarmer
+                            onAddFarmer={(newFarmer) => {
+                                setFarmers([...farmers, { ...newFarmer, id: farmers.length + 1 }]);
+                            }}
+                        />
                     </TabsContent>
 
                     {/* ফিল্ড ডেটা সংগ্রহ */}
