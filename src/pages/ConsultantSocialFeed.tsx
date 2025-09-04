@@ -25,7 +25,7 @@ const ConsultantSocialFeed = () => {
             content: "এই মৌসুমে ধানের ব্লাস্ট রোগের প্রকোপ বেশি দেখা যাচ্ছে। কৃষকভাইয়েরা নিয়মিত মাঠ পরিদর্শন করুন এবং প্রাথমিক লক্ষণ দেখা দিলেই ট্রাইসাইক্লাজল জাতীয় ছত্রাকনাশক প্রয়োগ করুন।",
             images: [],
             tags: ["ধান", "ব্লাস্ট", "পরামর্শ"],
-            type: "expert",
+            type: "expert_advice",
             likes: 156,
             comments: 42,
             shares: 28,
@@ -43,7 +43,7 @@ const ConsultantSocialFeed = () => {
             content: "আগামী সপ্তাহে ভারী বৃষ্টির সম্ভাবনা রয়েছে। যারা আউশ ধান কাটার পরিকল্পনা করেছেন, তারা আবহাওয়া অনুকূল থাকলে এই সপ্তাহেই কাটার ব্যবস্থা নিন।",
             images: [],
             tags: ["আবহাওয়া", "আউশ", "কাটাই"],
-            type: "expert",
+            type: "expert_advice",
             likes: 89,
             comments: 15,
             shares: 45,
@@ -61,7 +61,7 @@ const ConsultantSocialFeed = () => {
             content: "নতুন জাতের হাইব্রিড টমেটো বীজ পরীক্ষামূলকভাবে কয়েকটি জেলায় বিতরণ করা হচ্ছে। এই জাতটি তাপমাত্রা সহনশীল এবং ভাইরাস প্রতিরোধী। আগ্রহী কৃষকরা স্থানীয় কৃষি অফিসে যোগাযোগ করুন।",
             images: [],
             tags: ["টমেটো", "নতুনজাত", "হাইব্রিড"],
-            type: "expert",
+            type: "expert_advice",
             likes: 203,
             comments: 67,
             shares: 89,
@@ -79,7 +79,7 @@ const ConsultantSocialFeed = () => {
             comments: 0,
             shares: 0,
             liked: false,
-            type: "expert"
+            type: "expert_advice"
         };
 
         setPosts([post, ...posts]);
@@ -127,9 +127,9 @@ const ConsultantSocialFeed = () => {
 
     const filteredPosts = posts.filter(post => {
         if (feedFilter === "all") return true;
-        if (feedFilter === "expert") return post.type === "expert";
+        if (feedFilter === "expert") return post.type === "expert_advice";
         if (feedFilter === "question") return post.type === "question";
-        if (feedFilter === "success") return post.type === "success";
+        if (feedFilter === "success") return post.type === "general";
         return true;
     });
 
@@ -189,9 +189,9 @@ const ConsultantSocialFeed = () => {
                     <PostCard
                         key={post.id}
                         post={post}
-                        onLike={handleLike}
-                        onComment={handleComment}
-                        onShare={handleShare}
+                        onLike={(post) => handleLike(post.id)}
+                        onComment={(post) => handleComment(post.id, "")}
+                        onShare={(post) => handleShare(post.id)}
                     />
                 ))}
             </div>
@@ -203,8 +203,6 @@ const ConsultantSocialFeed = () => {
                         <CreatePost
                             onPost={handleCreatePost}
                             onCancel={() => setShowCreatePost(false)}
-                            placeholder="কৃষকদের জন্য পরামর্শ লিখুন..."
-                            defaultType="expert"
                         />
                     </div>
                 </div>
