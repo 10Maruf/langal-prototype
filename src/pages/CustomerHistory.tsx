@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { TTSButton } from "@/components/ui/tts-button";
 import { ShoppingCart, Package, Truck, Calendar, Search, Filter, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -351,13 +352,21 @@ const CustomerHistory = () => {
                                         {item.location && ` • ${item.location}`}
                                     </p>
                                 </div>
-                                <div className="text-right">
-                                    <p className="text-lg font-bold text-primary">
-                                        ৳{item.totalAmount.toLocaleString('bn-BD')}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        {item.quantity} {item.unit} × ৳{item.price}
-                                    </p>
+                                <div className="text-right flex flex-col items-end gap-2">
+                                    <TTSButton
+                                        text={`${item.title}। ${item.type === "buy" ? "ক্রয়" : "বিক্রয়"}। পরিমাণ ${item.quantity} ${item.unit}। মোট দাম ${item.totalAmount} টাকা। অবস্থা ${statusLabels[item.status]}। ${item.type === "buy" && item.seller ? `বিক্রেতা ${item.seller}` : item.type === "sell" && item.buyer ? `ক্রেতা ${item.buyer}` : ""}`}
+                                        authorName={item.type === "buy" ? item.seller : item.buyer}
+                                        size="icon"
+                                        variant="ghost"
+                                    />
+                                    <div>
+                                        <p className="text-lg font-bold text-primary">
+                                            ৳{item.totalAmount.toLocaleString('bn-BD')}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                            {item.quantity} {item.unit} × ৳{item.price}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 

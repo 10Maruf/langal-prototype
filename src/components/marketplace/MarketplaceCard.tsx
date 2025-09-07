@@ -1,6 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TTSButton } from "@/components/ui/tts-button";
 import { MapPin, Heart, MessageCircle, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +34,7 @@ interface MarketplaceCardProps {
 export const MarketplaceCard = ({ item, onContact, onSave }: MarketplaceCardProps) => {
   const categoryColors = {
     machinery: "bg-blue-50 text-blue-700 border-blue-200",
-    crops: "bg-green-50 text-green-700 border-green-200", 
+    crops: "bg-green-50 text-green-700 border-green-200",
     seeds: "bg-yellow-50 text-yellow-700 border-yellow-200",
     fertilizer: "bg-purple-50 text-purple-700 border-purple-200"
   };
@@ -41,7 +42,7 @@ export const MarketplaceCard = ({ item, onContact, onSave }: MarketplaceCardProp
   const categoryLabels = {
     machinery: "যন্ত্রপাতি",
     crops: "ফসল",
-    seeds: "বীজ", 
+    seeds: "বীজ",
     fertilizer: "সার"
   };
 
@@ -60,25 +61,33 @@ export const MarketplaceCard = ({ item, onContact, onSave }: MarketplaceCardProp
               {item.type === "sell" ? "বিক্রয়" : "ভাড়া"}
             </Badge>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => onSave(item)}
-            className="h-8 w-8 p-0"
-          >
-            <Heart className={cn(
-              "h-4 w-4",
-              item.saved && "fill-red-500 text-red-500"
-            )} />
-          </Button>
+          <div className="flex items-center gap-1">
+            <TTSButton
+              text={`${item.title}। ${item.description}। দাম ${item.price} টাকা। স্থান ${item.location}। বিক্রেতা ${item.seller.name}`}
+              authorName={item.seller.name}
+              size="icon"
+              variant="ghost"
+            />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onSave(item)}
+              className="h-8 w-8 p-0"
+            >
+              <Heart className={cn(
+                "h-4 w-4",
+                item.saved && "fill-red-500 text-red-500"
+              )} />
+            </Button>
+          </div>
         </div>
       </CardHeader>
 
       <CardContent className="p-3 pt-0">
         <div className="aspect-video bg-muted rounded-lg mb-3 overflow-hidden">
           {item.images.length > 0 ? (
-            <img 
-              src={item.images[0]} 
+            <img
+              src={item.images[0]}
               alt={item.title}
               className="w-full h-full object-cover"
             />
@@ -116,7 +125,7 @@ export const MarketplaceCard = ({ item, onContact, onSave }: MarketplaceCardProp
       </CardContent>
 
       <CardFooter className="p-3 pt-0">
-        <Button 
+        <Button
           onClick={() => onContact(item)}
           className="w-full h-8 text-xs"
           size="sm"

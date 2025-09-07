@@ -2,6 +2,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { TTSButton } from "@/components/ui/tts-button";
 import { Heart, MessageCircle, Share2, MoreHorizontal, MapPin, ExternalLink, UserCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -110,6 +111,12 @@ export const PostCard = ({
             <Badge variant="secondary" className={typeColors[post.type]}>
               {typeLabels[post.type]}
             </Badge>
+            <TTSButton
+              text={post.content}
+              authorName={post.author.name}
+              size="icon"
+              variant="ghost"
+            />
             <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
               <MoreHorizontal className="h-4 w-4" />
             </Button>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { TTSButton } from "@/components/ui/tts-button";
 import { Newspaper, TrendingUp, TrendingDown, DollarSign, Calendar, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -199,9 +200,8 @@ const NewsFeed = () => {
                 </div>
                 <div className="text-right">
                   <div className="font-bold text-lg">৳{price.currentPrice}</div>
-                  <div className={`text-sm flex items-center gap-1 ${
-                    price.change > 0 ? 'text-green-600' : 'text-red-600'
-                  }`}>
+                  <div className={`text-sm flex items-center gap-1 ${price.change > 0 ? 'text-green-600' : 'text-red-600'
+                    }`}>
                     {price.change > 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                     {price.change > 0 ? '+' : ''}{price.change} ({price.changePercent.toFixed(1)}%)
                   </div>
@@ -225,11 +225,10 @@ const NewsFeed = () => {
               <button
                 key={category.key}
                 onClick={() => setSelectedCategory(category.key)}
-                className={`px-3 py-2 rounded-full text-sm border transition-colors flex items-center gap-1 ${
-                  selectedCategory === category.key
+                className={`px-3 py-2 rounded-full text-sm border transition-colors flex items-center gap-1 ${selectedCategory === category.key
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background border-border hover:bg-muted"
-                }`}
+                  }`}
               >
                 <span>{category.icon}</span>
                 {category.label}
@@ -248,20 +247,26 @@ const NewsFeed = () => {
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-semibold text-lg leading-tight">{item.title}</h3>
                   <div className="flex gap-1 flex-shrink-0">
+                    <TTSButton
+                      text={`${item.title}। ${item.summary}। উৎস: ${item.source}`}
+                      authorName={item.source}
+                      size="icon"
+                      variant="ghost"
+                    />
                     <Badge className={getPriorityBadgeColor(item.priority)}>
                       {item.priority === 'high' ? 'জরুরি' : item.priority === 'medium' ? 'গুরুত্বপূর্ণ' : 'সাধারণ'}
                     </Badge>
                   </div>
                 </div>
-                
+
                 <p className="text-muted-foreground">{item.summary}</p>
-                
+
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-3">
                     <Badge variant="outline" className={getCategoryBadgeColor(item.category)}>
-                      {item.category === 'policy' ? 'নীতিমালা' : 
-                       item.category === 'market' ? 'বাজার' :
-                       item.category === 'weather' ? 'আবহাওয়া' : 'প্রযুক্তি'}
+                      {item.category === 'policy' ? 'নীতিমালা' :
+                        item.category === 'market' ? 'বাজার' :
+                          item.category === 'weather' ? 'আবহাওয়া' : 'প্রযুক্তি'}
                     </Badge>
                     <span className="text-muted-foreground">{item.source}</span>
                   </div>
@@ -270,7 +275,7 @@ const NewsFeed = () => {
                     {item.date}
                   </div>
                 </div>
-                
+
                 {item.link && (
                   <Button variant="outline" size="sm" className="w-full">
                     <ExternalLink className="h-4 w-4 mr-2" />

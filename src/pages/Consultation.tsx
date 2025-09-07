@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { TTSButton } from "@/components/ui/tts-button";
 import { MessageSquare, Mic, Phone, Video, Send, Clock, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -111,11 +112,11 @@ const Consultation = () => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
       const recognition = new SpeechRecognition();
-      
+
       recognition.lang = 'bn-BD';
       recognition.continuous = false;
       recognition.interimResults = false;
-      
+
       recognition.onstart = () => {
         setIsListening(true);
         toast({
@@ -123,13 +124,13 @@ const Consultation = () => {
           description: "এখন আপনার প্রশ্ন বলুন।",
         });
       };
-      
+
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
         setQuestion(prev => prev ? `${prev} ${transcript}` : transcript);
         setIsListening(false);
       };
-      
+
       recognition.onerror = () => {
         setIsListening(false);
         toast({
@@ -138,11 +139,11 @@ const Consultation = () => {
           variant: "destructive"
         });
       };
-      
+
       recognition.onend = () => {
         setIsListening(false);
       };
-      
+
       recognition.start();
     } else {
       toast({
@@ -175,7 +176,7 @@ const Consultation = () => {
     setConsultations(prev => [newConsultation, ...prev]);
     setQuestion("");
     setCategory("");
-    
+
     toast({
       title: "প্রশ্ন জমা হয়েছে",
       description: "বিশেষজ্ঞ শীঘ্রই উত্তর দেবেন।",
@@ -263,11 +264,10 @@ const Consultation = () => {
                 <button
                   key={method.value}
                   onClick={() => setContactMethod(method.value)}
-                  className={`px-3 py-2 rounded-lg text-sm border transition-colors flex items-center gap-2 ${
-                    contactMethod === method.value
+                  className={`px-3 py-2 rounded-lg text-sm border transition-colors flex items-center gap-2 ${contactMethod === method.value
                       ? "bg-primary text-primary-foreground border-primary"
                       : "bg-background border-border hover:bg-muted"
-                  }`}
+                    }`}
                 >
                   <method.icon className="h-4 w-4" />
                   {method.label}
@@ -353,6 +353,12 @@ const Consultation = () => {
                       </div>
                     )}
                   </div>
+                  <TTSButton
+                    text={`প্রশ্ন: ${consultation.question}${consultation.response ? `. উত্তর: ${consultation.response}` : ''}`}
+                    authorName={consultation.expert}
+                    size="icon"
+                    variant="ghost"
+                  />
                 </div>
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <span>{consultation.timestamp}</span>

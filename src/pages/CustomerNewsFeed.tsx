@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { TTSButton } from "@/components/ui/tts-button";
 import { Newspaper, TrendingUp, TrendingDown, DollarSign, Calendar, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -237,7 +238,7 @@ const CustomerNewsFeed = () => {
                                         <div className="text-right">
                                             <p className="text-lg font-bold">৳{price.currentPrice}</p>
                                             <div className={`flex items-center text-sm ${price.change > 0 ? 'text-green-600' :
-                                                    price.change < 0 ? 'text-red-600' : 'text-gray-500'
+                                                price.change < 0 ? 'text-red-600' : 'text-gray-500'
                                                 }`}>
                                                 {price.change > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> :
                                                     price.change < 0 ? <TrendingDown className="h-3 w-3 mr-1" /> : null}
@@ -295,11 +296,19 @@ const CustomerNewsFeed = () => {
                                     </div>
                                     <CardTitle className="text-lg mb-1">{news.title}</CardTitle>
                                 </div>
-                                {news.link && (
-                                    <Button variant="ghost" size="sm">
-                                        <ExternalLink className="h-4 w-4" />
-                                    </Button>
-                                )}
+                                <div className="flex items-center gap-1">
+                                    <TTSButton
+                                        text={`${news.title}। ${news.summary}। উৎস: ${news.source}`}
+                                        authorName={news.source}
+                                        size="icon"
+                                        variant="ghost"
+                                    />
+                                    {news.link && (
+                                        <Button variant="ghost" size="sm">
+                                            <ExternalLink className="h-4 w-4" />
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
                         </CardHeader>
                         <CardContent className="pt-0">

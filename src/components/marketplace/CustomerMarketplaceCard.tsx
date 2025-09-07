@@ -1,6 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TTSButton } from "@/components/ui/tts-button";
 import { MapPin, Heart, MessageCircle, Star, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -106,19 +107,27 @@ export const CustomerMarketplaceCard = ({ item, onContact, onSave, onClick }: Cu
                             {typeLabels[item.type]}
                         </Badge>
                     </div>
-                    {onSave && (
-                        <Button
+                    <div className="flex items-center gap-1">
+                        <TTSButton
+                            text={`${item.title}। ${item.description}। দাম ${item.price} টাকা। স্থান ${item.location}। বিক্রেতা ${item.seller.name}`}
+                            authorName={item.seller.name}
+                            size="icon"
                             variant="ghost"
-                            size="sm"
-                            onClick={handleSave}
-                            className="h-8 w-8 p-0"
-                        >
-                            <Heart className={cn(
-                                "h-4 w-4",
-                                item.saved && "fill-red-500 text-red-500"
-                            )} />
-                        </Button>
-                    )}
+                        />
+                        {onSave && (
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={handleSave}
+                                className="h-8 w-8 p-0"
+                            >
+                                <Heart className={cn(
+                                    "h-4 w-4",
+                                    item.saved && "fill-red-500 text-red-500"
+                                )} />
+                            </Button>
+                        )}
+                    </div>
                 </div>
             </CardHeader>
 
