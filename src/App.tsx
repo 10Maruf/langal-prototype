@@ -11,6 +11,10 @@ import NotFound from "./pages/NotFound";
 import SocialFeed from "./pages/SocialFeed";
 import Marketplace from "./pages/Marketplace";
 import Diagnosis from "./pages/Diagnosis";
+import Recommendation from "./pages/Recommendation";
+import NewsFeed from "./pages/NewsFeed";
+import WeatherPlanning from "./pages/WeatherPlanning";
+import Consultation from "./pages/Consultation";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -65,7 +69,7 @@ const App = () => (
                 }
               />
               <Route
-                path="/feed"
+                path="/social-feed"
                 element={
                   <ProtectedRoute>
                     <SocialFeed />
@@ -85,6 +89,38 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <Diagnosis />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/recommendation"
+                element={
+                  <ProtectedRoute>
+                    <Recommendation />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/news-feed"
+                element={
+                  <ProtectedRoute>
+                    <NewsFeed />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/weather-planning"
+                element={
+                  <ProtectedRoute>
+                    <WeatherPlanning />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/consultation"
+                element={
+                  <ProtectedRoute>
+                    <Consultation />
                   </ProtectedRoute>
                 }
               />

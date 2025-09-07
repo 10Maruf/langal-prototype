@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { Cloud, Sun, CloudRain, Wind, Thermometer, Mic, MapPin, Calendar, RefreshCw } from "lucide-react";
+import { Cloud, Sun, CloudRain, Wind, Thermometer, Mic, MapPin, Calendar, RefreshCw, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface WeatherData {
@@ -22,6 +23,9 @@ interface WeatherData {
 }
 
 const WeatherPlanning = () => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
   // Mock weather data
   const mockWeather: WeatherData = {
     temperature: 28,
@@ -39,8 +43,6 @@ const WeatherPlanning = () => {
       { day: "৭ দিন পর", temp: 28, condition: "আংশিক মেঘলা", icon: "⛅" }
     ]
   };
-
-  const { toast } = useToast();
   const [location, setLocation] = useState("");
   const [cropName, setCropName] = useState("");
   const [question, setQuestion] = useState("");
@@ -436,6 +438,14 @@ const WeatherPlanning = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="p-2 mr-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
             <Cloud className="h-5 w-5 text-primary" />
             আবহাওয়া ভিত্তিক পরিকল্পনা
           </CardTitle>

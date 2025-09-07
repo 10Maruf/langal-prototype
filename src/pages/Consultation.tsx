@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { TTSButton } from "@/components/ui/tts-button";
-import { MessageSquare, Mic, Phone, Video, Send, Clock, CheckCircle2 } from "lucide-react";
+import { MessageSquare, Mic, Phone, Video, Send, Clock, CheckCircle2, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ConsultationRequest {
@@ -31,6 +32,7 @@ interface Expert {
 
 const Consultation = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [question, setQuestion] = useState("");
   const [category, setCategory] = useState("");
   const [contactMethod, setContactMethod] = useState("text");
@@ -215,6 +217,14 @@ const Consultation = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="p-2 mr-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
             <MessageSquare className="h-5 w-5 text-primary" />
             কৃষি পরামর্শ সেবা
           </CardTitle>
@@ -265,8 +275,8 @@ const Consultation = () => {
                   key={method.value}
                   onClick={() => setContactMethod(method.value)}
                   className={`px-3 py-2 rounded-lg text-sm border transition-colors flex items-center gap-2 ${contactMethod === method.value
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-background border-border hover:bg-muted"
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-background border-border hover:bg-muted"
                     }`}
                 >
                   <method.icon className="h-4 w-4" />

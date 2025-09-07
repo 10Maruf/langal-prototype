@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Sprout, MapPin, Calendar, DollarSign, Timer } from "lucide-react";
+import { Sprout, MapPin, Calendar, DollarSign, Timer, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Crop {
@@ -32,6 +33,7 @@ interface Crop {
 
 const Recommendation = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [location, setLocation] = useState("");
   const [season, setSeason] = useState("");
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
@@ -602,6 +604,14 @@ const Recommendation = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="p-2 mr-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
             <Sprout className="h-5 w-5 text-primary" />
             ফসল সুপারিশ
           </CardTitle>

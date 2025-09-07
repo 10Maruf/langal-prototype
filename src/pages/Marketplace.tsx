@@ -1,17 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MarketplaceCard, MarketplaceItem } from "@/components/marketplace/MarketplaceCard";
 import { MarketplaceFilters, MarketplaceFilters as FilterType } from "@/components/marketplace/MarketplaceFilters";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, ArrowLeft, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Marketplace = () => {
   const { toast } = useToast();
-  
+  const navigate = useNavigate();
+
   const [filters, setFilters] = useState<FilterType>({
     search: "",
     category: "all",
-    type: "all", 
+    type: "all",
     location: "all",
     priceRange: [0, 100000],
     sortBy: "newest"
@@ -38,7 +40,7 @@ const Marketplace = () => {
       featured: true
     },
     {
-      id: "2", 
+      id: "2",
       title: "তাজা ধান বিক্রয়",
       description: "এই বছরের নতুন ধান। ভাল মানের BRRI-28 জাত।",
       price: 28,
@@ -57,7 +59,7 @@ const Marketplace = () => {
     {
       id: "3",
       title: "ইউরিয়া সার (৫০ কেজি)",
-      description: "সরকারি দোকান থেকে কেনা। অতিরিক্ত পড়ে গেছে।", 
+      description: "সরকারি দোকান থেকে কেনা। অতিরিক্ত পড়ে গেছে।",
       price: 950,
       currency: "BDT",
       category: "fertilizer",
@@ -76,7 +78,7 @@ const Marketplace = () => {
       title: "গমের বীজ (উন্নত জাত)",
       description: "BARI গম-৩০ জাত। অংকুরোদগম হার ৯৫%+।",
       price: 45,
-      currency: "BDT", 
+      currency: "BDT",
       category: "seeds",
       type: "sell",
       location: "রাজশাহী",
@@ -94,7 +96,7 @@ const Marketplace = () => {
       description: "দ্রুত ধান কাটার জন্য। অভিজ্ঞ অপারেটর সহ।",
       price: 3500,
       currency: "BDT",
-      category: "machinery", 
+      category: "machinery",
       type: "rent",
       location: "বগুড়া",
       seller: {
@@ -116,7 +118,7 @@ const Marketplace = () => {
       search: "",
       category: "all",
       type: "all",
-      location: "all", 
+      location: "all",
       priceRange: [0, 100000],
       sortBy: "newest"
     });
@@ -139,7 +141,7 @@ const Marketplace = () => {
   // Filter items based on current filters
   const filteredItems = items.filter(item => {
     if (filters.search && !item.title.toLowerCase().includes(filters.search.toLowerCase()) &&
-        !item.description.toLowerCase().includes(filters.search.toLowerCase())) {
+      !item.description.toLowerCase().includes(filters.search.toLowerCase())) {
       return false;
     }
     if (filters.category !== "all" && item.category !== filters.category) {
@@ -159,11 +161,24 @@ const Marketplace = () => {
       {/* Header */}
       <div className="bg-card border-b p-4">
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold">বাজার</h1>
-            <p className="text-sm text-muted-foreground">
-              {filteredItems.length} টি পণ্য পাওয়া গেছে
-            </p>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="p-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <div>
+              <h1 className="text-xl font-bold flex items-center gap-2">
+                <ShoppingCart className="h-5 w-5 text-primary" />
+                বাজার
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                {filteredItems.length} টি পণ্য পাওয়া গেছে
+              </p>
+            </div>
           </div>
           <Button size="sm">
             <Plus className="h-4 w-4 mr-1" />

@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Mic, Camera, Upload, Stethoscope } from "lucide-react";
+import { Mic, Camera, Upload, Stethoscope, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Disease {
@@ -30,6 +31,7 @@ interface Chemical {
 
 const Diagnosis = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [crop, setCrop] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -51,10 +53,10 @@ const Diagnosis = () => {
 
   const mockDiseases: Record<string, Disease[]> = {
     rice: [
-      { 
-        name: "ব্লাস্ট রোগ (ছত্রাক)", 
-        probability: 78, 
-        treatment: "ট্রাইসাইক্লাজোল স্প্রে", 
+      {
+        name: "ব্লাস্ট রোগ (ছত্রাক)",
+        probability: 78,
+        treatment: "ট্রাইসাইক্লাজোল স্প্রে",
         cost: 450,
         type: "ছত্রাক রোগ",
         guideline: [
@@ -69,10 +71,10 @@ const Diagnosis = () => {
         ],
         videos: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
       },
-      { 
-        name: "ব্যাকটেরিয়াল লিফ ব্লাইট", 
-        probability: 65, 
-        treatment: "কপার অক্সিক্লোরাইড", 
+      {
+        name: "ব্যাকটেরিয়াল লিফ ব্লাইট",
+        probability: 65,
+        treatment: "কপার অক্সিক্লোরাইড",
         cost: 320,
         type: "ব্যাকটেরিয়া রোগ",
         guideline: [
@@ -86,10 +88,10 @@ const Diagnosis = () => {
       }
     ],
     tomato: [
-      { 
-        name: "লেট ব্লাইট (Phytophthora)", 
-        probability: 82, 
-        treatment: "ম্যানকোজেব স্প্রে", 
+      {
+        name: "লেট ব্লাইট (Phytophthora)",
+        probability: 82,
+        treatment: "ম্যানকোজেব স্প্রে",
         cost: 380,
         type: "ছত্রাক রোগ",
         guideline: [
@@ -102,10 +104,10 @@ const Diagnosis = () => {
         ],
         videos: ["https://www.youtube.com/watch?v=oHg5SJYRHA0"]
       },
-      { 
-        name: "লিফ কার্ল (ভাইরাস)", 
-        probability: 60, 
-        treatment: "ইমিডাক্লোপ্রিড স্প্রে", 
+      {
+        name: "লিফ কার্ল (ভাইরাস)",
+        probability: 60,
+        treatment: "ইমিডাক্লোপ্রিড স্প্রে",
         cost: 420,
         type: "ভাইরাস রোগ",
         guideline: [
@@ -119,10 +121,10 @@ const Diagnosis = () => {
       }
     ],
     potato: [
-      { 
-        name: "আর্লি ব্লাইট", 
-        probability: 75, 
-        treatment: "ক্লোরোথালোনিল", 
+      {
+        name: "আর্লি ব্লাইট",
+        probability: 75,
+        treatment: "ক্লোরোথালোনিল",
         cost: 350,
         type: "ছত্রাক রোগ",
         guideline: [
@@ -134,10 +136,10 @@ const Diagnosis = () => {
         ],
         videos: ["https://www.youtube.com/watch?v=ub82Xb1C8os"]
       },
-      { 
-        name: "লেট ব্লাইট", 
-        probability: 68, 
-        treatment: "মেটাল্যাক্সিল", 
+      {
+        name: "লেট ব্লাইট",
+        probability: 68,
+        treatment: "মেটাল্যাক্সিল",
         cost: 480,
         type: "ছত্রাক রোগ",
         guideline: [
@@ -151,10 +153,10 @@ const Diagnosis = () => {
       }
     ],
     eggplant: [
-      { 
-        name: "ফোমপসিস ফল পচা", 
-        probability: 65, 
-        treatment: "কারবেনডাজিম", 
+      {
+        name: "ফোমপসিস ফল পচা",
+        probability: 65,
+        treatment: "কারবেনডাজিম",
         cost: 280,
         type: "ছত্রাক রোগ",
         guideline: [
@@ -168,10 +170,10 @@ const Diagnosis = () => {
       }
     ],
     cucumber: [
-      { 
-        name: "পাউডারি মিলডিউ", 
-        probability: 70, 
-        treatment: "সালফার স্প্রে", 
+      {
+        name: "পাউডারি মিলডিউ",
+        probability: 70,
+        treatment: "সালফার স্প্রে",
         cost: 200,
         type: "ছত্রাক রোগ",
         guideline: [
@@ -196,13 +198,13 @@ const Diagnosis = () => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
       const recognition = new SpeechRecognition();
-      
+
       recognition.lang = 'bn-BD';
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
         setSymptoms(prev => prev ? `${prev} ${transcript}` : transcript);
       };
-      
+
       recognition.start();
     } else {
       toast({
@@ -224,13 +226,13 @@ const Diagnosis = () => {
     }
 
     setIsAnalyzing(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       const diseases = mockDiseases[crop] || [];
       setResults(diseases);
       setIsAnalyzing(false);
-      
+
       toast({
         title: "বিশ্লেষণ সম্পূর্ণ",
         description: `${diseases.length} টি সম্ভাব্য রোগ পাওয়া গেছে।`,
@@ -240,10 +242,10 @@ const Diagnosis = () => {
 
   const calculateTotalCost = () => {
     if (!results.length || !area) return 0;
-    const areaInAcre = unit === "acre" ? parseFloat(area) : 
-                      unit === "bigha" ? parseFloat(area) * 0.33 :
-                      parseFloat(area) / 100;
-    
+    const areaInAcre = unit === "acre" ? parseFloat(area) :
+      unit === "bigha" ? parseFloat(area) * 0.33 :
+        parseFloat(area) / 100;
+
     return results[0]?.cost * areaInAcre || 0;
   };
 
@@ -253,6 +255,14 @@ const Diagnosis = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="p-2 mr-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
             <Stethoscope className="h-5 w-5 text-primary" />
             ফসলের রোগ নির্ণয়
           </CardTitle>
@@ -416,15 +426,15 @@ const Diagnosis = () => {
                       {disease.probability}% সম্ভাবনা
                     </Badge>
                   </div>
-                  
+
                   {disease.type && (
                     <Badge variant="outline">{disease.type}</Badge>
                   )}
-                  
+
                   <p className="text-sm text-muted-foreground">
                     <strong>চিকিৎসা:</strong> {disease.treatment}
                   </p>
-                  
+
                   {disease.guideline && (
                     <div className="space-y-1">
                       <strong className="text-sm">নির্দেশনা:</strong>
@@ -435,7 +445,7 @@ const Diagnosis = () => {
                       </ul>
                     </div>
                   )}
-                  
+
                   {disease.chemicals && area && (
                     <div className="space-y-2">
                       <strong className="text-sm">প্রস্তাবিত ঔষধ:</strong>
@@ -450,12 +460,12 @@ const Diagnosis = () => {
                           </thead>
                           <tbody>
                             {disease.chemicals.map((chem, idx) => {
-                              const areaInAcre = unit === "acre" ? parseFloat(area) : 
-                                               unit === "bigha" ? parseFloat(area) * 0.33 :
-                                               parseFloat(area) / 100;
+                              const areaInAcre = unit === "acre" ? parseFloat(area) :
+                                unit === "bigha" ? parseFloat(area) * 0.33 :
+                                  parseFloat(area) / 100;
                               const qty = chem.dosePerAcre * areaInAcre;
                               const cost = qty * chem.pricePerUnit;
-                              
+
                               return (
                                 <tr key={idx}>
                                   <td className="border border-border p-2">{chem.name}</td>
@@ -469,13 +479,13 @@ const Diagnosis = () => {
                       </div>
                     </div>
                   )}
-                  
+
                   {disease.videos && disease.videos.length > 0 && (
                     <div className="space-y-1">
                       <strong className="text-sm">ভিডিও গাইড:</strong>
                       {disease.videos.map((video, idx) => (
-                        <a key={idx} href={video} target="_blank" rel="noopener noreferrer" 
-                           className="block text-xs text-blue-600 hover:underline break-all">
+                        <a key={idx} href={video} target="_blank" rel="noopener noreferrer"
+                          className="block text-xs text-blue-600 hover:underline break-all">
                           {video}
                         </a>
                       ))}

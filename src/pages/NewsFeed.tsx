@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TTSButton } from "@/components/ui/tts-button";
-import { Newspaper, TrendingUp, TrendingDown, DollarSign, Calendar, ExternalLink } from "lucide-react";
+import { Newspaper, TrendingUp, TrendingDown, DollarSign, Calendar, ExternalLink, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface NewsItem {
@@ -29,6 +30,7 @@ interface MarketPrice {
 
 const NewsFeed = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   // Mock news data
@@ -176,6 +178,14 @@ const NewsFeed = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="p-2 mr-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
             <Newspaper className="h-5 w-5 text-primary" />
             কৃষি সংবাদ ও বাজার
           </CardTitle>
@@ -226,8 +236,8 @@ const NewsFeed = () => {
                 key={category.key}
                 onClick={() => setSelectedCategory(category.key)}
                 className={`px-3 py-2 rounded-full text-sm border transition-colors flex items-center gap-1 ${selectedCategory === category.key
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-background border-border hover:bg-muted"
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-background border-border hover:bg-muted"
                   }`}
               >
                 <span>{category.icon}</span>

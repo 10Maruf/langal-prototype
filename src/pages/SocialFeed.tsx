@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PostCard, SocialPost } from "@/components/social/PostCard";
 import { CreatePost } from "@/components/social/CreatePost";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus, TrendingUp, Users, Zap, MessageSquare, UserCheck, Filter } from "lucide-react";
+import { Plus, TrendingUp, Users, Zap, MessageSquare, UserCheck, Filter, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 
 const SocialFeed = () => {
   const { toast } = useToast();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [feedFilter, setFeedFilter] = useState("all");
 
@@ -226,9 +228,19 @@ const SocialFeed = () => {
       {/* Header */}
       <div className="bg-card border-b p-4">
         <div className="flex items-center justify-between mb-3">
-          <h1 className="text-xl font-bold">
-            {user?.type === 'expert' ? 'কৃষি ফিড ও পরামর্শ' : 'কৃষি ফিড'}
-          </h1>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="p-2"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <h1 className="text-xl font-bold">
+              {user?.type === 'expert' ? 'কৃষি ফিড ও পরামর্শ' : 'কৃষি ফিড'}
+            </h1>
+          </div>
           <Button size="sm" onClick={() => setShowCreatePost(!showCreatePost)}>
             <Plus className="h-4 w-4 mr-1" />
             {user?.type === 'expert' ? 'পরামর্শ দিন' : 'পোস্ট করুন'}
@@ -247,8 +259,8 @@ const SocialFeed = () => {
                 size="sm"
                 onClick={() => setFeedFilter(filter.id)}
                 className={`flex-shrink-0 ${isExpertAdvice && feedFilter !== filter.id
-                    ? 'border-blue-300 text-blue-700 hover:bg-blue-50'
-                    : ''
+                  ? 'border-blue-300 text-blue-700 hover:bg-blue-50'
+                  : ''
                   }`}
               >
                 <Icon className="h-4 w-4 mr-1" />
