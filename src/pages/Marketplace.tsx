@@ -35,7 +35,7 @@ const Marketplace = () => {
         rating: 4.8,
         verified: true
       },
-      images: [],
+      images: ["/src/assets/marketplace/power tiller.png"],
       postedAt: "2024-01-15T10:00:00Z",
       featured: true
     },
@@ -53,7 +53,7 @@ const Marketplace = () => {
         rating: 4.5,
         verified: false
       },
-      images: [],
+      images: ["/src/assets/marketplace/rice seed.png"],
       postedAt: "2024-01-14T14:30:00Z"
     },
     {
@@ -70,7 +70,7 @@ const Marketplace = () => {
         rating: 4.9,
         verified: true
       },
-      images: [],
+      images: ["/src/assets/marketplace/urea-fertilizer.png"],
       postedAt: "2024-01-13T09:15:00Z"
     },
     {
@@ -87,7 +87,7 @@ const Marketplace = () => {
         rating: 4.7,
         verified: true
       },
-      images: [],
+      images: ["/src/assets/marketplace/wheat grains.png"],
       postedAt: "2024-01-12T16:45:00Z"
     },
     {
@@ -104,8 +104,93 @@ const Marketplace = () => {
         rating: 4.6,
         verified: true
       },
-      images: [],
+      images: ["/src/assets/marketplace/harvester.png"],
       postedAt: "2024-01-11T11:20:00Z"
+    },
+    {
+      id: "6",
+      title: "ট্র্যাক্টর ভাড়া",
+      description: "৬০ হর্স পাওয়ার ট্র্যাক্টর। চাষাবাদের জন্য।",
+      price: 2000,
+      currency: "BDT",
+      category: "machinery",
+      type: "rent",
+      location: "দিনাজপুর",
+      seller: {
+        name: "হাসান আলী",
+        rating: 4.7,
+        verified: true
+      },
+      images: ["/src/assets/marketplace/tractor.png"],
+      postedAt: "2024-01-10T08:30:00Z"
+    },
+    {
+      id: "7",
+      title: "সেচ পাম্প",
+      description: "৫ ইঞ্চি সেচ পাম্প। ভাল অবস্থায়।",
+      price: 25000,
+      currency: "BDT",
+      category: "machinery",
+      type: "sell",
+      location: "চাঁদপুর",
+      seller: {
+        name: "আলমগীর হোসেন",
+        rating: 4.4,
+        verified: false
+      },
+      images: ["/src/assets/marketplace/pump.png"],
+      postedAt: "2024-01-09T15:20:00Z"
+    },
+    {
+      id: "8",
+      title: "জৈব সার (কম্পোস্ট)",
+      description: "ঘরে তৈরি জৈব সার। সম্পূর্ণ প্রাকৃতিক।",
+      price: 15,
+      currency: "BDT",
+      category: "fertilizer",
+      type: "sell",
+      location: "যশোর",
+      seller: {
+        name: "ফরিদা খাতুন",
+        rating: 4.8,
+        verified: true
+      },
+      images: ["/src/assets/marketplace/compost.png"],
+      postedAt: "2024-01-08T12:10:00Z"
+    },
+    {
+      id: "9",
+      title: "ধানের বীজ (BRRI-29)",
+      description: "উচ্চ ফলনশীল জাত। রোগ প্রতিরোধী।",
+      price: 35,
+      currency: "BDT",
+      category: "seeds",
+      type: "sell",
+      location: "পাবনা",
+      seller: {
+        name: "মোশারফ হোসেন",
+        rating: 4.6,
+        verified: true
+      },
+      images: ["/src/assets/marketplace/rice seed.png"],
+      postedAt: "2024-01-07T14:45:00Z"
+    },
+    {
+      id: "10",
+      title: "আলু বিক্রয়",
+      description: "তাজা আলু। ভাল মানের ডায়মন্ড জাত।",
+      price: 25,
+      currency: "BDT",
+      category: "crops",
+      type: "sell",
+      location: "রংপুর",
+      seller: {
+        name: "শামসুদ্দিন",
+        rating: 4.5,
+        verified: false
+      },
+      images: ["/src/assets/marketplace/potato.png"],
+      postedAt: "2024-01-06T10:30:00Z"
     }
   ]);
 
