@@ -8,6 +8,20 @@ import { Badge } from "@/components/ui/badge";
 import { Sprout, MapPin, Calendar, DollarSign, Timer, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+// Import crop images
+import riceImage from "@/assets/crops/rice.jpg";
+import sesameImage from "@/assets/crops/sesame.jpg";
+import peanutsImage from "@/assets/crops/peanuts.jpg";
+import mustardImage from "@/assets/crops/mustard.jpg";
+import wheatImage from "@/assets/crops/wheat.jpg";
+import lentilsImage from "@/assets/crops/lentils.jpg";
+import potatoImage from "@/assets/crops/potato.jpg";
+import cornImage from "@/assets/crops/corn.jpg";
+import tomatoImage from "@/assets/crops/tomato.jpg";
+import eggplantImage from "@/assets/crops/eggplant.jpg";
+import blackCuminImage from "@/assets/crops/black-cumin.jpg";
+import garlicImage from "@/assets/crops/garlic.jpg";
+
 interface Crop {
   name: string;
   cost: number;
@@ -40,6 +54,26 @@ const Recommendation = () => {
   const [selectedCrops, setSelectedCrops] = useState<Set<string>>(new Set());
   const [step, setStep] = useState(1);
   const [crops, setCrops] = useState<Crop[]>([]);
+
+  // Crop image mapping
+  const getCropImage = (cropName: string): string => {
+    const imageMap: Record<string, string> = {
+      "আমন ধান": riceImage,
+      "বোরো ধান": riceImage,
+      "তিল": sesameImage,
+      "চিনাবাদাম": peanutsImage,
+      "সরিষা": mustardImage,
+      "গম": wheatImage,
+      "মসুর ডাল": lentilsImage,
+      "আলু": potatoImage,
+      "ভুট্টা": cornImage,
+      "টমেটো": tomatoImage,
+      "বেগুন": eggplantImage,
+      "কালো জিরা": blackCuminImage,
+      "রসুন": garlicImage,
+    };
+    return imageMap[cropName] || riceImage; // Default to rice image
+  };
 
   const cropDatabase: Record<string, Crop[]> = {
     "Jul-Aug": [
@@ -735,47 +769,58 @@ const Recommendation = () => {
               {getFilteredCrops().map((crop, index) => (
                 <div
                   key={index}
-                  className={`border rounded-lg p-4 transition-colors ${selectedCrops.has(crop.name)
+                  className={`border rounded-lg overflow-hidden transition-colors ${selectedCrops.has(crop.name)
                     ? "border-primary bg-primary/5"
                     : "border-border"
                     }`}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="font-semibold text-lg">{crop.name}</h3>
-                    <div className="flex gap-2">
-                      {crop.easy && <Badge variant="secondary">👌 সহজ</Badge>}
-                      {crop.quick && <Badge variant="secondary">⚡ দ্রুত</Badge>}
+                  {/* Crop Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={getCropImage(crop.name)}
+                      alt={crop.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 flex gap-2">
+                      {crop.easy && <Badge variant="secondary" className="bg-white/90">👌 সহজ</Badge>}
+                      {crop.quick && <Badge variant="secondary" className="bg-white/90">⚡ দ্রুত</Badge>}
                     </div>
                   </div>
+                  
+                  <div className="p-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="font-semibold text-lg">{crop.name}</h3>
+                    </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
-                    <div className="flex items-center gap-1">
-                      <DollarSign className="h-4 w-4 text-muted-foreground" />
-                      <span>খরচ: ৳{crop.cost.toLocaleString('bn-BD')}</span>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
+                      <div className="flex items-center gap-1">
+                        <DollarSign className="h-4 w-4 text-muted-foreground" />
+                        <span>খরচ: ৳{crop.cost.toLocaleString('bn-BD')}</span>
+                      </div>
+                      <div>
+                        <span>ফলন: {crop.yield} টন/একর</span>
+                      </div>
+                      <div>
+                        <span>দাম: ৳{crop.price}/কেজি</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Timer className="h-4 w-4 text-muted-foreground" />
+                        <span>{crop.duration} দিন</span>
+                      </div>
                     </div>
-                    <div>
-                      <span>ফলন: {crop.yield} টন/একর</span>
-                    </div>
-                    <div>
-                      <span>দাম: ৳{crop.price}/কেজি</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Timer className="h-4 w-4 text-muted-foreground" />
-                      <span>{crop.duration} দিন</span>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="text-lg font-bold text-green-600">
-                      লাভ: ৳{crop.profit.toLocaleString('bn-BD')}
+                    <div className="flex items-center justify-between">
+                      <div className="text-lg font-bold text-green-600">
+                        লাভ: ৳{crop.profit.toLocaleString('bn-BD')}
+                      </div>
+                      <Button
+                        variant={selectedCrops.has(crop.name) ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => toggleCropSelection(crop.name)}
+                      >
+                        {selectedCrops.has(crop.name) ? "নির্বাচিত" : "নির্বাচন করুন"}
+                      </Button>
                     </div>
-                    <Button
-                      variant={selectedCrops.has(crop.name) ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => toggleCropSelection(crop.name)}
-                    >
-                      {selectedCrops.has(crop.name) ? "নির্বাচিত" : "নির্বাচন করুন"}
-                    </Button>
                   </div>
                 </div>
               ))}
