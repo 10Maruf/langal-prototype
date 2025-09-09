@@ -6,6 +6,17 @@ import { Button } from "@/components/ui/button";
 import { Plus, ArrowLeft, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+// Import images
+import powerTillerImg from "@/assets/marketplace/power tiller.png";
+import riceSeedImg from "@/assets/marketplace/rice seed.png";
+import ureaFertilizerImg from "@/assets/marketplace/urea-fertilizer.png";
+import wheatGrainsImg from "@/assets/marketplace/wheat grains.png";
+import harvesterImg from "@/assets/marketplace/harvester.png";
+import tractorImg from "@/assets/marketplace/tractor.png";
+import pumpImg from "@/assets/marketplace/pump.png";
+import compostImg from "@/assets/marketplace/compost.png";
+import potatoImg from "@/assets/marketplace/potato.png";
+
 const Marketplace = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -35,7 +46,7 @@ const Marketplace = () => {
         rating: 4.8,
         verified: true
       },
-      images: ["/src/assets/marketplace/power tiller.png"],
+      images: [powerTillerImg],
       postedAt: "2024-01-15T10:00:00Z",
       featured: true
     },
@@ -53,7 +64,7 @@ const Marketplace = () => {
         rating: 4.5,
         verified: false
       },
-      images: ["/src/assets/marketplace/rice seed.png"],
+      images: [riceSeedImg],
       postedAt: "2024-01-14T14:30:00Z"
     },
     {
@@ -70,7 +81,7 @@ const Marketplace = () => {
         rating: 4.9,
         verified: true
       },
-      images: ["/src/assets/marketplace/urea-fertilizer.png"],
+      images: [ureaFertilizerImg],
       postedAt: "2024-01-13T09:15:00Z"
     },
     {
@@ -87,7 +98,7 @@ const Marketplace = () => {
         rating: 4.7,
         verified: true
       },
-      images: ["/src/assets/marketplace/wheat grains.png"],
+      images: [wheatGrainsImg],
       postedAt: "2024-01-12T16:45:00Z"
     },
     {
@@ -104,7 +115,7 @@ const Marketplace = () => {
         rating: 4.6,
         verified: true
       },
-      images: ["/src/assets/marketplace/harvester.png"],
+      images: [harvesterImg],
       postedAt: "2024-01-11T11:20:00Z"
     },
     {
@@ -121,7 +132,7 @@ const Marketplace = () => {
         rating: 4.7,
         verified: true
       },
-      images: ["/src/assets/marketplace/tractor.png"],
+      images: [tractorImg],
       postedAt: "2024-01-10T08:30:00Z"
     },
     {
@@ -138,7 +149,7 @@ const Marketplace = () => {
         rating: 4.4,
         verified: false
       },
-      images: ["/src/assets/marketplace/pump.png"],
+      images: [pumpImg],
       postedAt: "2024-01-09T15:20:00Z"
     },
     {
@@ -155,7 +166,7 @@ const Marketplace = () => {
         rating: 4.8,
         verified: true
       },
-      images: ["/src/assets/marketplace/compost.png"],
+      images: [compostImg],
       postedAt: "2024-01-08T12:10:00Z"
     },
     {
@@ -172,7 +183,7 @@ const Marketplace = () => {
         rating: 4.6,
         verified: true
       },
-      images: ["/src/assets/marketplace/rice seed.png"],
+      images: [riceSeedImg],
       postedAt: "2024-01-07T14:45:00Z"
     },
     {
@@ -189,7 +200,7 @@ const Marketplace = () => {
         rating: 4.5,
         verified: false
       },
-      images: ["/src/assets/marketplace/potato.png"],
+      images: [potatoImg],
       postedAt: "2024-01-06T10:30:00Z"
     }
   ]);
