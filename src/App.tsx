@@ -35,6 +35,9 @@ import DataOperatorStatistics from "./pages/DataOperatorStatistics";
 
 const queryClient = new QueryClient();
 
+// Get the base path for GitHub Pages
+const basename = import.meta.env.PROD ? "/langal-prototype" : "";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -42,7 +45,7 @@ const App = () => (
         <NotificationProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <BrowserRouter basename={basename}>
             <Routes>
               <Route
                 path="/login"
