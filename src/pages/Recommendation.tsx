@@ -199,6 +199,22 @@ const Recommendation = () => {
         ]
       },
       {
+        name: "মটর",
+        cost: 9000,
+        yield: 1.5,
+        price: 80,
+        duration: 85,
+        easy: true,
+        quick: true,
+        profit: 111000,
+        breakdown: { seed: 2000, fert: 1500, labor: 3500, irrigation: 1000, other: 1000 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["লাইন দূরত্ব ৩০ সেমি, গাছ ১০ সেমি"] },
+          { phase: "মাচা", window: "Day 15–20", actions: ["মাচা তৈরি বা সাপোর্ট দিন"] },
+          { phase: "হারভেস্ট", window: "Day 75–90", actions: ["কচি শুঁটি সংগ্রহ"] }
+        ]
+      },
+      {
         name: "রসুন",
         cost: 18000,
         yield: 3,
@@ -254,6 +270,24 @@ const Recommendation = () => {
         ]
       },
       {
+        name: "শাকসবজি (লাউ/কুমড়া)",
+        cost: 9000,
+        yield: 3.5,
+        price: 30,
+        duration: 75,
+        easy: true,
+        quick: true,
+        profit: 96000,
+        breakdown: { seed: 1000, fert: 2200, labor: 3800, irrigation: 900, other: 1100 },
+        plan: [
+          { phase: "মাচা/বেড", window: "Day -5 to -1", actions: ["মাচা তৈরি, মাটিতে জৈব সার মেশান"] },
+          { phase: "রোপণ", window: "Day 0", actions: ["৪x৬ ফুট দূরত্বে"] },
+          { phase: "সার ব্যবস্থাপনা", window: "প্রতি ১৫ দিনে", actions: ["ঝাড়ে গোবর/কম্পোস্ট, প্রয়োজনে সামান্য ইউরিয়া"] },
+          { phase: "সেচ", window: "৫–৭ দিনে", actions: ["মাটি স্যাঁতসেঁতে রাখুন"] },
+          { phase: "হারভেস্ট", window: "Day 60–80", actions: ["বাজার উপযোগী আকার হলে তোলা"] }
+        ]
+      },
+      {
         name: "টমেটো",
         cost: 16000,
         yield: 12,
@@ -287,6 +321,22 @@ const Recommendation = () => {
           { phase: "সার প্রয়োগ", window: "প্রতি ২০ দিনে", actions: ["জৈব সার ও রাসায়নিক সার"] },
           { phase: "হারভেস্ট", window: "Day 110–130", actions: ["কচি বেগুন সংগ্রহ"] }
         ]
+      },
+      {
+        name: "ফুলকপি",
+        cost: 12000,
+        yield: 6,
+        price: 40,
+        duration: 90,
+        easy: true,
+        quick: true,
+        profit: 228000,
+        breakdown: { seed: 800, fert: 3000, labor: 4500, irrigation: 1500, other: 2200 },
+        plan: [
+          { phase: "চারা রোপণ", window: "Day 0", actions: ["৫০x৫০ সেমি দূরত্বে"] },
+          { phase: "সেচ", window: "নিয়মিত", actions: ["মাটি আর্দ্র রাখুন"] },
+          { phase: "হারভেস্ট", window: "Day 80–95", actions: ["ফুল শক্ত হলে কাটুন"] }
+        ]
       }
     ],
     "Mar-Jun": [
@@ -308,84 +358,220 @@ const Recommendation = () => {
           { phase: "সেচ", window: "১০–১২ দিনে একবার", actions: ["ফুল আসা সময়ে আর্দ্রতা জরুরি"] },
           { phase: "হারভেস্ট", window: "Day 100–115", actions: ["শস্য ২৫–৩০% আর্দ্রতায় সংগ্রহ"] }
         ]
+      },
+      {
+        name: "চা শিম",
+        cost: 8000,
+        yield: 2.5,
+        price: 60,
+        duration: 85,
+        easy: true,
+        quick: true,
+        profit: 142000,
+        breakdown: { seed: 1200, fert: 1800, labor: 3000, irrigation: 1200, other: 800 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["লাইন দূরত্ব ৪০ সেমি"] },
+          { phase: "মাচা", window: "Day 15–20", actions: ["৬ ফুট উচ্চতায় মাচা"] },
+          { phase: "হারভেস্ট", window: "Day 75–90", actions: ["কচি শিম নিয়মিত তোলা"] }
+        ]
+      },
+      {
+        name: "ধুন্দুল",
+        cost: 7500,
+        yield: 4,
+        price: 25,
+        duration: 80,
+        easy: true,
+        quick: true,
+        profit: 92500,
+        breakdown: { seed: 600, fert: 1500, labor: 3200, irrigation: 1200, other: 1000 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["৩x৩ মিটার দূরত্বে"] },
+          { phase: "মাচা", window: "Day 10–15", actions: ["মাচা বা সাপোর্ট"] },
+          { phase: "হারভেস্ট", window: "Day 70–85", actions: ["কচি ধুন্দুল সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "পানি কচু",
+        cost: 6000,
+        yield: 8,
+        price: 20,
+        duration: 90,
+        easy: true,
+        quick: true,
+        profit: 154000,
+        breakdown: { seed: 2000, fert: 1200, labor: 1800, irrigation: 600, other: 400 },
+        plan: [
+          { phase: "রোপণ", window: "Day 0", actions: ["জলাভূমিতে চারা রোপণ"] },
+          { phase: "পানি ব্যবস্থাপনা", window: "নিয়মিত", actions: ["৫-১০ সেমি পানি রাখুন"] },
+          { phase: "হারভেস্ট", window: "Day 80–95", actions: ["পাতা ও কন্দ সংগ্রহ"] }
+        ]
+      },
+      {
+        name: "ঢেঁড়স",
+        cost: 10000,
+        yield: 3,
+        price: 50,
+        duration: 95,
+        easy: true,
+        quick: false,
+        profit: 140000,
+        breakdown: { seed: 800, fert: 2500, labor: 4000, irrigation: 1500, other: 1200 },
+        plan: [
+          { phase: "বপন", window: "Day 0", actions: ["৪০x৩০ সেমি দূরত্বে"] },
+          { phase: "সার প্রয়োগ", window: "প্রতি ১৫ দিনে", actions: ["জৈব ও রাসায়নিক সার"] },
+          { phase: "হারভেস্ট", window: "Day 85–100", actions: ["কচি ঢেঁড়স নিয়মিত তোলা"] }
+        ]
       }
     ]
   };
 
   const locations = [
-    "ঢাকা", "কুমিল্লা", "সিলেট", "রংপুর", "বরিশাল", "চট্টগ্রাম",
-    "খুলনা", "ময়মনসিংহ", "রাজশাহী", "গাজীপুর", "নরসিংদী", "ফেনী"
+    "Noakhali", "Dhaka", "Rajshahi", "Chattogram", "Barishal", "Khulna", "Sylhet", "Rangpur"
   ];
 
   const seasons = [
-    { value: "Jul-Aug", label: "জুলাই-আগস্ট (খরিফ)" },
-    { value: "Sep-Nov", label: "সেপ্টেম্বর-নভেম্বর (রবি)" },
-    { value: "Dec-Feb", label: "ডিসেম্বর-ফেব্রুয়ারি (শীত)" },
-    { value: "Mar-Jun", label: "মার্চ-জুন (গ্রীষ্ম)" }
+    { value: "Dec-Feb", label: "রবি (ডিসেম্বর-ফেব্রুয়ারি)" },
+    { value: "Mar-Jun", label: "প্রাক-খরিপ (মার্চ-জুন)" },
+    { value: "Jul-Aug", label: "খরিপ ১ (জুলাই-আগস্ট)" },
+    { value: "Sep-Nov", label: "খরিপ ২ (সেপ্টেম্বর-নভেম্বর)" }
   ];
 
-  const handleLocationFromGPS = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        () => {
-          setLocation("ঢাকা"); // Simulated
-          toast({
-            title: "লোকেশন পাওয়া গেছে",
-            description: "আপনার লোকেশন: ঢাকা",
-          });
-        },
-        () => {
-          toast({
-            title: "GPS ত্রুটি",
-            description: "লোকেশন পাওয়া যায়নি। ম্যানুয়ালি নির্বাচন করুন।",
-            variant: "destructive",
-          });
-        }
-      );
-    } else {
-      toast({
-        title: "GPS সাপোর্ট নেই",
-        description: "আপনার ব্রাউজার GPS সাপোর্ট করে না।",
-        variant: "destructive",
-      });
+  // Auto detect current season based on current date
+  const getCurrentSeason = () => {
+    const now = new Date();
+    const month = now.getMonth() + 1; // JavaScript months are 0-indexed
+
+    if (month >= 12 || month <= 2) {
+      return "Dec-Feb";
+    } else if (month >= 3 && month <= 6) {
+      return "Mar-Jun";
+    } else if (month >= 7 && month <= 8) {
+      return "Jul-Aug";
+    } else if (month >= 9 && month <= 11) {
+      return "Sep-Nov";
     }
+    return "Dec-Feb";
   };
 
   const handleAutoSelectSeason = () => {
-    const now = new Date();
-    const month = now.getMonth() + 1; // JavaScript months are 0-based
-    
-    let currentSeason = "";
-    if (month >= 7 && month <= 8) currentSeason = "Jul-Aug";
-    else if (month >= 9 && month <= 11) currentSeason = "Sep-Nov";
-    else if (month >= 12 || month <= 2) currentSeason = "Dec-Feb";
-    else if (month >= 3 && month <= 6) currentSeason = "Mar-Jun";
-    
+    const currentSeason = getCurrentSeason();
     setSeason(currentSeason);
+    const seasonLabel = seasons.find(s => s.value === currentSeason)?.label || "";
     toast({
-      title: "মৌসুম নির্বাচিত",
-      description: `বর্তমান মৌসুম: ${seasons.find(s => s.value === currentSeason)?.label}`,
+      title: "মৌসুম অটো নির্বাচিত",
+      description: `বর্তমান মৌসুম: ${seasonLabel}`,
     });
   };
+
+  // Auto-select season on page load
+  useEffect(() => {
+    const currentSeason = getCurrentSeason();
+    setSeason(currentSeason);
+  }, []);
 
   const handleRecommend = () => {
     if (!location || !season) {
       toast({
-        title: "তথ্য অসম্পূর্ণ",
-        description: "লোকেশন এবং সিজন উভয়ই নির্বাচন করুন।",
-        variant: "destructive",
+        title: "তথ্য প্রয়োজন",
+        description: "লোকেশন এবং সিজন নির্বাচন করুন।",
+        variant: "destructive"
       });
       return;
     }
 
-    const recommendedCrops = cropDatabase[season] || [];
-    setCrops(recommendedCrops);
+    const seasonCrops = cropDatabase[season] || [];
+    setCrops(seasonCrops);
     setStep(2);
 
     toast({
       title: "সুপারিশ প্রস্তুত",
-      description: `${recommendedCrops.length}টি ফসলের সুপারিশ পাওয়া গেছে।`,
+      description: `${seasonCrops.length}টি ফসলের সুপারিশ পাওয়া গেছে।`,
     });
+  };
+
+  const handleLocationFromGPS = () => {
+    if ('geolocation' in navigator) {
+      toast({
+        title: "GPS চালু করা হচ্ছে",
+        description: "অনুগ্রহ করে অপেক্ষা করুন...",
+      });
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+
+          try {
+            // Simple location detection based on coordinates
+            let detectedLocation = "Dhaka"; // Default
+
+            // Basic coordinate-based location detection for Bangladesh
+            if (latitude >= 22.0 && latitude <= 22.5 && longitude >= 91.0 && longitude <= 92.5) {
+              detectedLocation = "Chattogram";
+            } else if (latitude >= 23.4 && latitude <= 24.0 && longitude >= 90.0 && longitude <= 91.0) {
+              detectedLocation = "Dhaka";
+            } else if (latitude >= 22.3 && latitude <= 23.0 && longitude >= 90.0 && longitude <= 91.0) {
+              detectedLocation = "Noakhali";
+            } else if (latitude >= 24.0 && latitude <= 25.5 && longitude >= 88.0 && longitude <= 90.0) {
+              detectedLocation = "Rajshahi";
+            } else if (latitude >= 22.0 && latitude <= 23.0 && longitude >= 89.0 && longitude <= 90.5) {
+              detectedLocation = "Khulna";
+            } else if (latitude >= 22.0 && latitude <= 23.0 && longitude >= 90.0 && longitude <= 91.0) {
+              detectedLocation = "Barishal";
+            } else if (latitude >= 24.0 && latitude <= 25.5 && longitude >= 90.5 && longitude <= 92.5) {
+              detectedLocation = "Sylhet";
+            } else if (latitude >= 25.0 && latitude <= 26.5 && longitude >= 88.5 && longitude <= 90.0) {
+              detectedLocation = "Rangpur";
+            }
+
+            setLocation(detectedLocation);
+
+            toast({
+              title: "লোকেশন পাওয়া গেছে",
+              description: `আপনার অবস্থান: ${detectedLocation}`,
+            });
+          } catch (error) {
+            toast({
+              title: "ত্রুটি",
+              description: "লোকেশন নাম পেতে সমস্যা হয়েছে।",
+              variant: "destructive"
+            });
+          }
+        },
+        (error) => {
+          let errorMessage = "অজানা ত্রুটি।";
+
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = "GPS অনুমতি দেওয়া হয়নি।";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = "লোকেশন পাওয়া যাচ্ছে না।";
+              break;
+            case error.TIMEOUT:
+              errorMessage = "GPS সময় শেষ।";
+              break;
+          }
+
+          toast({
+            title: "GPS ত্রুটি",
+            description: errorMessage,
+            variant: "destructive"
+          });
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
+        }
+      );
+    } else {
+      toast({
+        title: "সাপোর্ট নেই",
+        description: "আপনার ব্রাউজার GPS সাপোর্ট করে না।",
+        variant: "destructive"
+      });
+    }
   };
 
   const getFilteredCrops = () => {
@@ -394,9 +580,9 @@ const Recommendation = () => {
     return crops.filter(crop => {
       switch (activeFilter) {
         case "lowCost":
-          return crop.cost <= 15000;
+          return crop.cost <= Math.min(...crops.map(c => c.cost)) * 1.2;
         case "highProfit":
-          return crop.profit >= 200000;
+          return crop.profit >= Math.max(...crops.map(c => c.profit)) * 0.8;
         case "easy":
           return crop.easy;
         case "quick":
@@ -408,13 +594,13 @@ const Recommendation = () => {
   };
 
   const toggleCropSelection = (cropName: string) => {
-    const newSelection = new Set(selectedCrops);
-    if (newSelection.has(cropName)) {
-      newSelection.delete(cropName);
+    const newSelected = new Set(selectedCrops);
+    if (newSelected.has(cropName)) {
+      newSelected.delete(cropName);
     } else {
-      newSelection.add(cropName);
+      newSelected.add(cropName);
     }
-    setSelectedCrops(newSelection);
+    setSelectedCrops(newSelected);
   };
 
   const generateYearPlan = () => {
@@ -579,72 +765,60 @@ const Recommendation = () => {
                 ))}
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3">
               {getFilteredCrops().map((crop, index) => (
                 <div
                   key={index}
-                  className={`border rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg ${selectedCrops.has(crop.name)
-                    ? "border-primary bg-primary/5 shadow-md"
-                    : "border-border hover:border-primary/30"
+                  className={`border rounded-lg overflow-hidden transition-colors ${selectedCrops.has(crop.name)
+                    ? "border-primary bg-primary/5"
+                    : "border-border"
                     }`}
                 >
-                  {/* Crop Card Layout */}
-                  <div className="md:flex">
-                    {/* Image Section - Reduced height for desktop */}
-                    <div className="relative md:w-48 md:flex-shrink-0">
-                      <div className="h-40 md:h-full overflow-hidden">
-                        <img
-                          src={getCropImage(crop.name)}
-                          alt={crop.name}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
+                  {/* Crop Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={getCropImage(crop.name)}
+                      alt={crop.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 flex gap-2">
+                      {crop.easy && <Badge variant="secondary" className="bg-white/90">👌 সহজ</Badge>}
+                      {crop.quick && <Badge variant="secondary" className="bg-white/90">⚡ দ্রুত</Badge>}
+                    </div>
+                  </div>
+                  
+                  <div className="p-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="font-semibold text-lg">{crop.name}</h3>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
+                      <div className="flex items-center gap-1">
+                        <DollarSign className="h-4 w-4 text-muted-foreground" />
+                        <span>খরচ: ৳{crop.cost.toLocaleString('bn-BD')}</span>
                       </div>
-                      <div className="absolute top-3 right-3 flex gap-2">
-                        {crop.easy && <Badge variant="secondary" className="bg-green-100 text-green-800 border-green-200">👌 সহজ</Badge>}
-                        {crop.quick && <Badge variant="secondary" className="bg-blue-100 text-blue-800 border-blue-200">⚡ দ্রুত</Badge>}
+                      <div>
+                        <span>ফলন: {crop.yield} টন/একর</span>
+                      </div>
+                      <div>
+                        <span>দাম: ৳{crop.price}/কেজি</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Timer className="h-4 w-4 text-muted-foreground" />
+                        <span>{crop.duration} দিন</span>
                       </div>
                     </div>
-                    
-                    {/* Content Section */}
-                    <div className="flex-1 p-4 md:p-6">
-                      {/* Header */}
-                      <div className="flex items-start justify-between mb-4">
-                        <h3 className="font-bold text-xl text-foreground">{crop.name}</h3>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-green-600">
-                            ৳{Math.round(crop.profit / 1000)}K
-                          </div>
-                          <div className="text-xs text-muted-foreground">লাভ/একর</div>
-                        </div>
-                      </div>
 
-                      {/* Key Stats - Compact Grid */}
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                        <div className="text-center p-2 bg-muted/50 rounded-lg">
-                          <div className="text-sm font-semibold text-foreground">৳{Math.round(crop.cost / 1000)}K</div>
-                          <div className="text-xs text-muted-foreground">খরচ</div>
-                        </div>
-                        <div className="text-center p-2 bg-muted/50 rounded-lg">
-                          <div className="text-sm font-semibold text-foreground">{crop.yield} টন</div>
-                          <div className="text-xs text-muted-foreground">ফলন/একর</div>
-                        </div>
-                        <div className="text-center p-2 bg-muted/50 rounded-lg">
-                          <div className="text-sm font-semibold text-foreground">৳{crop.price}</div>
-                          <div className="text-xs text-muted-foreground">দাম/কেজি</div>
-                        </div>
-                        <div className="text-center p-2 bg-muted/50 rounded-lg">
-                          <div className="text-sm font-semibold text-foreground">{crop.duration}</div>
-                          <div className="text-xs text-muted-foreground">দিন</div>
-                        </div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-lg font-bold text-green-600">
+                        লাভ: ৳{crop.profit.toLocaleString('bn-BD')}
                       </div>
-
-                      {/* Action Button */}
                       <Button
                         variant={selectedCrops.has(crop.name) ? "default" : "outline"}
+                        size="sm"
                         onClick={() => toggleCropSelection(crop.name)}
-                        className="w-full md:w-auto px-6 py-2 font-medium"
                       >
-                        {selectedCrops.has(crop.name) ? "✓ নির্বাচিত" : "নির্বাচন করুন"}
+                        {selectedCrops.has(crop.name) ? "নির্বাচিত" : "নির্বাচন করুন"}
                       </Button>
                     </div>
                   </div>
