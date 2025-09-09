@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getAssetPath } from "@/lib/utils";
 
 export const Header = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -50,7 +51,7 @@ export const Header = () => {
       <div className="container mx-auto flex h-14 items-center justify-between px-4">
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/img/Asset 3.png" alt="logo" className="h-10 w-10" />
+            <img src={getAssetPath("/img/Asset 3.png")} alt="logo" className="h-10 w-10" />
             <h1 className="text-xl font-bold text-primary">লাঙল<sub>prototype</sub></h1>
           </Link>
         </div>

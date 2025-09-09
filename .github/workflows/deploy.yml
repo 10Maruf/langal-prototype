@@ -1,12 +1,10 @@
-name: Deploy to GitHub Pages (DISABLED)
+name: Deploy to GitHub Pages
 
-# Disabled - using gh-pages branch deployment instead
 on:
-  # push:
-  #   branches: [main]
-  # pull_request:
-  #   branches: [main]
-  workflow_dispatch: # Manual trigger only
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build-and-deploy:

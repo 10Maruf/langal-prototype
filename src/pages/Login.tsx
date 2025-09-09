@@ -8,6 +8,7 @@ import { useAuth, UserType } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Loader2, Users, User, UserCheck, Database } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { getAssetPath } from "@/lib/utils";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -109,7 +110,7 @@ const Login = () => {
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
                     <div className="flex flex-col items-center justify-center mb-4">
-                        <img src="/img/Asset 3.png" alt="logo" className="h-16 w-16 mb-2" />
+                        <img src={getAssetPath("/img/Asset 3.png")} alt="logo" className="h-16 w-16 mb-2" />
                         <h1 className="text-2xl font-bold text-primary mb-2">লাঙল</h1>
                         <p className="text-sm text-gray-700 font-medium px-3 py-1 bg-green-50 rounded-md border-l-4 border-green-500">
                             কৃষকের ডিজিটাল হাতিয়ার

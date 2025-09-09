@@ -11,6 +11,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { getAssetPath } from "@/lib/utils";
 
 interface ConsultantHeaderProps {
     onProfileClick: () => void;
@@ -30,7 +31,7 @@ export const ConsultantHeader = ({ onProfileClick }: ConsultantHeaderProps) => {
             <div className="container flex h-14 items-center justify-between px-4">
                 {/* Logo */}
                 <div className="flex items-center gap-2">
-                    <img src="/img/Asset 3.png" alt="লাঙল" className="h-8 w-8" />
+                    <img src={getAssetPath("/img/Asset 3.png")} alt="লাঙল" className="h-8 w-8" />
                     <span className="text-lg font-bold text-primary">লাঙল - বিশেষজ্ঞ</span>
                 </div>
 
