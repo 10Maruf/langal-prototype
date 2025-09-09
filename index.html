@@ -8,14 +8,28 @@
   <meta name="description" content="লাঙল - Prototype" />
   <meta name="author" content="Maruf" />
 
-  <link rel="icon" type="image/png" href="/langal-prototype/img/logo.png" />
+  <link rel="icon" type="image/png" href="/langal-prototype/favicon.ico" />
 
   <meta property="og:title" content="লাঙল - Prototype" />
   <meta property="og:description" content="Agricultural Assistant Platform" />
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <script type="module" crossorigin src="/langal-prototype/assets/index-D-T-gKAu.js"></script>
+  
+  <script>
+    // GitHub Pages SPA handler
+    (function(l) {
+      if (l.search[1] === '/' ) {
+        var decoded = l.search.slice(1).split('&').map(function(s) { 
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
+  <script type="module" crossorigin src="/langal-prototype/assets/index-DD-R2WAi.js"></script>
   <link rel="stylesheet" crossorigin href="/langal-prototype/assets/index-Dxnxr0KK.css">
 </head>
 

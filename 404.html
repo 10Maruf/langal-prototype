@@ -1,26 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>লাঙল - Prototype</title>
   <meta name="description" content="লাঙল - Prototype" />
   <meta name="author" content="Maruf" />
-
-  <link rel="icon" type="image/png" href="/langal-prototype/img/logo.png" />
-
+  
+  <link rel="icon" type="image/png" href="/favicon.ico" />
+  
   <meta property="og:title" content="লাঙল - Prototype" />
   <meta property="og:description" content="Agricultural Assistant Platform" />
   <meta property="og:type" content="website" />
-
+  
   <meta name="twitter:card" content="summary_large_image" />
-  <script type="module" crossorigin src="/langal-prototype/assets/index-D-T-gKAu.js"></script>
-  <link rel="stylesheet" crossorigin href="/langal-prototype/assets/index-Dxnxr0KK.css">
+  
+  <script>
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    
+    // This script takes the current url and converts the path and query
+    // string into just a query string, and then redirects the browser
+    // to the new url with only a query string and hash fragment,
+    // e.g. https://www.foo.tld/one/two?a=b&c=d#qwe, becomes
+    // https://www.foo.tld/?/one/two&a=b~and~c=d#qwe
+    // Note: this 404.html file must be at least 512 bytes for it to work
+    // with Internet Explorer (it is currently > 512 bytes)
+    
+    // If you're creating a Project Pages site and NOT using a custom domain,
+    // then set pathSegmentsToKeep to 1 (enterprise users may need to set it to > 1).
+    // This way the code will only replace the route part and not the real folder.
+    // For example, if your site is at username.github.io/your-app-name,
+    // then you would set pathSegmentsToKeep to 1 so that routes like
+    // username.github.io/your-app-name/one/two would redirect to
+    // username.github.io/your-app-name/?/one/two instead of
+    // username.github.io/?/your-app-name/one/two
+    
+    var pathSegmentsToKeep = 1;
+    
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
 </head>
-
 <body>
-  <div id="root"></div>
+  <!-- IE needs at least 512 bytes: https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/dd565845(v=vs.85) -->
+  <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+    <h1>Loading...</h1>
+    <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+  </div>
 </body>
-
 </html>
