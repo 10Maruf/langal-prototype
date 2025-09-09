@@ -124,7 +124,7 @@ const TTSDemo = () => {
                 text={selectedText || "কোনো টেক্সট লেখা হয়নি"}
                 size="default"
                 variant="default"
-                showLabel={true}
+                
                 className={!selectedText ? "opacity-50 cursor-not-allowed" : ""}
               />
               <Button

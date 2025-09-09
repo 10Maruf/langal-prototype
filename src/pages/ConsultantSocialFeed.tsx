@@ -79,7 +79,7 @@ const ConsultantSocialFeed = () => {
             comments: 0,
             shares: 0,
             liked: false,
-            type: "expert"
+            type: "expert_advice"
         };
 
         setPosts([post, ...posts]);
@@ -127,17 +127,17 @@ const ConsultantSocialFeed = () => {
 
     const filteredPosts = posts.filter(post => {
         if (feedFilter === "all") return true;
-        if (feedFilter === "expert") return post.type === "expert";
+        if (feedFilter === "expert_advice") return post.type === "expert_advice";
         if (feedFilter === "question") return post.type === "question";
-        if (feedFilter === "success") return post.type === "success";
+        if (feedFilter === "advice") return post.type === "advice";
         return true;
     });
 
     const filterOptions = [
         { value: "all", label: "সব পোস্ট", icon: TrendingUp },
-        { value: "expert", label: "বিশেষজ্ঞ পরামর্শ", icon: UserCheck },
+        { value: "expert_advice", label: "বিশেষজ্ঞ পরামর্শ", icon: UserCheck },
         { value: "question", label: "প্রশ্ন", icon: MessageSquare },
-        { value: "success", label: "সফলতার গল্প", icon: Zap },
+        { value: "advice", label: "পরামর্শ", icon: Zap },
     ];
 
     return (
@@ -189,9 +189,9 @@ const ConsultantSocialFeed = () => {
                     <PostCard
                         key={post.id}
                         post={post}
-                        onLike={handleLike}
-                        onComment={handleComment}
-                        onShare={handleShare}
+                        onLike={() => handleLike(post.id)}
+                        onComment={() => handleComment(post.id, "")}
+                        onShare={() => handleShare(post.id)}
                     />
                 ))}
             </div>
@@ -203,8 +203,6 @@ const ConsultantSocialFeed = () => {
                         <CreatePost
                             onPost={handleCreatePost}
                             onCancel={() => setShowCreatePost(false)}
-                            placeholder="কৃষকদের জন্য পরামর্শ লিখুন..."
-                            defaultType="expert"
                         />
                     </div>
                 </div>

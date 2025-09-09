@@ -109,7 +109,7 @@ const DataOperatorDashboard = () => {
             landOwnership: "নিজস্ব ৫ বিঘা",
             registrationDate: "২৫/০৮/২০২৫",
             nidVerificationStatus: "verified" as const,
-            profileVerificationStatus: "pending" as const,
+            profileVerificationStatus: "verified" as const,
             documents: ["এনআইডি কার্ড", "জমির দলিল"],
         },
         {
@@ -620,9 +620,6 @@ const DataOperatorDashboard = () => {
                     {/* কৃষক নিবন্ধন */}
                     <TabsContent value="register-farmer" className="space-y-4">
                         <RegisterFarmer
-                            onAddFarmer={(newFarmer) => {
-                                setFarmers([...farmers, { ...newFarmer, id: farmers.length + 1 }]);
-                            }}
                         />
                     </TabsContent>
 

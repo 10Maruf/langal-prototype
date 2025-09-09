@@ -716,7 +716,7 @@ const Profile = () => {
                 </div>
             </main>
 
-            <BottomNav />
+            <BottomNav activeTab="profile" onTabChange={() => {}} />
         </div>
     );
 };
