@@ -5,7 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Sprout, MapPin, Calendar, DollarSign, Timer, ArrowLeft } from "lucide-react";
+import {
+  MapPin,
+  Calendar,
+  ArrowLeft,
+  DollarSign,
+  Clock,
+  TrendingUp,
+  Leaf,
+  Zap,
+  Banknote,
+  Wheat,
+  CalendarDays,
+  ClipboardList,
+  Heart
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 // Import crop images
@@ -644,9 +658,9 @@ const Recommendation = () => {
               onClick={() => navigate('/')}
               className="p-2 mr-2"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-4 w-4" />
             </Button>
-            <Sprout className="h-5 w-5 text-primary" />
+            <Wheat className="h-5 w-5 text-green-600" />
             ফসল সুপারিশ
           </CardTitle>
         </CardHeader>
@@ -662,7 +676,7 @@ const Recommendation = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
+                  <MapPin className="h-4 w-4 text-blue-600" />
                   লোকেশন (জেলা/উপজেলা)
                 </label>
                 <Select value={location} onValueChange={setLocation}>
@@ -690,7 +704,7 @@ const Recommendation = () => {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
+                  <Calendar className="h-4 w-4 text-orange-600" />
                   সিজন / মাস
                 </label>
                 <Select value={season} onValueChange={setSeason}>
@@ -711,7 +725,7 @@ const Recommendation = () => {
                   onClick={handleAutoSelectSeason}
                   className="w-full"
                 >
-                  <Calendar className="h-4 w-4 mr-2" />
+                  <CalendarDays className="h-4 w-4 mr-2" />
                   বর্তমান মৌসুম অটো সিলেক্ট
                 </Button>
               </div>
@@ -747,83 +761,120 @@ const Recommendation = () => {
               </CardTitle>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { key: "lowCost", label: "💸 কম খরচ" },
-                  { key: "highProfit", label: "💰 বেশি লাভ" },
-                  { key: "easy", label: "👌 সহজ" },
-                  { key: "quick", label: "⚡ দ্রুত" }
-                ].map(filter => (
-                  <button
-                    key={filter.key}
-                    onClick={() => setActiveFilter(activeFilter === filter.key ? null : filter.key)}
-                    className={`px-3 py-1 rounded-full text-sm border transition-colors ${activeFilter === filter.key
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-background border-border hover:bg-muted"
-                      }`}
-                  >
-                    {filter.label}
-                  </button>
-                ))}
+                  { key: "lowCost", label: "কম খরচ", icon: DollarSign, color: "text-green-600" },
+                  { key: "highProfit", label: "বেশি লাভ", icon: TrendingUp, color: "text-blue-600" },
+                  { key: "easy", label: "সহজ", icon: Leaf, color: "text-emerald-600" },
+                  { key: "quick", label: "দ্রুত", icon: Zap, color: "text-yellow-600" }
+                ].map(filter => {
+                  const IconComponent = filter.icon;
+                  return (
+                    <button
+                      key={filter.key}
+                      onClick={() => setActiveFilter(activeFilter === filter.key ? null : filter.key)}
+                      className={`px-3 py-1.5 rounded-full text-sm border transition-colors flex items-center gap-1.5 ${activeFilter === filter.key
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background border-border hover:bg-muted"
+                        }`}
+                    >
+                      <IconComponent className={`h-3.5 w-3.5 ${activeFilter === filter.key ? "" : filter.color}`} />
+                      {filter.label}
+                    </button>
+                  );
+                })}
               </div>
             </CardHeader>
-            <CardContent className="space-y-3">
-              {getFilteredCrops().map((crop, index) => (
-                <div
-                  key={index}
-                  className={`border rounded-lg overflow-hidden transition-colors ${selectedCrops.has(crop.name)
-                    ? "border-primary bg-primary/5"
-                    : "border-border"
-                    }`}
-                >
-                  {/* Crop Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={getCropImage(crop.name)}
-                      alt={crop.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-2 right-2 flex gap-2">
-                      {crop.easy && <Badge variant="secondary" className="bg-white/90">👌 সহজ</Badge>}
-                      {crop.quick && <Badge variant="secondary" className="bg-white/90">⚡ দ্রুত</Badge>}
-                    </div>
-                  </div>
-                  
-                  <div className="p-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="font-semibold text-lg">{crop.name}</h3>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
-                      <div className="flex items-center gap-1">
-                        <DollarSign className="h-4 w-4 text-muted-foreground" />
-                        <span>খরচ: ৳{crop.cost.toLocaleString('bn-BD')}</span>
-                      </div>
-                      <div>
-                        <span>ফলন: {crop.yield} টন/একর</span>
-                      </div>
-                      <div>
-                        <span>দাম: ৳{crop.price}/কেজি</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Timer className="h-4 w-4 text-muted-foreground" />
-                        <span>{crop.duration} দিন</span>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {getFilteredCrops().map((crop, index) => (
+                  <div
+                    key={index}
+                    className={`border rounded-lg overflow-hidden transition-all hover:shadow-md ${selectedCrops.has(crop.name)
+                      ? "border-primary bg-primary/5 shadow-sm"
+                      : "border-border"
+                      }`}
+                  >
+                    {/* Crop Image */}
+                    <div className="relative h-40 overflow-hidden">
+                      <img
+                        src={getCropImage(crop.name)}
+                        alt={crop.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2 right-2 flex gap-1">
+                        {crop.easy && (
+                          <Badge variant="secondary" className="bg-white/90 text-xs flex items-center gap-1">
+                            <Leaf className="h-3 w-3" />
+                            সহজ
+                          </Badge>
+                        )}
+                        {crop.quick && (
+                          <Badge variant="secondary" className="bg-white/90 text-xs flex items-center gap-1">
+                            <Zap className="h-3 w-3" />
+                            দ্রুত
+                          </Badge>
+                        )}
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <div className="text-lg font-bold text-green-600">
-                        লাভ: ৳{crop.profit.toLocaleString('bn-BD')}
+                    <div className="p-3">
+                      <div className="mb-3">
+                        <h3 className="font-semibold text-base mb-2">{crop.name}</h3>
                       </div>
-                      <Button
-                        variant={selectedCrops.has(crop.name) ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => toggleCropSelection(crop.name)}
-                      >
-                        {selectedCrops.has(crop.name) ? "নির্বাচিত" : "নির্বাচন করুন"}
-                      </Button>
+
+                      <div className="space-y-2 text-sm mb-3">
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <DollarSign className="h-4 w-4 text-green-600" />
+                            <span>খরচ:</span>
+                          </span>
+                          <span className="font-medium">৳{crop.cost.toLocaleString('bn-BD')}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <Wheat className="h-4 w-4 text-amber-600" />
+                            <span>ফলন:</span>
+                          </span>
+                          <span className="font-medium">{crop.yield} টন/একর</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <Banknote className="h-4 w-4 text-blue-600" />
+                            <span>দাম:</span>
+                          </span>
+                          <span className="font-medium">৳{crop.price}/কেজি</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="h-4 w-4 text-purple-600" />
+                            <span>সময়:</span>
+                          </span>
+                          <span className="font-medium">{crop.duration} দিন</span>
+                        </div>
+                      </div>
+
+                      <div className="border-t pt-3">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm text-muted-foreground flex items-center gap-1">
+                            <TrendingUp className="h-4 w-4" />
+                            প্রত্যাশিত লাভ:
+                          </span>
+                          <span className="text-lg font-bold text-green-600">
+                            ৳{crop.profit.toLocaleString('bn-BD')}
+                          </span>
+                        </div>
+                        <Button
+                          variant={selectedCrops.has(crop.name) ? "default" : "outline"}
+                          size="sm"
+                          onClick={() => toggleCropSelection(crop.name)}
+                          className="w-full"
+                        >
+                          {selectedCrops.has(crop.name) ? "নির্বাচিত ✓" : "নির্বাচন করুন"}
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </CardContent>
             <CardContent>
               <div className="flex gap-2">
@@ -852,15 +903,30 @@ const Recommendation = () => {
                 <CardTitle className="text-lg">{crop.name} - বিস্তারিত পরিকল্পনা</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                  <div>খরচ: ৳{crop.cost.toLocaleString('bn-BD')}</div>
-                  <div>ফলন: {crop.yield} টন/একর</div>
-                  <div>দাম: ৳{crop.price}/কেজি</div>
-                  <div>সময়কাল: {crop.duration} দিন</div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm bg-muted/30 p-3 rounded-lg">
+                  <div className="flex items-center gap-1.5">
+                    <DollarSign className="h-4 w-4 text-green-600" />
+                    <span>খরচ: ৳{crop.cost.toLocaleString('bn-BD')}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Wheat className="h-4 w-4 text-amber-600" />
+                    <span>ফলন: {crop.yield} টন/একর</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Banknote className="h-4 w-4 text-blue-600" />
+                    <span>দাম: ৳{crop.price}/কেজি</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="h-4 w-4 text-purple-600" />
+                    <span>সময়কাল: {crop.duration} দিন</span>
+                  </div>
                 </div>
 
                 <div className="space-y-3">
-                  <h4 className="font-semibold">চাষাবাদ পরিকল্পনা:</h4>
+                  <h4 className="font-semibold flex items-center gap-2">
+                    <ClipboardList className="h-5 w-5 text-indigo-600" />
+                    চাষাবাদ পরিকল্পনা:
+                  </h4>
                   {crop.plan.map((phase, idx) => (
                     <div key={idx} className="border-l-4 border-primary pl-4 py-2">
                       <div className="font-medium">{phase.phase}</div>
@@ -874,9 +940,12 @@ const Recommendation = () => {
                   ))}
                 </div>
 
-                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-primary">
+                    <div className="flex justify-center mb-2">
+                      <Heart className="h-8 w-8 text-green-600" />
+                    </div>
+                    <p className="text-2xl font-bold text-green-600">
                       ৳{crop.profit.toLocaleString('bn-BD')}
                     </p>
                     <p className="text-sm text-muted-foreground">
@@ -907,18 +976,35 @@ const Recommendation = () => {
       {step === 4 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">📅 ১ বছরের পরিকল্পনা</CardTitle>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <CalendarDays className="h-5 w-5 text-blue-600" />
+              ১ বছরের পরিকল্পনা
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {generateYearPlan().map((month, index) => (
-                <div key={index} className="border rounded-lg p-3 bg-muted/30">
-                  <h5 className="font-semibold text-sm mb-2">{month.month}</h5>
-                  <div className="text-sm space-y-1">
-                    <div><strong>{month.crop}</strong></div>
-                    <div className="text-muted-foreground">কাজ: {month.action}</div>
+                <div key={index} className="border rounded-lg p-4 bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 hover:shadow-md transition-shadow">
+                  <h5 className="font-semibold text-base mb-3 text-blue-800 flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    {month.month}
+                  </h5>
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <Wheat className="h-4 w-4 text-amber-600 mt-0.5" />
+                      <div>
+                        <div className="font-medium text-sm">{month.crop}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Zap className="h-4 w-4 text-yellow-600 mt-0.5" />
+                      <div className="text-sm text-muted-foreground">কাজ: {month.action}</div>
+                    </div>
                     {month.duration > 0 && (
-                      <div className="text-muted-foreground">~ {month.duration} দিন</div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4 text-purple-600" />
+                        <div className="text-sm text-muted-foreground">~ {month.duration} দিন</div>
+                      </div>
                     )}
                   </div>
                 </div>
