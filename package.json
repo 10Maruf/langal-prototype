@@ -1,8 +1,13 @@
 {
-  "name": "vite_react_shadcn_ts",
-  "private": true,
-  "version": "0.0.0",
+  "name": "langal-prototype",
+  "private": false,
+  "version": "1.0.0",
   "type": "module",
+  "homepage": "https://10maruf.github.io/langal-prototype",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/10maruf/langal-prototype.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,7 +15,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "postbuild": "cp dist/index.html dist/404.html"
+    "postbuild": "copy dist\\index.html dist\\404.html"
   },
   
 
