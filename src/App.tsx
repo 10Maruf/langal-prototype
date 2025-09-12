@@ -32,6 +32,8 @@ import DataOperatorRegisterFarmer from "./pages/DataOperatorRegisterFarmer";
 import DataOperatorFieldData from "./pages/DataOperatorFieldData";
 import DataOperatorReports from "./pages/DataOperatorReports";
 import DataOperatorStatistics from "./pages/DataOperatorStatistics";
+import MarketPrices from "./pages/MarketPrices";
+import AgriculturalNews from "./pages/AgriculturalNews";
 
 const queryClient = new QueryClient();
 
@@ -214,6 +216,22 @@ const App = () => (
               <Route
                 path="/data-operator/statistics"
                 element={<DataOperatorStatistics />}
+              />
+              <Route
+                path="/market-prices"
+                element={
+                  <ProtectedRoute>
+                    <MarketPrices />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/agricultural-news"
+                element={
+                  <ProtectedRoute>
+                    <AgriculturalNews />
+                  </ProtectedRoute>
+                }
               />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

@@ -73,7 +73,7 @@ const FarmerDashboard = () => {
             title: "বাজারদর",
             description: "দৈনিক বাজারদর ও মূল্য তালিকা",
             image: marketPriceBdIcon,
-            route: "/news-feed",
+            route: "/market-prices",
             color: "bg-cyan-500",
             stats: "আজকের দর"
         },
@@ -82,7 +82,7 @@ const FarmerDashboard = () => {
             title: "কৃষি সংবাদ",
             description: "কৃষি বিষয়ক সংবাদ ও তথ্য",
             image: newsIcon,
-            route: "/news-feed", 
+            route: "/agricultural-news",
             color: "bg-amber-500",
             stats: "নতুন সংবাদ"
         },
@@ -163,8 +163,8 @@ const FarmerDashboard = () => {
                             >
                                 <CardContent className="p-6 text-center space-y-3">
                                     <div className="mx-auto w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center p-2">
-                                        <img 
-                                            src={item.image} 
+                                        <img
+                                            src={item.image}
                                             alt={item.title}
                                             className="w-full h-full object-contain"
                                         />
