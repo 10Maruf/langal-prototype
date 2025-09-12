@@ -69,11 +69,11 @@ const FarmerDashboard = () => {
             stats: "৭ দিনের পূর্বাভাস"
         },
         {
-            id: "market-price",
+            id: "news",
             title: "বাজারদর",
             description: "দৈনিক বাজারদর ও মূল্য তালিকা",
             image: marketPriceBdIcon,
-            route: "/market-price",
+            route: "/news-feed",
             color: "bg-cyan-500",
             stats: "আজকের দর"
         },
@@ -82,7 +82,7 @@ const FarmerDashboard = () => {
             title: "কৃষি সংবাদ",
             description: "কৃষি বিষয়ক সংবাদ ও তথ্য",
             image: newsIcon,
-            route: "/agricultural-news", 
+            route: "/news-feed", 
             color: "bg-amber-500",
             stats: "নতুন সংবাদ"
         },
@@ -153,43 +153,39 @@ const FarmerDashboard = () => {
                     />
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {dashboardItems.map((item) => {
                         return (
                             <Card
                                 key={item.id}
-                                className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 border-0 bg-gradient-to-br from-white to-gray-50 overflow-hidden"
+                                className="cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-105 border-2 hover:border-primary/50"
                                 onClick={() => handleNavigation(item.route)}
                             >
-                                <CardContent className="p-0">
-                                    {/* Image Section - Takes majority of the card */}
-                                    <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 p-8 flex items-center justify-center">
+                                <CardContent className="p-6 text-center space-y-3">
+                                    <div className="mx-auto w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center p-2">
                                         <img 
                                             src={item.image} 
                                             alt={item.title}
-                                            className="w-full h-full object-contain drop-shadow-lg"
+                                            className="w-full h-full object-contain"
                                         />
                                     </div>
-                                    
-                                    {/* Content Section - Compact but readable */}
-                                    <div className="p-4 space-y-2">
-                                        <h3 className="font-bold text-lg text-center text-gray-800">
-                                            {item.title}
-                                        </h3>
-                                        <p className="text-sm text-gray-600 text-center leading-relaxed">
+
+                                    <div>
+                                        <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                                        <p className="text-sm text-muted-foreground mb-2 leading-relaxed">
                                             {item.description}
                                         </p>
-                                        <div className="flex items-center justify-between pt-2">
-                                            <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 border-green-200">
-                                                {item.stats}
-                                            </Badge>
-                                            <TTSButton
-                                                text={`${item.title}। ${item.description}। ${item.stats}`}
-                                                size="icon"
-                                                variant="ghost"
-                                                className="h-8 w-8"
-                                            />
-                                        </div>
+                                        <Badge variant="secondary" className="text-xs">
+                                            {item.stats}
+                                        </Badge>
+                                    </div>
+
+                                    <div className="mt-2">
+                                        <TTSButton
+                                            text={`${item.title}। ${item.description}। ${item.stats}`}
+                                            size="icon"
+                                            variant="outline"
+                                        />
                                     </div>
                                 </CardContent>
                             </Card>

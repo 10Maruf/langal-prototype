@@ -13,8 +13,6 @@ import Marketplace from "./pages/Marketplace";
 import Diagnosis from "./pages/Diagnosis";
 import Recommendation from "./pages/Recommendation";
 import NewsFeed from "./pages/NewsFeed";
-import MarketPrice from "./pages/MarketPrice";
-import AgriculturalNews from "./pages/AgriculturalNews";
 import WeatherPlanning from "./pages/WeatherPlanning";
 import Consultation from "./pages/Consultation";
 import Profile from "./pages/Profile";
@@ -110,22 +108,6 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <NewsFeed />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/market-price"
-                element={
-                  <ProtectedRoute>
-                    <MarketPrice />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/agricultural-news"
-                element={
-                  <ProtectedRoute>
-                    <AgriculturalNews />
                   </ProtectedRoute>
                 }
               />
