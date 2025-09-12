@@ -29,8 +29,8 @@ export class SocialFeedService {
                 },
                 content: "এই বছর আমার ধানের ফলন খুবই ভাল হয়েছে। BRRI-29 জাতের ধান বপন করেছিলাম। প্রতি বিঘায় ২৮ মণ ধান পেয়েছি। আর কোন ভাই এই জাত ব্যবহার করেছেন?",
                 images: [
-                    "/src/assets/crops/rice.jpg",
-                    "/src/assets/marketplace/rice seed.png"
+                    "/langal-prototype/src/assets/crops/rice.jpg",
+                    "/langal-prototype/src/assets/marketplace/rice seed.png"
                 ],
                 tags: ["ধান", "BRRI29", "ফলন"],
                 type: "general",
@@ -52,7 +52,7 @@ export class SocialFeedService {
                 },
                 content: "আমার টমেটো গাছে লেট ব্লাইট রোগ দেখা দিয়েছে। কেউ কি বলতে পারবেন কোন ওষুধ ব্যবহার করলে ভাল হবে? ছবি দেখে মতামত দিন।",
                 images: [
-                    "/src/assets/crops/tomato.jpg"
+                    "/langal-prototype/src/assets/crops/tomato.jpg"
                 ],
                 tags: ["টমেটো", "রোগ", "সাহায্য"],
                 type: "question",
@@ -74,7 +74,7 @@ export class SocialFeedService {
                 },
                 content: "আমার কাছে অতিরিক্ত ইউরিয়া সার আছে। ভাল দামে বিক্রয় করব। আগ্রহীরা যোগাযোগ করুন।",
                 images: [
-                    "/src/assets/marketplace/urea-fertilizer.png"
+                    "/langal-prototype/src/assets/marketplace/urea-fertilizer.png"
                 ],
                 tags: ["সার", "বিক্রয়", "ইউরিয়া"],
                 type: "marketplace",
@@ -102,8 +102,8 @@ export class SocialFeedService {
                 },
                 content: "ধানের ব্লাস্ট রোগ প্রতিরোধে ট্রাইসাইক্লাজোল গ্রুপের ছত্রাকনাশক ব্যবহার করুন। প্রতি লিটার পানিতে ০.৬ গ্রাম মিশিয়ে ১৫ দিন পর পর ২-৩ বার স্প্রে করুন। রোগ দেখা দেওয়ার সাথে সাথেই প্রয়োগ করুন।",
                 images: [
-                    "/src/assets/crops/rice.jpg",
-                    "/src/assets/crops/wheat.jpg"
+                    "/langal-prototype/src/assets/crops/rice.jpg",
+                    "/langal-prototype/src/assets/crops/wheat.jpg"
                 ],
                 tags: ["ধান", "ব্লাস্ট", "রোগ", "ছত্রাকনাশক"],
                 type: "expert_advice",
@@ -125,9 +125,9 @@ export class SocialFeedService {
                 },
                 content: "আমি নিয়মিত অর্গানিক সবজি কিনি। কোথায় ভাল মানের অর্গানিক সবজি পাওয়া যায়? দাম একটু বেশি হলেও সমস্যা নেই।",
                 images: [
-                    "/src/assets/crops/eggplant.jpg",
-                    "/src/assets/crops/potato.jpg",
-                    "/src/assets/crops/tomato.jpg"
+                    "/langal-prototype/src/assets/crops/eggplant.jpg",
+                    "/langal-prototype/src/assets/crops/potato.jpg",
+                    "/langal-prototype/src/assets/crops/tomato.jpg"
                 ],
                 tags: ["অর্গানিক", "সবজি", "কেনাকাটা"],
                 type: "question",
@@ -231,7 +231,7 @@ export class SocialFeedService {
                 },
                 content: "আমার গরুর গাড়ি ভাড়া দেওয়ার ব্যবস্থা আছে। ফসল পরিবহনের জন্য যোগাযোগ করুন। দামও কম।",
                 images: [
-                    "/src/assets/marketplace/tractor.png"
+                    "/langal-prototype/src/assets/marketplace/tractor.png"
                 ],
                 tags: ["গরুর গাড়ি", "ভাড়া", "পরিবহন"],
                 type: "marketplace",
@@ -299,7 +299,7 @@ export class SocialFeedService {
                 },
                 content: "আমার পাওয়ার টিলার বিক্রি করব। ভাল অবস্থায় আছে। মাত্র ২ বছর ব্যবহার করেছি। আগ্রহীরা দেখে নিতে পারেন।",
                 images: [
-                    "/src/assets/marketplace/power tiller.png"
+                    "/langal-prototype/src/assets/marketplace/power tiller.png"
                 ],
                 tags: ["পাওয়ার টিলার", "বিক্রয়", "যন্ত্রপাতি"],
                 type: "marketplace",
@@ -346,7 +346,7 @@ export class SocialFeedService {
                 },
                 content: "কম্পোস্ট সার তৈরির সহজ পদ্ধতি জানতে চান? গোবর, খড়, পচা পাতা ও রান্নাঘরের উচ্ছিষ্ট মিশিয়ে ৩-৪ মাস রেখে দিন। মাঝে মাঝে নেড়ে দিবেন।",
                 images: [
-                    "/src/assets/marketplace/compost.png"
+                    "/langal-prototype/src/assets/marketplace/compost.png"
                 ],
                 tags: ["কম্পোস্ট", "জৈব সার", "পদ্ধতি", "পরিবেশ বান্ধব"],
                 type: "advice",
@@ -388,10 +388,10 @@ export class SocialFeedService {
                 },
                 content: "আমার এই বছরের সবজি চাষ খুবই ভাল হয়েছে! প্রতিদিন ৫০০ টাকার মত আয় হচ্ছে। সবাইকে সবজি চাষে উৎসাহিত করি।",
                 images: [
-                    "/src/assets/crops/eggplant.jpg",
-                    "/src/assets/crops/garlic.jpg",
-                    "/src/assets/crops/lentils.jpg",
-                    "/src/assets/crops/mustard.jpg"
+                    "/langal-prototype/src/assets/crops/eggplant.jpg",
+                    "/langal-prototype/src/assets/crops/garlic.jpg",
+                    "/langal-prototype/src/assets/crops/lentils.jpg",
+                    "/langal-prototype/src/assets/crops/mustard.jpg"
                 ],
                 tags: ["সবজি চাষ", "আয়", "সফলতার গল্প", "উৎসাহ"],
                 type: "general",
@@ -433,7 +433,7 @@ export class SocialFeedService {
                 },
                 content: "আমার গমের ক্ষেতে পোকামাকড়ের আক্রমণ হয়েছে। কোন কীটনাশক ভাল কাজ করে? খরচও কম হয় এমন কিছু বলুন।",
                 images: [
-                    "/src/assets/crops/wheat.jpg"
+                    "/langal-prototype/src/assets/crops/wheat.jpg"
                 ],
                 tags: ["গম", "পোকামাকড়", "কীটনাশক", "সাহায্য"],
                 type: "question",
