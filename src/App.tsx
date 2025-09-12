@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import IntroAnimation from "@/components/IntroAnimation";
+import { useState, useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import SocialFeed from "./pages/SocialFeed";
@@ -41,14 +43,36 @@ const queryClient = new QueryClient();
 // Get the base path for GitHub Pages
 const basename = import.meta.env.PROD ? "/langal-prototype" : "";
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-        <NotificationProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter basename={basename}>
+const App = () => {
+  const [showIntro, setShowIntro] = useState(true);
+  const [hasShownIntro, setHasShownIntro] = useState(false);
+
+  useEffect(() => {
+    // Check if intro has been shown in this session
+    const introShown = sessionStorage.getItem('introShown');
+    if (introShown) {
+      setShowIntro(false);
+      setHasShownIntro(true);
+    }
+  }, []);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    setHasShownIntro(true);
+    sessionStorage.setItem('introShown', 'true');
+  };
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <AuthProvider>
+          <NotificationProvider>
+            <Toaster />
+            <Sonner />
+            {showIntro && !hasShownIntro && (
+              <IntroAnimation onComplete={handleIntroComplete} duration={3500} />
+            )}
+            <BrowserRouter basename={basename}>
             <Routes>
               <Route
                 path="/login"
@@ -250,6 +274,7 @@ const App = () => (
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
