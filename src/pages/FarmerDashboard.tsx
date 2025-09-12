@@ -3,17 +3,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TTSButton } from "@/components/ui/tts-button";
 import {
-    Home,
-    Sprout,
-    Stethoscope,
-    ShoppingCart,
-    CloudSun,
-    DollarSign,
-    MessageCircle,
     TrendingUp,
     Users,
-    Calendar
+    CloudSun
 } from "lucide-react";
+
+// Import dashboard icons
+import socialFeedIcon from "@/assets/dashboard-icons/social-feed.png";
+import cropSelectionIcon from "@/assets/dashboard-icons/crop-selection.png";
+import diagnosisIcon from "@/assets/dashboard-icons/diagnosis.png";
+import marketplaceIcon from "@/assets/dashboard-icons/marketplace.png";
+import weatherIcon from "@/assets/dashboard-icons/weather.png";
+import marketPriceIcon from "@/assets/dashboard-icons/market-price.png";
+import consultationIcon from "@/assets/dashboard-icons/consultation.png";
 
 const FarmerDashboard = () => {
     const navigate = useNavigate();
@@ -24,7 +26,7 @@ const FarmerDashboard = () => {
             id: "social",
             title: "কৃষি ফিড",
             description: "কৃষক সম্প্রদায়ের সাথে যোগাযোগ করুন",
-            icon: Home,
+            image: socialFeedIcon,
             route: "/social-feed",
             color: "bg-blue-500",
             stats: "২৪৫ নতুন পোস্ট"
@@ -33,7 +35,7 @@ const FarmerDashboard = () => {
             id: "recommendation",
             title: "ফসল নির্বাচন",
             description: "উপযুক্ত ফসল বেছে নিন",
-            icon: Sprout,
+            image: cropSelectionIcon,
             route: "/recommendation",
             color: "bg-green-500",
             stats: "১৫ টি সুপারিশ"
@@ -42,7 +44,7 @@ const FarmerDashboard = () => {
             id: "diagnosis",
             title: "রোগ নির্ণয়",
             description: "ফসলের রোগ শনাক্ত করুন",
-            icon: Stethoscope,
+            image: diagnosisIcon,
             route: "/diagnosis",
             color: "bg-red-500",
             stats: "AI সহায়তা"
@@ -51,7 +53,7 @@ const FarmerDashboard = () => {
             id: "marketplace",
             title: "বাজার",
             description: "কেনাবেচা করুন",
-            icon: ShoppingCart,
+            image: marketplaceIcon,
             route: "/marketplace",
             color: "bg-purple-500",
             stats: "৮৯ নতুন পণ্য"
@@ -60,7 +62,7 @@ const FarmerDashboard = () => {
             id: "weather",
             title: "আবহাওয়া",
             description: "আবহাওয়ার পূর্বাভাস দেখুন",
-            icon: CloudSun,
+            image: weatherIcon,
             route: "/weather-planning",
             color: "bg-orange-500",
             stats: "৭ দিনের পূর্বাভাস"
@@ -69,7 +71,7 @@ const FarmerDashboard = () => {
             id: "news",
             title: "বাজারদর",
             description: "দৈনিক বাজারদর ও সংবাদ",
-            icon: DollarSign,
+            image: marketPriceIcon,
             route: "/news-feed",
             color: "bg-cyan-500",
             stats: "আজকের দর"
@@ -78,7 +80,7 @@ const FarmerDashboard = () => {
             id: "consultation",
             title: "পরামর্শ",
             description: "বিশেষজ্ঞদের পরামর্শ নিন",
-            icon: MessageCircle,
+            image: consultationIcon,
             route: "/consultation",
             color: "bg-indigo-500",
             stats: "২৪/৭ সেবা"
@@ -143,7 +145,6 @@ const FarmerDashboard = () => {
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {dashboardItems.map((item) => {
-                        const Icon = item.icon;
                         return (
                             <Card
                                 key={item.id}
@@ -151,8 +152,12 @@ const FarmerDashboard = () => {
                                 onClick={() => handleNavigation(item.route)}
                             >
                                 <CardContent className="p-6 text-center space-y-3">
-                                    <div className={`mx-auto w-16 h-16 ${item.color} rounded-full flex items-center justify-center`}>
-                                        <Icon className="h-8 w-8 text-white" />
+                                    <div className="mx-auto w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center p-2">
+                                        <img 
+                                            src={item.image} 
+                                            alt={item.title}
+                                            className="w-full h-full object-contain"
+                                        />
                                     </div>
 
                                     <div>
