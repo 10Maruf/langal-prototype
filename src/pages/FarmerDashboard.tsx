@@ -14,7 +14,8 @@ import cropSelectionIcon from "@/assets/dashboard-icons/crop-selection.png";
 import diagnosisIcon from "@/assets/dashboard-icons/diagnosis.png";
 import marketplaceIcon from "@/assets/dashboard-icons/marketplace.png";
 import weatherIcon from "@/assets/dashboard-icons/weather.png";
-import marketPriceIcon from "@/assets/dashboard-icons/market-price.png";
+import marketPriceBdIcon from "@/assets/dashboard-icons/market-price-bd.png";
+import newsIcon from "@/assets/dashboard-icons/news.png";
 import consultationIcon from "@/assets/dashboard-icons/consultation.png";
 
 const FarmerDashboard = () => {
@@ -70,11 +71,20 @@ const FarmerDashboard = () => {
         {
             id: "news",
             title: "বাজারদর",
-            description: "দৈনিক বাজারদর ও সংবাদ",
-            image: marketPriceIcon,
+            description: "দৈনিক বাজারদর ও মূল্য তালিকা",
+            image: marketPriceBdIcon,
             route: "/news-feed",
             color: "bg-cyan-500",
             stats: "আজকের দর"
+        },
+        {
+            id: "agricultural-news",
+            title: "কৃষি সংবাদ",
+            description: "কৃষি বিষয়ক সংবাদ ও তথ্য",
+            image: newsIcon,
+            route: "/news-feed", 
+            color: "bg-amber-500",
+            stats: "নতুন সংবাদ"
         },
         {
             id: "consultation",
