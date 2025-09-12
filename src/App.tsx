@@ -34,6 +34,7 @@ import DataOperatorReports from "./pages/DataOperatorReports";
 import DataOperatorStatistics from "./pages/DataOperatorStatistics";
 import MarketPrices from "./pages/MarketPrices";
 import AgriculturalNews from "./pages/AgriculturalNews";
+import FarmerDashboard from "./pages/FarmerDashboard";
 
 const queryClient = new QueryClient();
 
@@ -182,6 +183,14 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <ConsultantProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/farmer-dashboard"
+                element={
+                  <ProtectedRoute>
+                    <FarmerDashboard />
                   </ProtectedRoute>
                 }
               />

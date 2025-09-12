@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { Loader2, Users, User, UserCheck, Database } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getAssetPath } from "@/lib/utils";
+import FarmerLogin from "@/components/farmer/FarmerLogin";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState<UserType>("farmer");
+    const [showFarmerLogin, setShowFarmerLogin] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
     const { toast } = useToast();
@@ -107,136 +109,157 @@ const Login = () => {
                 </Button>
             </div>
 
-            <Card className="w-full max-w-md">
-                <CardHeader className="text-center">
-                    <div className="flex flex-col items-center justify-center mb-4">
-                        <img src={getAssetPath("/img/Asset 3.png")} alt="logo" className="h-16 w-16 mb-2" />
-                        <h1 className="text-2xl font-bold text-primary mb-2">লাঙল</h1>
-                        <p className="text-sm text-gray-700 font-medium px-3 py-1 bg-green-50 rounded-md border-l-4 border-green-500">
-                            কৃষকের ডিজিটাল হাতিয়ার
-                        </p>
-                    </div>
-                    <CardTitle className="text-xl">লগইন করুন</CardTitle>
-                    <CardDescription>
-                        আপনার অ্যাকাউন্টে প্রবেশ করতে তথ্য দিন
-                    </CardDescription>
-                </CardHeader>
+            {/* Show Farmer Login Component if farmer is selected */}
+            {activeTab === 'farmer' && showFarmerLogin ? (
+                <FarmerLogin onBackToMainLogin={() => setShowFarmerLogin(false)} />
+            ) : (
+                <Card className="w-full max-w-md">
+                    <CardHeader className="text-center">
+                        <div className="flex flex-col items-center justify-center mb-4">
+                            <img src={getAssetPath("/img/Asset 3.png")} alt="logo" className="h-16 w-16 mb-2" />
+                            <h1 className="text-2xl font-bold text-primary mb-2">লাঙল</h1>
+                            <p className="text-sm text-gray-700 font-medium px-3 py-1 bg-green-50 rounded-md border-l-4 border-green-500">
+                                কৃষকের ডিজিটাল হাতিয়ার
+                            </p>
+                        </div>
+                        <CardTitle className="text-xl">লগইন করুন</CardTitle>
+                        <CardDescription>
+                            আপনার অ্যাকাউন্টে প্রবেশ করতে তথ্য দিন
+                        </CardDescription>
+                    </CardHeader>
 
-                <CardContent>
-                    <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as UserType)}>
-                        <TabsList className="grid w-full grid-cols-3">
-                            <TabsTrigger
-                                value="farmer"
-                                className={`flex items-center gap-1 ${activeTab === 'farmer'
-                                    ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
-                                    : ''
-                                    }`}
+                    <CardContent>
+                        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as UserType)}>
+                            <TabsList className="grid w-full grid-cols-3">
+                                <TabsTrigger
+                                    value="farmer"
+                                    className={`flex items-center gap-1 ${activeTab === 'farmer'
+                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
+                                        : ''
+                                        }`}
+                                >
+                                    {getUserTypeIcon('farmer')}
+                                    <span className="hidden sm:inline">কৃষক</span>
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="expert"
+                                    className={`flex items-center gap-1 ${activeTab === 'expert'
+                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
+                                        : ''
+                                        }`}
+                                >
+                                    {getUserTypeIcon('expert')}
+                                    <span className="hidden sm:inline">বিশেষজ্ঞ</span>
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="customer"
+                                    className={`flex items-center gap-1 ${activeTab === 'customer'
+                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
+                                        : ''
+                                        }`}
+                                >
+                                    {getUserTypeIcon('customer')}
+                                    <span className="hidden sm:inline">ক্রেতা</span>
+                                </TabsTrigger>
+                            </TabsList>
+
+                            <form onSubmit={handleLogin} className="space-y-4 mt-6">
+                                <TabsContent value="farmer" className="space-y-4 mt-0">
+                                    <div className="text-center p-4 bg-green-50 rounded-lg">
+                                        <h3 className="font-semibold text-green-800">কৃষক হিসেবে লগইন</h3>
+                                        <p className="text-sm text-green-600 mb-3">মোবাইল নম্বর দিয়ে OTP এর মাধ্যমে লগইন করুন</p>
+                                        <Button
+                                            type="button"
+                                            onClick={() => setShowFarmerLogin(true)}
+                                            className="w-full bg-green-600 hover:bg-green-700"
+                                        >
+                                            <User className="mr-2 h-4 w-4" />
+                                            কৃষক লগইন
+                                        </Button>
+                                    </div>
+                                </TabsContent>
+
+                                <TabsContent value="expert" className="space-y-4 mt-0">
+                                    <div className="text-center p-4 bg-blue-50 rounded-lg">
+                                        <h3 className="font-semibold text-blue-800">কৃষি বিশেষজ্ঞ হিসেবে লগইন</h3>
+                                        <p className="text-sm text-blue-600">কৃষকদের পরামর্শ ও সহায়তা প্রদান করুন</p>
+                                    </div>
+                                </TabsContent>
+
+                                <TabsContent value="customer" className="space-y-4 mt-0">
+                                    <div className="text-center p-4 bg-purple-50 rounded-lg">
+                                        <h3 className="font-semibold text-purple-800">ক্রেতা হিসেবে লগইন</h3>
+                                        <p className="text-sm text-purple-600">তাজা কৃষিপণ্য কিনুন</p>
+                                    </div>
+                                </TabsContent>
+
+                                {/* Only show email/password fields for expert and customer */}
+                                {(activeTab === 'expert' || activeTab === 'customer') && (
+                                    <>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="email">ইমেইল</Label>
+                                            <Input
+                                                id="email"
+                                                type="email"
+                                                placeholder="আপনার ইমেইল দিন"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="password">পাসওয়ার্ড</Label>
+                                            <Input
+                                                id="password"
+                                                type="password"
+                                                placeholder="আপনার পাসওয়ার্ড দিন"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                            </form>
+                        </Tabs>
+                    </CardContent>
+
+                    <CardFooter className="flex flex-col space-y-4">
+                        {/* Only show login button for expert and customer */}
+                        {(activeTab === 'expert' || activeTab === 'customer') && (
+                            <Button
+                                onClick={handleLogin}
+                                className="w-full"
+                                disabled={isLoading}
                             >
-                                {getUserTypeIcon('farmer')}
-                                <span className="hidden sm:inline">কৃষক</span>
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="expert"
-                                className={`flex items-center gap-1 ${activeTab === 'expert'
-                                    ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
-                                    : ''
-                                    }`}
-                            >
-                                {getUserTypeIcon('expert')}
-                                <span className="hidden sm:inline">বিশেষজ্ঞ</span>
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="customer"
-                                className={`flex items-center gap-1 ${activeTab === 'customer'
-                                    ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
-                                    : ''
-                                    }`}
-                            >
-                                {getUserTypeIcon('customer')}
-                                <span className="hidden sm:inline">ক্রেতা</span>
-                            </TabsTrigger>
-                        </TabsList>
-
-                        <form onSubmit={handleLogin} className="space-y-4 mt-6">
-                            <TabsContent value="farmer" className="space-y-4 mt-0">
-                                <div className="text-center p-4 bg-green-50 rounded-lg">
-                                    <h3 className="font-semibold text-green-800">কৃষক হিসেবে লগইন</h3>
-                                    <p className="text-sm text-green-600">আপনার ফসল ও কৃষিকাজ পরিচালনা করুন</p>
-                                </div>
-                            </TabsContent>
-
-                            <TabsContent value="expert" className="space-y-4 mt-0">
-                                <div className="text-center p-4 bg-blue-50 rounded-lg">
-                                    <h3 className="font-semibold text-blue-800">কৃষি বিশেষজ্ঞ হিসেবে লগইন</h3>
-                                    <p className="text-sm text-blue-600">কৃষকদের পরামর্শ ও সহায়তা প্রদান করুন</p>
-                                </div>
-                            </TabsContent>
-
-                            <TabsContent value="customer" className="space-y-4 mt-0">
-                                <div className="text-center p-4 bg-purple-50 rounded-lg">
-                                    <h3 className="font-semibold text-purple-800">ক্রেতা হিসেবে লগইন</h3>
-                                    <p className="text-sm text-purple-600">তাজা কৃষিপণ্য কিনুন</p>
-                                </div>
-                            </TabsContent>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="email">ইমেইল</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    placeholder="আপনার ইমেইল দিন"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="password">পাসওয়ার্ড</Label>
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    placeholder="আপনার পাসওয়ার্ড দিন"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                            </div>
-                        </form>
-                    </Tabs>
-                </CardContent>
-
-                <CardFooter className="flex flex-col space-y-4">
-                    <Button
-                        onClick={handleLogin}
-                        className="w-full"
-                        disabled={isLoading}
-                    >
-                        {isLoading ? (
-                            <>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                লগইন হচ্ছে...
-                            </>
-                        ) : (
-                            <>
-                                {getUserTypeIcon(activeTab)}
-                                <span className="ml-2">{getUserTypeLabel(activeTab)} হিসেবে লগইন</span>
-                            </>
+                                {isLoading ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        লগইন হচ্ছে...
+                                    </>
+                                ) : (
+                                    <>
+                                        {getUserTypeIcon(activeTab)}
+                                        <span className="ml-2">{getUserTypeLabel(activeTab)} হিসেবে লগইন</span>
+                                    </>
+                                )}
+                            </Button>
                         )}
-                    </Button>
 
-                    <div className="text-center text-sm text-gray-600">
-                        নতুন ব্যবহারকারী?{" "}
-                        <Button
-                            variant="link"
-                            className="p-0 text-green-600 hover:text-green-700 font-medium"
-                            onClick={() => navigate('/register')}
-                        >
-                            নিবন্ধন করুন
-                        </Button>
-                    </div>
-                </CardFooter>
-            </Card>
+                        <div className="text-center text-sm text-gray-600">
+                            নতুন ব্যবহারকারী?{" "}
+                            <Button
+                                variant="link"
+                                className="p-0 text-green-600 hover:text-green-700 font-medium"
+                                onClick={() => navigate('/register')}
+                            >
+                                নিবন্ধন করুন
+                            </Button>
+                        </div>
+                    </CardFooter>
+                </Card>
+            )}
         </div>
     );
 };

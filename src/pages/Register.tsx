@@ -11,6 +11,7 @@ import { Loader2, Users, User, UserCheck, Upload, Camera, FileText, MapPin, Phon
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { getAssetPath } from "@/lib/utils";
+import FarmerRegistration from "@/components/farmer/FarmerRegistration";
 
 interface RegisterData {
     // Common fields
@@ -50,6 +51,7 @@ interface RegisterData {
 const Register = () => {
     const [activeTab, setActiveTab] = useState<UserType>("farmer");
     const [isLoading, setIsLoading] = useState(false);
+    const [showFarmerRegistration, setShowFarmerRegistration] = useState(false);
     const [registerData, setRegisterData] = useState<RegisterData>({
         fullName: "",
         email: "",
@@ -218,476 +220,462 @@ const Register = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-            <Card className="w-full max-w-2xl">
-                <CardHeader className="text-center">
-                    <div className="flex flex-col items-center justify-center mb-4">
-                        <img src={getAssetPath("/img/Asset 3.png")} alt="logo" className="h-16 w-16 mb-2" />
-                        <h1 className="text-2xl font-bold text-primary mb-2">লাঙল</h1>
-                        <p className="text-sm text-gray-700 font-medium px-3 py-1 bg-green-50 rounded-md border-l-4 border-green-500">
-                            কৃষকের ডিজিটাল হাতিয়ার
-                        </p>
-                    </div>
-                    <CardTitle className="text-xl">নতুন অ্যাকাউন্ট তৈরি করুন</CardTitle>
-                    <CardDescription>
-                        আপনার ধরণ অনুযায়ী নিবন্ধন করুন
-                    </CardDescription>
-                </CardHeader>
+            {/* Show Farmer Registration Component if farmer is selected and farmer registration is enabled */}
+            {activeTab === 'farmer' && showFarmerRegistration ? (
+                <FarmerRegistration />
+            ) : (
+                <Card className="w-full max-w-2xl">
+                    <CardHeader className="text-center">
+                        <div className="flex flex-col items-center justify-center mb-4">
+                            <img src={getAssetPath("/img/Asset 3.png")} alt="logo" className="h-16 w-16 mb-2" />
+                            <h1 className="text-2xl font-bold text-primary mb-2">লাঙল</h1>
+                            <p className="text-sm text-gray-700 font-medium px-3 py-1 bg-green-50 rounded-md border-l-4 border-green-500">
+                                কৃষকের ডিজিটাল হাতিয়ার
+                            </p>
+                        </div>
+                        <CardTitle className="text-xl">নতুন অ্যাকাউন্ট তৈরি করুন</CardTitle>
+                        <CardDescription>
+                            আপনার ধরণ অনুযায়ী নিবন্ধন করুন
+                        </CardDescription>
+                    </CardHeader>
 
-                <CardContent>
-                    <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as UserType)}>
-                        <TabsList className="grid w-full grid-cols-3">
-                            <TabsTrigger
-                                value="farmer"
-                                className={`flex items-center gap-1 ${activeTab === 'farmer'
-                                    ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
-                                    : ''
-                                    }`}
-                            >
-                                {getUserTypeIcon('farmer')}
-                                <span className="hidden sm:inline">কৃষক</span>
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="expert"
-                                className={`flex items-center gap-1 ${activeTab === 'expert'
-                                    ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
-                                    : ''
-                                    }`}
-                            >
-                                {getUserTypeIcon('expert')}
-                                <span className="hidden sm:inline">বিশেষজ্ঞ</span>
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="customer"
-                                className={`flex items-center gap-1 ${activeTab === 'customer'
-                                    ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
-                                    : ''
-                                    }`}
-                            >
-                                {getUserTypeIcon('customer')}
-                                <span className="hidden sm:inline">ক্রেতা</span>
-                            </TabsTrigger>
-                        </TabsList>
+                    <CardContent>
+                        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as UserType)}>
+                            <TabsList className="grid w-full grid-cols-3">
+                                <TabsTrigger
+                                    value="farmer"
+                                    className={`flex items-center gap-1 ${activeTab === 'farmer'
+                                        ? 'data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:border-green-500'
+                                        : ''
+                                        }`}
+                                >
+                                    {getUserTypeIcon('farmer')}
+                                    <span className="hidden sm:inline">কৃষক</span>
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="expert"
+                                    className={`flex items-center gap-1 ${activeTab === 'expert'
+                                        ? 'data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:border-blue-500'
+                                        : ''
+                                        }`}
+                                >
+                                    {getUserTypeIcon('expert')}
+                                    <span className="hidden sm:inline">বিশেষজ্ঞ</span>
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="customer"
+                                    className={`flex items-center gap-1 ${activeTab === 'customer'
+                                        ? 'data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:border-purple-500'
+                                        : ''
+                                        }`}
+                                >
+                                    {getUserTypeIcon('customer')}
+                                    <span className="hidden sm:inline">ক্রেতা</span>
+                                </TabsTrigger>
+                            </TabsList>
 
-                        <form onSubmit={handleRegister} className="space-y-6 mt-6">
-                            {/* Common Fields */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="fullName">পূর্ণ নাম *</Label>
-                                    <Input
-                                        id="fullName"
-                                        type="text"
-                                        placeholder="আপনার পূর্ণ নাম"
-                                        value={registerData.fullName}
-                                        onChange={(e) => handleInputChange('fullName', e.target.value)}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="email">ইমেইল *</Label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="আপনার ইমেইল"
-                                        value={registerData.email}
-                                        onChange={(e) => handleInputChange('email', e.target.value)}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="phone">মোবাইল নম্বর *</Label>
-                                    <Input
-                                        id="phone"
-                                        type="tel"
-                                        placeholder="০১৭xxxxxxxx"
-                                        value={registerData.phone}
-                                        onChange={(e) => handleInputChange('phone', e.target.value)}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="nidNumber">জাতীয় পরিচয়পত্র নম্বর *</Label>
-                                    <Input
-                                        id="nidNumber"
-                                        type="text"
-                                        placeholder="১০ বা ১৭ ডিজিটের NID"
-                                        value={registerData.nidNumber}
-                                        onChange={(e) => handleInputChange('nidNumber', e.target.value)}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="password">পাসওয়ার্ড *</Label>
-                                    <Input
-                                        id="password"
-                                        type="password"
-                                        placeholder="কমপক্ষে ৬ অক্ষর"
-                                        value={registerData.password}
-                                        onChange={(e) => handleInputChange('password', e.target.value)}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="confirmPassword">পাসওয়ার্ড নিশ্চিত করুন *</Label>
-                                    <Input
-                                        id="confirmPassword"
-                                        type="password"
-                                        placeholder="পাসওয়ার্ড আবার লিখুন"
-                                        value={registerData.confirmPassword}
-                                        onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="address">ঠিকানা *</Label>
-                                <Textarea
-                                    id="address"
-                                    placeholder="আপনার সম্পূর্ণ ঠিকানা"
-                                    value={registerData.address}
-                                    onChange={(e) => handleInputChange('address', e.target.value)}
-                                    required
-                                />
-                            </div>
-
-                            {/* Photo Requirements */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label>প্রোফাইল ছবি * (সামনের দিকের ছবি)</Label>
-                                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                                        <Camera className="mx-auto h-8 w-8 text-gray-400 mb-2" />
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            onClick={() => profilePhotoRef.current?.click()}
-                                            className="mb-2"
-                                        >
-                                            <Upload className="h-4 w-4 mr-2" />
-                                            ছবি আপলোড করুন
-                                        </Button>
-                                        <input
-                                            ref={profilePhotoRef}
-                                            type="file"
-                                            accept="image/*"
-                                            className="hidden"
-                                            onChange={(e) => handleFileChange('profilePhoto', e.target.files?.[0] || null)}
-                                        />
-                                        {registerData.profilePhoto && (
-                                            <p className="text-sm text-green-600">{registerData.profilePhoto.name}</p>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label>জাতীয় পরিচয়পত্রের ছবি * (স্পষ্ট ও পড়া যায় এমন)</Label>
-                                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                                        <IdCard className="mx-auto h-8 w-8 text-gray-400 mb-2" />
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            onClick={() => nidPhotoRef.current?.click()}
-                                            className="mb-2"
-                                        >
-                                            <Upload className="h-4 w-4 mr-2" />
-                                            NID আপলোড করুন
-                                        </Button>
-                                        <input
-                                            ref={nidPhotoRef}
-                                            type="file"
-                                            accept="image/*"
-                                            className="hidden"
-                                            onChange={(e) => handleFileChange('nidPhoto', e.target.files?.[0] || null)}
-                                        />
-                                        {registerData.nidPhoto && (
-                                            <p className="text-sm text-green-600">{registerData.nidPhoto.name}</p>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Type-specific fields */}
+                            {/* Farmer Registration Button */}
                             <TabsContent value="farmer" className="space-y-4 mt-6">
                                 <Alert className="border-green-200 bg-green-50">
                                     <User className="h-4 w-4 text-green-600" />
                                     <AlertDescription className="text-green-800">
-                                        কৃষক হিসেবে নিবন্ধনের জন্য আপনার কৃষি সম্পর্কিত তথ্য প্রয়োজন
+                                        কৃষক নিবন্ধনের জন্য একটি বিশেষ প্রক্রিয়া রয়েছে। আপনার মোবাইল নম্বর, পরিচয়পত্র এবং OTP যাচাইয়ের মাধ্যমে নিবন্ধন সম্পন্ন করুন।
                                     </AlertDescription>
                                 </Alert>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="farmSize">জমির পরিমাণ (একর) *</Label>
-                                        <Input
-                                            id="farmSize"
-                                            type="text"
-                                            placeholder="যেমন: ২.৫ একর"
-                                            value={registerData.farmSize || ''}
-                                            onChange={(e) => handleInputChange('farmSize', e.target.value)}
-                                            className="border-green-200 focus:border-green-500"
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="farmType">চাষের ধরণ *</Label>
-                                        <Input
-                                            id="farmType"
-                                            type="text"
-                                            placeholder="যেমন: ধান, সবজি, ফল"
-                                            value={registerData.farmType || ''}
-                                            onChange={(e) => handleInputChange('farmType', e.target.value)}
-                                            className="border-green-200 focus:border-green-500"
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2 md:col-span-2">
-                                        <Label htmlFor="experience">কৃষিকাজের অভিজ্ঞতা *</Label>
-                                        <Textarea
-                                            id="experience"
-                                            placeholder="আপনার কৃষিকাজের অভিজ্ঞতা বর্ণনা করুন"
-                                            value={registerData.experience || ''}
-                                            onChange={(e) => handleInputChange('experience', e.target.value)}
-                                            className="border-green-200 focus:border-green-500"
-                                        />
-                                    </div>
+                                <div className="text-center">
+                                    <Button
+                                        onClick={() => setShowFarmerRegistration(true)}
+                                        className="w-full bg-green-600 hover:bg-green-700"
+                                        size="lg"
+                                    >
+                                        <User className="mr-2 h-4 w-4" />
+                                        কৃষক নিবন্ধন শুরু করুন
+                                    </Button>
                                 </div>
                             </TabsContent>
 
-                            <TabsContent value="expert" className="space-y-4 mt-6">
-                                <Alert className="border-blue-200 bg-blue-50">
-                                    <UserCheck className="h-4 w-4 text-blue-600" />
-                                    <AlertDescription className="text-blue-800">
-                                        কৃষি বিশেষজ্ঞ হিসেবে নিবন্ধনের জন্য আপনার শিক্ষাগত যোগ্যতা ও সার্টিফিকেট প্রয়োজন
-                                    </AlertDescription>
-                                </Alert>
+                            {/* Expert and Customer forms remain the same */}
+                            <form onSubmit={handleRegister} className="space-y-6 mt-6">
+                                {/* Common Fields for Expert and Customer only */}
+                                {(activeTab === 'expert' || activeTab === 'customer') && (
+                                    <>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="fullName">পূর্ণ নাম *</Label>
+                                                <Input
+                                                    id="fullName"
+                                                    type="text"
+                                                    placeholder="আপনার পূর্ণ নাম"
+                                                    value={registerData.fullName}
+                                                    onChange={(e) => handleInputChange('fullName', e.target.value)}
+                                                    required
+                                                />
+                                            </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="qualification">শিক্ষাগত যোগ্যতা *</Label>
-                                        <Input
-                                            id="qualification"
-                                            type="text"
-                                            placeholder="যেমন: কৃষি বিষয়ে স্নাতক/স্নাতকোত্তর"
-                                            value={registerData.qualification || ''}
-                                            onChange={(e) => handleInputChange('qualification', e.target.value)}
-                                            className="border-blue-200 focus:border-blue-500"
-                                        />
-                                    </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="email">ইমেইল *</Label>
+                                                <Input
+                                                    id="email"
+                                                    type="email"
+                                                    placeholder="আপনার ইমেইল"
+                                                    value={registerData.email}
+                                                    onChange={(e) => handleInputChange('email', e.target.value)}
+                                                    required
+                                                />
+                                            </div>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="specialization">বিশেষত্ব *</Label>
-                                        <Input
-                                            id="specialization"
-                                            type="text"
-                                            placeholder="যেমন: ফসল উৎপাদন, মাটি বিজ্ঞান"
-                                            value={registerData.specialization || ''}
-                                            onChange={(e) => handleInputChange('specialization', e.target.value)}
-                                            className="border-blue-200 focus:border-blue-500"
-                                        />
-                                    </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="phone">মোবাইল নম্বর *</Label>
+                                                <Input
+                                                    id="phone"
+                                                    type="tel"
+                                                    placeholder="০১৭xxxxxxxx"
+                                                    value={registerData.phone}
+                                                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                                                    required
+                                                />
+                                            </div>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="experience_years">অভিজ্ঞতা (বছর) *</Label>
-                                        <Input
-                                            id="experience_years"
-                                            type="number"
-                                            placeholder="যেমন: ৫"
-                                            value={registerData.experience_years || ''}
-                                            onChange={(e) => handleInputChange('experience_years', e.target.value)}
-                                            className="border-blue-200 focus:border-blue-500"
-                                        />
-                                    </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="nidNumber">জাতীয় পরিচয়পত্র নম্বর *</Label>
+                                                <Input
+                                                    id="nidNumber"
+                                                    type="text"
+                                                    placeholder="১০ বা ১৭ ডিজিটের NID"
+                                                    value={registerData.nidNumber}
+                                                    onChange={(e) => handleInputChange('nidNumber', e.target.value)}
+                                                    required
+                                                />
+                                            </div>
 
-                                    <div className="space-y-2">
-                                        <Label>সার্টিফিকেট/ডিগ্রি *</Label>
-                                        <div className="border-2 border-dashed border-blue-300 rounded-lg p-4 text-center bg-blue-50/30">
-                                            <FileText className="mx-auto h-8 w-8 text-blue-400 mb-2" />
-                                            <Button
-                                                type="button"
-                                                variant="outline"
-                                                onClick={() => certificationRef.current?.click()}
-                                                className="mb-2 border-blue-300 text-blue-600 hover:bg-blue-50"
-                                            >
-                                                <Upload className="h-4 w-4 mr-2" />
-                                                সার্টিফিকেট আপলোড
-                                            </Button>
-                                            <input
-                                                ref={certificationRef}
-                                                type="file"
-                                                accept="image/*,application/pdf"
-                                                className="hidden"
-                                                onChange={(e) => handleFileChange('certification', e.target.files?.[0] || null)}
+                                            <div className="space-y-2">
+                                                <Label htmlFor="password">পাসওয়ার্ড *</Label>
+                                                <Input
+                                                    id="password"
+                                                    type="password"
+                                                    placeholder="কমপক্ষে ৬ অক্ষর"
+                                                    value={registerData.password}
+                                                    onChange={(e) => handleInputChange('password', e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <Label htmlFor="confirmPassword">পাসওয়ার্ড নিশ্চিত করুন *</Label>
+                                                <Input
+                                                    id="confirmPassword"
+                                                    type="password"
+                                                    placeholder="পাসওয়ার্ড আবার লিখুন"
+                                                    value={registerData.confirmPassword}
+                                                    onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="address">ঠিকানা *</Label>
+                                            <Textarea
+                                                id="address"
+                                                placeholder="আপনার সম্পূর্ণ ঠিকানা"
+                                                value={registerData.address}
+                                                onChange={(e) => handleInputChange('address', e.target.value)}
+                                                required
                                             />
-                                            {registerData.certification && (
-                                                <p className="text-sm text-blue-600">{registerData.certification.name}</p>
-                                            )}
+                                        </div>
+
+                                        {/* Photo Requirements */}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <Label>প্রোফাইল ছবি * (সামনের দিকের ছবি)</Label>
+                                                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                                    <Camera className="mx-auto h-8 w-8 text-gray-400 mb-2" />
+                                                    <Button
+                                                        type="button"
+                                                        variant="outline"
+                                                        onClick={() => profilePhotoRef.current?.click()}
+                                                        className="mb-2"
+                                                    >
+                                                        <Upload className="h-4 w-4 mr-2" />
+                                                        ছবি আপলোড করুন
+                                                    </Button>
+                                                    <input
+                                                        ref={profilePhotoRef}
+                                                        type="file"
+                                                        accept="image/*"
+                                                        className="hidden"
+                                                        onChange={(e) => handleFileChange('profilePhoto', e.target.files?.[0] || null)}
+                                                    />
+                                                    {registerData.profilePhoto && (
+                                                        <p className="text-sm text-green-600">{registerData.profilePhoto.name}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <Label>জাতীয় পরিচয়পত্রের ছবি * (স্পষ্ট ও পড়া যায় এমন)</Label>
+                                                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                                    <IdCard className="mx-auto h-8 w-8 text-gray-400 mb-2" />
+                                                    <Button
+                                                        type="button"
+                                                        variant="outline"
+                                                        onClick={() => nidPhotoRef.current?.click()}
+                                                        className="mb-2"
+                                                    >
+                                                        <Upload className="h-4 w-4 mr-2" />
+                                                        NID আপলোড করুন
+                                                    </Button>
+                                                    <input
+                                                        ref={nidPhotoRef}
+                                                        type="file"
+                                                        accept="image/*"
+                                                        className="hidden"
+                                                        onChange={(e) => handleFileChange('nidPhoto', e.target.files?.[0] || null)}
+                                                    />
+                                                    {registerData.nidPhoto && (
+                                                        <p className="text-sm text-green-600">{registerData.nidPhoto.name}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+
+                                {/* Type-specific fields */}
+                                <TabsContent value="expert" className="space-y-4 mt-6">
+                                    <Alert className="border-blue-200 bg-blue-50">
+                                        <UserCheck className="h-4 w-4 text-blue-600" />
+                                        <AlertDescription className="text-blue-800">
+                                            কৃষি বিশেষজ্ঞ হিসেবে নিবন্ধনের জন্য আপনার শিক্ষাগত যোগ্যতা ও সার্টিফিকেট প্রয়োজন
+                                        </AlertDescription>
+                                    </Alert>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="qualification">শিক্ষাগত যোগ্যতা *</Label>
+                                            <Input
+                                                id="qualification"
+                                                type="text"
+                                                placeholder="যেমন: কৃষি বিষয়ে স্নাতক/স্নাতকোত্তর"
+                                                value={registerData.qualification || ''}
+                                                onChange={(e) => handleInputChange('qualification', e.target.value)}
+                                                className="border-blue-200 focus:border-blue-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="specialization">বিশেষত্ব *</Label>
+                                            <Input
+                                                id="specialization"
+                                                type="text"
+                                                placeholder="যেমন: ফসল উৎপাদন, মাটি বিজ্ঞান"
+                                                value={registerData.specialization || ''}
+                                                onChange={(e) => handleInputChange('specialization', e.target.value)}
+                                                className="border-blue-200 focus:border-blue-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="experience_years">অভিজ্ঞতা (বছর) *</Label>
+                                            <Input
+                                                id="experience_years"
+                                                type="number"
+                                                placeholder="যেমন: ৫"
+                                                value={registerData.experience_years || ''}
+                                                onChange={(e) => handleInputChange('experience_years', e.target.value)}
+                                                className="border-blue-200 focus:border-blue-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label>সার্টিফিকেট/ডিগ্রি *</Label>
+                                            <div className="border-2 border-dashed border-blue-300 rounded-lg p-4 text-center bg-blue-50/30">
+                                                <FileText className="mx-auto h-8 w-8 text-blue-400 mb-2" />
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    onClick={() => certificationRef.current?.click()}
+                                                    className="mb-2 border-blue-300 text-blue-600 hover:bg-blue-50"
+                                                >
+                                                    <Upload className="h-4 w-4 mr-2" />
+                                                    সার্টিফিকেট আপলোড
+                                                </Button>
+                                                <input
+                                                    ref={certificationRef}
+                                                    type="file"
+                                                    accept="image/*,application/pdf"
+                                                    className="hidden"
+                                                    onChange={(e) => handleFileChange('certification', e.target.files?.[0] || null)}
+                                                />
+                                                {registerData.certification && (
+                                                    <p className="text-sm text-blue-600">{registerData.certification.name}</p>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Additional Expert Fields */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {/* Additional Expert Fields */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="institution">প্রতিষ্ঠান *</Label>
+                                            <Input
+                                                id="institution"
+                                                type="text"
+                                                placeholder="যেমন: কৃষি বিশ্ববিদ্যালয়, কৃষি অফিস"
+                                                value={registerData.institution || ''}
+                                                onChange={(e) => handleInputChange('institution', e.target.value)}
+                                                className="border-blue-200 focus:border-blue-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="consultationFee">পরামর্শ ফি (টাকা)</Label>
+                                            <Input
+                                                id="consultationFee"
+                                                type="number"
+                                                placeholder="যেমন: 500"
+                                                value={registerData.consultationFee || ''}
+                                                onChange={(e) => handleInputChange('consultationFee', e.target.value)}
+                                                className="border-blue-200 focus:border-blue-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="division">বিভাগ *</Label>
+                                            <Input
+                                                id="division"
+                                                type="text"
+                                                placeholder="যেমন: ঢাকা, চট্টগ্রাম"
+                                                value={registerData.division || ''}
+                                                onChange={(e) => handleInputChange('division', e.target.value)}
+                                                className="border-blue-200 focus:border-blue-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="district">জেলা *</Label>
+                                            <Input
+                                                id="district"
+                                                type="text"
+                                                placeholder="যেমন: ঢাকা, ময়মনসিংহ"
+                                                value={registerData.district || ''}
+                                                onChange={(e) => handleInputChange('district', e.target.value)}
+                                                className="border-blue-200 focus:border-blue-500"
+                                            />
+                                        </div>
+                                    </div>
+
                                     <div className="space-y-2">
-                                        <Label htmlFor="institution">প্রতিষ্ঠান *</Label>
+                                        <Label htmlFor="availability">কাজের সময়</Label>
                                         <Input
-                                            id="institution"
+                                            id="availability"
                                             type="text"
-                                            placeholder="যেমন: কৃষি বিশ্ববিদ্যালয়, কৃষি অফিস"
-                                            value={registerData.institution || ''}
-                                            onChange={(e) => handleInputChange('institution', e.target.value)}
+                                            placeholder="যেমন: সকাল ৯টা - বিকাল ৫টা"
+                                            value={registerData.availability || ''}
+                                            onChange={(e) => handleInputChange('availability', e.target.value)}
                                             className="border-blue-200 focus:border-blue-500"
                                         />
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="consultationFee">পরামর্শ ফি (টাকা)</Label>
-                                        <Input
-                                            id="consultationFee"
-                                            type="number"
-                                            placeholder="যেমন: 500"
-                                            value={registerData.consultationFee || ''}
-                                            onChange={(e) => handleInputChange('consultationFee', e.target.value)}
+                                        <Label htmlFor="bio">সংক্ষিপ্ত পরিচয়</Label>
+                                        <Textarea
+                                            id="bio"
+                                            placeholder="আপনার কাজের অভিজ্ঞতা ও বিশেষত্ব সম্পর্কে লিখুন..."
+                                            value={registerData.bio || ''}
+                                            onChange={(e) => handleInputChange('bio', e.target.value)}
                                             className="border-blue-200 focus:border-blue-500"
+                                            rows={4}
                                         />
                                     </div>
+                                </TabsContent>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="division">বিভাগ *</Label>
-                                        <Input
-                                            id="division"
-                                            type="text"
-                                            placeholder="যেমন: ঢাকা, চট্টগ্রাম"
-                                            value={registerData.division || ''}
-                                            onChange={(e) => handleInputChange('division', e.target.value)}
-                                            className="border-blue-200 focus:border-blue-500"
-                                        />
+                                <TabsContent value="customer" className="space-y-4 mt-6">
+                                    <Alert className="border-purple-200 bg-purple-50">
+                                        <Users className="h-4 w-4 text-purple-600" />
+                                        <AlertDescription className="text-purple-800">
+                                            ক্রেতা হিসেবে নিবন্ধনের জন্য আপনার ব্যবসায়িক তথ্য প্রয়োজন
+                                        </AlertDescription>
+                                    </Alert>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="businessName">ব্যবসার নাম *</Label>
+                                            <Input
+                                                id="businessName"
+                                                type="text"
+                                                placeholder="আপনার ব্যবসার নাম"
+                                                value={registerData.businessName || ''}
+                                                onChange={(e) => handleInputChange('businessName', e.target.value)}
+                                                className="border-purple-200 focus:border-purple-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="businessType">ব্যবসার ধরণ *</Label>
+                                            <Input
+                                                id="businessType"
+                                                type="text"
+                                                placeholder="যেমন: খুচরা, পাইকারি, রেস্তোরাঁ"
+                                                value={registerData.businessType || ''}
+                                                onChange={(e) => handleInputChange('businessType', e.target.value)}
+                                                className="border-purple-200 focus:border-purple-500"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2 md:col-span-2">
+                                            <Label htmlFor="tradeLicense">ট্রেড লাইসেন্স নম্বর *</Label>
+                                            <Input
+                                                id="tradeLicense"
+                                                type="text"
+                                                placeholder="আপনার ট্রেড লাইসেন্স নম্বর"
+                                                value={registerData.tradeLicense || ''}
+                                                onChange={(e) => handleInputChange('tradeLicense', e.target.value)}
+                                                className="border-purple-200 focus:border-purple-500"
+                                            />
+                                        </div>
                                     </div>
+                                </TabsContent>
+                            </form>
+                        </Tabs>
+                    </CardContent>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="district">জেলা *</Label>
-                                        <Input
-                                            id="district"
-                                            type="text"
-                                            placeholder="যেমন: ঢাকা, ময়মনসিংহ"
-                                            value={registerData.district || ''}
-                                            onChange={(e) => handleInputChange('district', e.target.value)}
-                                            className="border-blue-200 focus:border-blue-500"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="availability">কাজের সময়</Label>
-                                    <Input
-                                        id="availability"
-                                        type="text"
-                                        placeholder="যেমন: সকাল ৯টা - বিকাল ৫টা"
-                                        value={registerData.availability || ''}
-                                        onChange={(e) => handleInputChange('availability', e.target.value)}
-                                        className="border-blue-200 focus:border-blue-500"
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="bio">সংক্ষিপ্ত পরিচয়</Label>
-                                    <Textarea
-                                        id="bio"
-                                        placeholder="আপনার কাজের অভিজ্ঞতা ও বিশেষত্ব সম্পর্কে লিখুন..."
-                                        value={registerData.bio || ''}
-                                        onChange={(e) => handleInputChange('bio', e.target.value)}
-                                        className="border-blue-200 focus:border-blue-500"
-                                        rows={4}
-                                    />
-                                </div>
-                            </TabsContent>
-
-                            <TabsContent value="customer" className="space-y-4 mt-6">
-                                <Alert className="border-purple-200 bg-purple-50">
-                                    <Users className="h-4 w-4 text-purple-600" />
-                                    <AlertDescription className="text-purple-800">
-                                        ক্রেতা হিসেবে নিবন্ধনের জন্য আপনার ব্যবসায়িক তথ্য প্রয়োজন
-                                    </AlertDescription>
-                                </Alert>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="businessName">ব্যবসার নাম *</Label>
-                                        <Input
-                                            id="businessName"
-                                            type="text"
-                                            placeholder="আপনার ব্যবসার নাম"
-                                            value={registerData.businessName || ''}
-                                            onChange={(e) => handleInputChange('businessName', e.target.value)}
-                                            className="border-purple-200 focus:border-purple-500"
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="businessType">ব্যবসার ধরণ *</Label>
-                                        <Input
-                                            id="businessType"
-                                            type="text"
-                                            placeholder="যেমন: খুচরা, পাইকারি, রেস্তোরাঁ"
-                                            value={registerData.businessType || ''}
-                                            onChange={(e) => handleInputChange('businessType', e.target.value)}
-                                            className="border-purple-200 focus:border-purple-500"
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2 md:col-span-2">
-                                        <Label htmlFor="tradeLicense">ট্রেড লাইসেন্স নম্বর *</Label>
-                                        <Input
-                                            id="tradeLicense"
-                                            type="text"
-                                            placeholder="আপনার ট্রেড লাইসেন্স নম্বর"
-                                            value={registerData.tradeLicense || ''}
-                                            onChange={(e) => handleInputChange('tradeLicense', e.target.value)}
-                                            className="border-purple-200 focus:border-purple-500"
-                                        />
-                                    </div>
-                                </div>
-                            </TabsContent>
-                        </form>
-                    </Tabs>
-                </CardContent>
-
-                <CardFooter className="flex flex-col space-y-4">
-                    <Button
-                        onClick={handleRegister}
-                        className={`w-full ${activeTab === 'farmer'
-                            ? 'bg-green-600 hover:bg-green-700'
-                            : activeTab === 'expert'
-                                ? 'bg-blue-600 hover:bg-blue-700'
-                                : 'bg-purple-600 hover:bg-purple-700'
-                            }`}
-                        disabled={isLoading}
-                        size="lg"
-                    >
-                        {isLoading ? (
-                            <>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                নিবন্ধন হচ্ছে...
-                            </>
-                        ) : (
-                            <>
-                                {getUserTypeIcon(activeTab)}
-                                <span className="ml-2">{getUserTypeLabel(activeTab)} হিসেবে নিবন্ধন করুন</span>
-                            </>
+                    <CardFooter className="flex flex-col space-y-4">
+                        {/* Only show register button for expert and customer */}
+                        {(activeTab === 'expert' || activeTab === 'customer') && (
+                            <Button
+                                onClick={handleRegister}
+                                className={`w-full ${activeTab === 'expert'
+                                    ? 'bg-blue-600 hover:bg-blue-700'
+                                    : 'bg-purple-600 hover:bg-purple-700'
+                                    }`}
+                                disabled={isLoading}
+                                size="lg"
+                            >
+                                {isLoading ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        নিবন্ধন হচ্ছে...
+                                    </>
+                                ) : (
+                                    <>
+                                        {getUserTypeIcon(activeTab)}
+                                        <span className="ml-2">{getUserTypeLabel(activeTab)} হিসেবে নিবন্ধন করুন</span>
+                                    </>
+                                )}
+                            </Button>
                         )}
-                    </Button>
 
-                    <div className="text-center text-sm text-gray-600">
-                        ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
-                        <Button variant="link" className="p-0" onClick={() => navigate('/login')}>
-                            লগইন করুন
-                        </Button>
-                    </div>
-                </CardFooter>
-            </Card>
+                        <div className="text-center text-sm text-gray-600">
+                            ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
+                            <Button variant="link" className="p-0" onClick={() => navigate('/login')}>
+                                লগইন করুন
+                            </Button>
+                        </div>
+                    </CardFooter>
+                </Card>
+            )}
         </div>
     );
 };
