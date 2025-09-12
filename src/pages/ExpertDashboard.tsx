@@ -221,9 +221,6 @@ const ExpertDashboard = () => {
                             <Card>
                                 <CardHeader>
                                     <CardTitle>সামাজিক ফিড</CardTitle>
-                                    <CardDescription>
-                                        কৃষক সম্প্রদায়ের সাথে যোগাযোগ ও তথ্য শেয়ার করুন
-                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <div className="text-center py-8">
