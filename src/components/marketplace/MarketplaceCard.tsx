@@ -11,8 +11,8 @@ export interface MarketplaceItem {
   description: string;
   price: number;
   currency: string;
-  category: "machinery" | "crops" | "seeds" | "fertilizer";
-  type: "sell" | "rent";
+  category: "machinery" | "crops" | "seeds" | "fertilizer" | "livestock" | "tools" | "other";
+  type: "sell" | "rent" | "buy" | "service";
   location: string;
   seller: {
     name: string;
@@ -36,14 +36,27 @@ export const MarketplaceCard = ({ item, onContact, onSave }: MarketplaceCardProp
     machinery: "bg-blue-50 text-blue-700 border-blue-200",
     crops: "bg-green-50 text-green-700 border-green-200",
     seeds: "bg-yellow-50 text-yellow-700 border-yellow-200",
-    fertilizer: "bg-purple-50 text-purple-700 border-purple-200"
+    fertilizer: "bg-purple-50 text-purple-700 border-purple-200",
+    livestock: "bg-orange-50 text-orange-700 border-orange-200",
+    tools: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    other: "bg-gray-50 text-gray-700 border-gray-200"
   };
 
   const categoryLabels = {
     machinery: "যন্ত্রপাতি",
     crops: "ফসল",
     seeds: "বীজ",
-    fertilizer: "সার"
+    fertilizer: "সার",
+    livestock: "গবাদি পশু",
+    tools: "হাতিয়ার",
+    other: "অন্যান্য"
+  };
+
+  const typeLabels = {
+    sell: "বিক্রয়",
+    rent: "ভাড়া",
+    buy: "কিনতে চাই",
+    service: "সেবা"
   };
 
   return (
@@ -58,7 +71,7 @@ export const MarketplaceCard = ({ item, onContact, onSave }: MarketplaceCardProp
               {categoryLabels[item.category]}
             </Badge>
             <Badge variant={item.type === "sell" ? "default" : "outline"}>
-              {item.type === "sell" ? "বিক্রয়" : "ভাড়া"}
+              {typeLabels[item.type]}
             </Badge>
           </div>
           <div className="flex items-center gap-1">

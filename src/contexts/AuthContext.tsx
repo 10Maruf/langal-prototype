@@ -10,6 +10,7 @@ export interface User {
     nidNumber?: string;
     phone?: string;
     profilePhoto?: string;
+    location?: string;
 }
 
 interface AuthContextType {
@@ -53,6 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     name: userType === 'farmer' ? 'কৃষক' : userType === 'expert' ? 'কৃষি বিশেষজ্ঞ' : 'ক্রেতা',
                     type: userType,
                     email: email,
+                    location: userType === 'farmer' ? 'বাংলাদেশ' : userType === 'expert' ? 'কৃষি বিশ্ববিদ্যালয়' : 'ঢাকা'
                 };
 
                 setUser(mockUser);

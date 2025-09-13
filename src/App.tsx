@@ -37,6 +37,7 @@ import DataOperatorStatistics from "./pages/DataOperatorStatistics";
 import MarketPrices from "./pages/MarketPrices";
 import AgriculturalNews from "./pages/AgriculturalNews";
 import FarmerDashboard from "./pages/FarmerDashboard";
+import CentralMarketplace from "./pages/CentralMarketplace";
 
 const queryClient = new QueryClient();
 
@@ -111,6 +112,14 @@ const App = () => {
                   element={
                     <ProtectedRoute>
                       <Marketplace />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/central-marketplace"
+                  element={
+                    <ProtectedRoute>
+                      <CentralMarketplace />
                     </ProtectedRoute>
                   }
                 />
