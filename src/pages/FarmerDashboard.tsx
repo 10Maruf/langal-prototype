@@ -55,7 +55,7 @@ const FarmerDashboard = () => {
             title: "বাজার",
             description: "কেনাবেচা করুন",
             image: marketplaceIcon,
-            route: "/marketplace",
+            route: "/central-marketplace",
             color: "bg-purple-500",
             stats: "৮৯ নতুন পণ্য"
         },

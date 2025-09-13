@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Package, Truck } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import CustomerSocialFeed from "./CustomerSocialFeed";
-import CustomerMarketplace from "./CustomerMarketplace";
+import CentralMarketplace from "./CentralMarketplace";
 import CustomerNewsFeed from "./CustomerNewsFeed";
 import CustomerHistory from "./CustomerHistory";
 
@@ -19,7 +19,7 @@ const CustomerDashboard = () => {
             case "social":
                 return <CustomerSocialFeed />;
             case "marketplace":
-                return <CustomerMarketplace />;
+                return <CentralMarketplace />;
             case "news":
                 return <CustomerNewsFeed />;
             case "history":

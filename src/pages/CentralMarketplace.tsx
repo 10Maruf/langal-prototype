@@ -7,10 +7,10 @@ import { ListingManager } from "@/components/marketplace/ListingManager";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { 
-    Plus, 
-    ShoppingCart, 
-    TrendingUp, 
+import {
+    Plus,
+    ShoppingCart,
+    TrendingUp,
     ArrowLeft,
     User,
     Filter
@@ -24,7 +24,7 @@ const CentralMarketplace = () => {
     const { toast } = useToast();
     const { user } = useAuth();
     const navigate = useNavigate();
-    
+
     // State management
     const [listings, setListings] = useState<MarketplaceListing[]>([]);
     const [showCreateListing, setShowCreateListing] = useState(false);
@@ -166,7 +166,7 @@ const CentralMarketplace = () => {
     return (
         <div className="pb-20">
             {/* Header */}
-            <div className="bg-card border-b p-4 sticky top-0 z-40 backdrop-blur-md bg-background/95">
+            <div className="border-b p-4 sticky top-0 z-40 backdrop-blur-md bg-background/95">
                 <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                         <Button
@@ -188,8 +188,8 @@ const CentralMarketplace = () => {
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             size="sm"
                             onClick={() => setShowListingManager(true)}
                         >

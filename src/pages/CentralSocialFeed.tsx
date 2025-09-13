@@ -6,14 +6,14 @@ import { PersonalPostManager } from "@/components/social/PersonalPostManager";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { 
-    Plus, 
-    TrendingUp, 
-    Users, 
-    Zap, 
-    MessageSquare, 
-    UserCheck, 
-    Filter, 
+import {
+    Plus,
+    TrendingUp,
+    Users,
+    Zap,
+    MessageSquare,
+    UserCheck,
+    Filter,
     ArrowLeft,
     Settings,
     User
@@ -27,7 +27,7 @@ const CentralSocialFeed = () => {
     const { toast } = useToast();
     const { user } = useAuth();
     const navigate = useNavigate();
-    
+
     // State management
     const [posts, setPosts] = useState<SocialPost[]>([]);
     const [showCreatePost, setShowCreatePost] = useState(false);
@@ -103,7 +103,7 @@ const CentralSocialFeed = () => {
             title: "বাজারে যাচ্ছে",
             description: "বাজার পেজে নিয়ে যাওয়া হচ্ছে...",
         });
-        navigate("/marketplace");
+        navigate("/central-marketplace");
     };
 
     // Handle post delete
@@ -166,7 +166,7 @@ const CentralSocialFeed = () => {
     };
 
     // Filter available filters based on user type
-    const availableFilters = FEED_FILTERS.filter(filter => 
+    const availableFilters = FEED_FILTERS.filter(filter =>
         !filter.userTypes || filter.userTypes.includes(user?.type || "farmer")
     );
 
@@ -186,12 +186,12 @@ const CentralSocialFeed = () => {
                         </Button>
                         <div>
                             <h1 className="text-xl font-bold">{getPageTitle()}</h1>
-                           
+
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             size="sm"
                             onClick={() => setShowPostManager(true)}
                         >
@@ -209,11 +209,11 @@ const CentralSocialFeed = () => {
                 <div className="flex gap-2 overflow-x-auto pb-2">
                     {availableFilters.map((filter) => {
                         const IconComponent = filter.icon === "Users" ? Users :
-                                           filter.icon === "TrendingUp" ? TrendingUp :
-                                           filter.icon === "Zap" ? Zap :
-                                           filter.icon === "MessageSquare" ? MessageSquare :
-                                           filter.icon === "UserCheck" ? UserCheck : Users;
-                        
+                            filter.icon === "TrendingUp" ? TrendingUp :
+                                filter.icon === "Zap" ? Zap :
+                                    filter.icon === "MessageSquare" ? MessageSquare :
+                                        filter.icon === "UserCheck" ? UserCheck : Users;
+
                         const isExpertAdvice = filter.id === 'expert_advice';
                         const isActive = feedFilter === filter.id;
 
@@ -223,11 +223,10 @@ const CentralSocialFeed = () => {
                                 variant={isActive ? "default" : "outline"}
                                 size="sm"
                                 onClick={() => setFeedFilter(filter.id)}
-                                className={`flex-shrink-0 ${
-                                    isExpertAdvice && !isActive
+                                className={`flex-shrink-0 ${isExpertAdvice && !isActive
                                         ? 'border-blue-300 text-blue-700 hover:bg-blue-50'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 <IconComponent className="h-4 w-4 mr-1" />
                                 {filter.label}
