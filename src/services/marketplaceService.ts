@@ -6,6 +6,7 @@ import { MarketplaceListing, ListingAuthor, ListingFilter } from "@/types/market
 import powerTillerImg from "@/assets/marketplace/power tiller.png";
 import riceSeedImg from "@/assets/marketplace/rice seed.png";
 import ureaFertilizerImg from "@/assets/marketplace/urea-fertilizer.png";
+import ureaImg from "@/assets/marketplace/Urea.png";
 import wheatGrainsImg from "@/assets/marketplace/wheat grains.png";
 import harvesterImg from "@/assets/marketplace/harvester.png";
 import tractorImg from "@/assets/marketplace/tractor.png";
@@ -166,6 +167,151 @@ class MarketplaceService {
                 views: 52,
                 saves: 18,
                 contacts: 22
+            },
+            {
+                id: "6",
+                author: {
+                    name: "শফিক উল্লাহ",
+                    avatar: "/placeholder.svg",
+                    location: "যশোর",
+                    verified: true,
+                    rating: 4.9,
+                    userType: "farmer"
+                },
+                title: "ট্রাক্টর ভাড়া (৭৫ এইচপি)",
+                description: "মাহিন্দ্রা ট্রাক্টর ৭৫ এইচপি। চাষাবাদ, পরিবহন সব কাজের জন্য উপযুক্ত। অভিজ্ঞ চালক সহ।",
+                price: 2800,
+                currency: "BDT",
+                category: "machinery",
+                type: "rent",
+                status: "active",
+                images: [tractorImg],
+                tags: ["ট্রাক্টর", "৭৫এইচপি", "ভাড়া", "চাষাবাদ"],
+                location: "যশোর",
+                contactInfo: {
+                    phone: "01715-456789"
+                },
+                createdAt: "2024-01-10T08:30:00Z",
+                updatedAt: "2024-01-10T08:30:00Z",
+                views: 67,
+                saves: 23,
+                contacts: 31
+            },
+            {
+                id: "7",
+                author: {
+                    name: "রফিকুল ইসলাম",
+                    avatar: "/placeholder.svg",
+                    location: "রংপুর",
+                    verified: false,
+                    rating: 4.4,
+                    userType: "farmer"
+                },
+                title: "সাবমার্সিবল পাম্প বিক্রয়",
+                description: "৩ ইঞ্চি সাবমার্সিবল পাম্প। ১ বছরের ওয়ারেন্টি সহ। ১০০ ফুট পর্যন্ত পানি তুলতে পারে।",
+                price: 8500,
+                currency: "BDT",
+                category: "machinery",
+                type: "sell",
+                status: "active",
+                images: [pumpImg],
+                tags: ["পাম্প", "সাবমার্সিবল", "সেচ"],
+                location: "রংপুর",
+                contactInfo: {
+                    phone: "01818-765432"
+                },
+                createdAt: "2024-01-09T15:45:00Z",
+                updatedAt: "2024-01-09T15:45:00Z",
+                views: 34,
+                saves: 11,
+                contacts: 9
+            },
+            {
+                id: "8",
+                author: {
+                    name: "হাবিবুর রহমান",
+                    avatar: "/placeholder.svg",
+                    location: "সিলেট",
+                    verified: true,
+                    rating: 4.7,
+                    userType: "farmer"
+                },
+                title: "জৈব কম্পোস্ট সার",
+                description: "গোবর ও খড় দিয়ে তৈরি জৈব কম্পোস্ট। সম্পূর্ণ প্রাকৃতিক। মাটির উর্বরতা বৃদ্ধি করে।",
+                price: 15,
+                currency: "BDT",
+                category: "fertilizer",
+                type: "sell",
+                status: "active",
+                images: [compostImg],
+                tags: ["কম্পোস্ট", "জৈব সার", "প্রাকৃতিক"],
+                location: "সিলেট",
+                contactInfo: {
+                    phone: "01912-654321"
+                },
+                createdAt: "2024-01-08T12:15:00Z",
+                updatedAt: "2024-01-08T12:15:00Z",
+                views: 29,
+                saves: 8,
+                contacts: 14
+            },
+            {
+                id: "9",
+                author: {
+                    name: "আলমগীর হোসেন",
+                    avatar: "/placeholder.svg",
+                    location: "বরিশাল",
+                    verified: true,
+                    rating: 4.6,
+                    userType: "farmer"
+                },
+                title: "তাজা আলু বিক্রয়",
+                description: "দেশী জাতের আলু। এই সপ্তাহে তোলা। প্রতি কেজি ২৫ টাকা। পাইকারি দরেও পাওয়া যাবে।",
+                price: 25,
+                currency: "BDT",
+                category: "crops",
+                type: "sell",
+                status: "active",
+                images: [potatoImg],
+                tags: ["আলু", "তাজা", "দেশী"],
+                location: "বরিশাল",
+                contactInfo: {
+                    phone: "01612-987654"
+                },
+                createdAt: "2024-01-07T10:00:00Z",
+                updatedAt: "2024-01-07T10:00:00Z",
+                views: 41,
+                saves: 16,
+                contacts: 28
+            },
+            {
+                id: "10",
+                author: {
+                    name: "মোস্তফা কামাল",
+                    avatar: "/placeholder.svg",
+                    location: "কুষ্টিয়া",
+                    verified: false,
+                    rating: 4.5,
+                    userType: "farmer"
+                },
+                title: "ইউরিয়া সার (২৫ কেজি ব্যাগ)",
+                description: "ব্র্যান্ডেড ইউরিয়া সার। নতুন স্টক। ফসলের জন্য অত্যন্ত কার্যকর। ছোট চাষিদের জন্য সুবিধাজনক প্যাকেট।",
+                price: 480,
+                currency: "BDT",
+                category: "fertilizer",
+                type: "sell",
+                status: "active",
+                images: [ureaImg],
+                tags: ["ইউরিয়া", "সার", "২৫কেজি", "ব্র্যান্ডেড"],
+                location: "কুষ্টিয়া",
+                contactInfo: {
+                    phone: "01715-123456"
+                },
+                createdAt: "2024-01-06T14:20:00Z",
+                updatedAt: "2024-01-06T14:20:00Z",
+                views: 33,
+                saves: 7,
+                contacts: 11
             }
         ];
 
