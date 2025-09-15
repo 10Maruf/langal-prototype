@@ -1,32 +1,6 @@
 // Central Social Feed Service - Facebook-like system for all user types
 import { SocialPost, PostComment } from '@/types/social';
 
-// Report interfaces
-export interface PostReport {
-    id: string;
-    postId: string;
-    postContent: string;
-    postAuthor: string;
-    reportedBy: string;
-    reason: string;
-    reportDate: string;
-    status: 'pending' | 'reviewed' | 'resolved' | 'dismissed';
-    notes?: string;
-}
-
-export interface CommentReport {
-    id: string;
-    postId: string;
-    commentId: string;
-    commentContent: string;
-    commentAuthor: string;
-    reportedBy: string;
-    reason: string;
-    reportDate: string;
-    status: 'pending' | 'reviewed' | 'resolved' | 'dismissed';
-    notes?: string;
-}
-
 // Import crop images
 import riceImg from '@/assets/crops/rice.jpg';
 import tomatoImg from '@/assets/crops/tomato.jpg';
@@ -50,8 +24,6 @@ export class SocialFeedService {
     private comments: { [postId: string]: PostComment[] } = {};
     private reportedPosts: Set<string> = new Set();
     private reportedComments: Set<string> = new Set();
-    private postReports: PostReport[] = [];
-    private commentReports: CommentReport[] = [];
 
     static getInstance(): SocialFeedService {
         if (!SocialFeedService.instance) {
@@ -638,135 +610,17 @@ export class SocialFeedService {
     }
 
     // Report post
-    reportPost(postId: string, reason: string, reportedBy: string = "ব্যবহারকারী"): boolean {
-        const post = this.posts.find(p => p.id === postId);
-        if (!post) return false;
-
-        const report: PostReport = {
-            id: `pr_${Date.now()}`,
-            postId,
-            postContent: post.content,
-            postAuthor: post.author.name,
-            reportedBy,
-            reason,
-            reportDate: new Date().toISOString(),
-            status: 'pending'
-        };
-
-        this.postReports.push(report);
+    reportPost(postId: string, reason: string): boolean {
         this.reportedPosts.add(postId);
         console.log(`Post ${postId} reported for: ${reason}`);
         return true;
     }
 
     // Report comment
-    reportComment(postId: string, commentId: string, reason: string, reportedBy: string = "ব্যবহারকারী"): boolean {
-        const comments = this.comments[postId];
-        const comment = comments?.find(c => c.id === commentId);
-        if (!comment) return false;
-
-        const report: CommentReport = {
-            id: `cr_${Date.now()}`,
-            postId,
-            commentId,
-            commentContent: comment.content,
-            commentAuthor: comment.author.name,
-            reportedBy,
-            reason,
-            reportDate: new Date().toISOString(),
-            status: 'pending'
-        };
-
-        this.commentReports.push(report);
+    reportComment(postId: string, commentId: string, reason: string): boolean {
         this.reportedComments.add(commentId);
         console.log(`Comment ${commentId} reported for: ${reason}`);
         return true;
-    }
-
-    // Get all pending reports for data operators
-    getPendingReports(): { postReports: PostReport[], commentReports: CommentReport[] } {
-        return {
-            postReports: this.postReports.filter(r => r.status === 'pending'),
-            commentReports: this.commentReports.filter(r => r.status === 'pending')
-        };
-    }
-
-    // Get all reports with filtering
-    getAllReports(status?: string): { postReports: PostReport[], commentReports: CommentReport[] } {
-        let postReports = this.postReports;
-        let commentReports = this.commentReports;
-
-        if (status) {
-            postReports = postReports.filter(r => r.status === status);
-            commentReports = commentReports.filter(r => r.status === status);
-        }
-
-        return { postReports, commentReports };
-    }
-
-    // Handle post report by data operator
-    handlePostReport(reportId: string, action: 'resolved' | 'dismissed', notes?: string): boolean {
-        const report = this.postReports.find(r => r.id === reportId);
-        if (!report) return false;
-
-        report.status = action;
-        report.notes = notes;
-
-        if (action === 'resolved') {
-            // Remove the post if resolved
-            this.deletePostByOperator(report.postId);
-        }
-
-        return true;
-    }
-
-    // Handle comment report by data operator
-    handleCommentReport(reportId: string, action: 'resolved' | 'dismissed', notes?: string): boolean {
-        const report = this.commentReports.find(r => r.id === reportId);
-        if (!report) return false;
-
-        report.status = action;
-        report.notes = notes;
-
-        if (action === 'resolved') {
-            // Remove the comment if resolved
-            this.deleteCommentByOperator(report.postId, report.commentId);
-        }
-
-        return true;
-    }
-
-    // Delete post by data operator (different from user delete)
-    deletePostByOperator(postId: string): boolean {
-        const postIndex = this.posts.findIndex(p => p.id === postId);
-        
-        if (postIndex !== -1) {
-            this.posts.splice(postIndex, 1);
-            delete this.comments[postId];
-            this.reportedPosts.delete(postId);
-            return true;
-        }
-        return false;
-    }
-
-    // Delete comment by data operator
-    deleteCommentByOperator(postId: string, commentId: string): boolean {
-        const comments = this.comments[postId];
-        if (comments) {
-            const commentIndex = comments.findIndex(c => c.id === commentId);
-            if (commentIndex !== -1) {
-                comments.splice(commentIndex, 1);
-                this.reportedComments.delete(commentId);
-                
-                // Update post comment count
-                const post = this.posts.find(p => p.id === postId);
-                if (post) {
-                    post.comments = Math.max(0, post.comments - 1);
-                }
-                return true;
-            }
-        }
-        return false;
     }
 
     // Delete post (only own posts)

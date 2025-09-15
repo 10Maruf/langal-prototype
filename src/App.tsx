@@ -73,13 +73,7 @@ const App = () => {
             {showIntro && !hasShownIntro && (
               <IntroAnimation onComplete={handleIntroComplete} duration={3500} />
             )}
-            <BrowserRouter 
-              basename={basename}
-              future={{
-                v7_startTransition: true,
-                v7_relativeSplatPath: true
-              }}
-            >
+            <BrowserRouter basename={basename}>
               <Routes>
                 <Route
                   path="/login"
