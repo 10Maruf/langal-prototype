@@ -119,7 +119,7 @@ export const EnhancedPostCard = ({
     const handleReportPost = () => {
         if (!reportReason) return;
 
-        socialFeedService.reportPost(post.id, reportReason);
+        socialFeedService.reportPost(post.id, reportReason, user?.name || "ব্যবহারকারী");
         setShowReportDialog(false);
         setReportReason("");
         
@@ -133,7 +133,7 @@ export const EnhancedPostCard = ({
     const handleReportComment = (commentId: string) => {
         if (!reportReason) return;
 
-        socialFeedService.reportComment(post.id, commentId, reportReason);
+        socialFeedService.reportComment(post.id, commentId, reportReason, user?.name || "ব্যবহারকারী");
         setShowReportDialog(false);
         setReportReason("");
         setReportCommentId(null);
