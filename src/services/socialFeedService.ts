@@ -637,6 +637,43 @@ export class SocialFeedService {
         return false;
     }
 
+    // Admin delete post (for reports)
+    adminDeletePost(postId: string): boolean {
+        const postIndex = this.posts.findIndex(p => p.id === postId);
+        
+        if (postIndex !== -1) {
+            this.posts.splice(postIndex, 1);
+            delete this.comments[postId];
+            return true;
+        }
+        return false;
+    }
+
+    // Admin delete comment (for reports)
+    adminDeleteComment(commentId: string, postId: string): boolean {
+        if (this.comments[postId]) {
+            const commentIndex = this.comments[postId].findIndex(c => c.id === commentId);
+            if (commentIndex !== -1) {
+                this.comments[postId].splice(commentIndex, 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Get post by ID
+    getPostById(postId: string): SocialPost | null {
+        return this.posts.find(p => p.id === postId) || null;
+    }
+
+    // Get comment by ID
+    getCommentById(commentId: string, postId: string): PostComment | null {
+        if (this.comments[postId]) {
+            return this.comments[postId].find(c => c.id === commentId) || null;
+        }
+        return null;
+    }
+
     // Update post
     updatePost(postId: string, updates: Partial<SocialPost>, userId: string): SocialPost | null {
         const post = this.posts.find(p => 

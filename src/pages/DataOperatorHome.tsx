@@ -10,7 +10,8 @@ import {
     CheckCircle,
     AlertTriangle,
     Home,
-    ArrowLeft
+    ArrowLeft,
+    Shield
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -79,6 +80,16 @@ const DataOperatorHome = () => {
             hoverColor: "hover:bg-teal-600",
             count: 20,
             route: "/data-operator/statistics"
+        },
+        {
+            id: "social-feed-reports",
+            title: "সোশ্যাল ফিড রিপোর্ট",
+            description: "পোস্ট ও কমেন্ট রিপোর্ট পরিচালনা",
+            icon: Shield,
+            bgColor: "bg-red-500",
+            hoverColor: "hover:bg-red-600",
+            count: 15,
+            route: "/data-operator/social-feed-reports"
         }
     ];
 

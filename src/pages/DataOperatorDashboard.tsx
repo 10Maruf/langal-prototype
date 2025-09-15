@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,16 +22,32 @@ import {
     Activity,
     PieChart
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ProfileVerification from "@/components/data-operator/ProfileVerification";
 import CropVerification from "@/components/data-operator/CropVerification";
 import DashboardStats from "@/components/data-operator/DashboardStats";
 import RegisterFarmer from "@/components/data-operator/RegisterFarmer";
 import FieldDataCollection from "@/components/data-operator/FieldDataCollection";
+import SocialFeedReportMng from "@/components/data-operator/SocialFeedReportMng";
 
 const DataOperatorDashboard = () => {
     const [activeTab, setActiveTab] = useState("home-dashboard");
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Set active tab based on URL hash on component mount
+    useEffect(() => {
+        const hash = location.hash.replace('#', '');
+        if (hash && hash !== activeTab) {
+            setActiveTab(hash);
+        }
+    }, [location.hash]);
+
+    // Update URL hash when tab changes
+    const handleTabChange = (tabId: string) => {
+        setActiveTab(tabId);
+        navigate(`/data-operator/dashboard#${tabId}`, { replace: true });
+    };
 
     // Dashboard menu items with icons
     const dashboardMenuItems = [
@@ -88,8 +104,20 @@ const DataOperatorDashboard = () => {
             bgColor: "bg-teal-500",
             hoverColor: "hover:bg-teal-600",
             count: 20
+        },
+        {
+            id: "social-feed-reports",
+            title: "সোশ্যাল ফিড রিপোর্ট",
+            description: "পোস্ট ও কমেন্ট রিপোর্ট পরিচালনা",
+            icon: Shield,
+            bgColor: "bg-red-500",
+            hoverColor: "hover:bg-red-600",
+            count: 15
         }
     ];
+
+    console.log('Dashboard Menu Items:', dashboardMenuItems);
+    console.log('Social Feed Reports Item:', dashboardMenuItems.find(item => item.id === 'social-feed-reports'));
 
     // Enhanced farmer data with NID verification
     const [farmers, setFarmers] = useState([
@@ -439,7 +467,7 @@ const DataOperatorDashboard = () => {
                 {/* Dashboard Statistics */}
                 <DashboardStats farmers={farmers} cropVerifications={cropVerifications} />
 
-                <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+                <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
                     <TabsList className="grid w-full grid-cols-5">
                         <TabsTrigger value="home-dashboard" className="flex items-center gap-2">
                             <Home className="h-4 w-4" />
@@ -527,13 +555,14 @@ const DataOperatorDashboard = () => {
 
                         {/* Main Menu Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {dashboardMenuItems.map((item) => {
+                            {dashboardMenuItems.map((item, index) => {
                                 const IconComponent = item.icon;
+                                console.log(`Rendering menu item ${index}:`, item.title, item.id);
                                 return (
                                     <Card
                                         key={item.id}
                                         className="cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 border-0 shadow-md"
-                                        onClick={() => setActiveTab(item.id)}
+                                        onClick={() => handleTabChange(item.id)}
                                     >
                                         <CardContent className="p-8 text-center">
                                             <div className={`${item.bgColor} ${item.hoverColor} w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors duration-300`}>
@@ -713,6 +742,11 @@ const DataOperatorDashboard = () => {
                                 </div>
                             </CardContent>
                         </Card>
+                    </TabsContent>
+
+                    {/* সোশ্যাল ফিড রিপোর্ট ম্যানেজমেন্ট */}
+                    <TabsContent value="social-feed-reports" className="space-y-4">
+                        <SocialFeedReportMng />
                     </TabsContent>
                 </Tabs>
             </div>

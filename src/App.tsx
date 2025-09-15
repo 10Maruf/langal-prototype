@@ -34,6 +34,7 @@ import DataOperatorRegisterFarmer from "./pages/DataOperatorRegisterFarmer";
 import DataOperatorFieldData from "./pages/DataOperatorFieldData";
 import DataOperatorReports from "./pages/DataOperatorReports";
 import DataOperatorStatistics from "./pages/DataOperatorStatistics";
+import SocialFeedReportMng from "./components/data-operator/SocialFeedReportMng";
 import MarketPrices from "./pages/MarketPrices";
 import AgriculturalNews from "./pages/AgriculturalNews";
 import FarmerDashboard from "./pages/FarmerDashboard";
@@ -258,6 +259,10 @@ const App = () => {
                 <Route
                   path="/data-operator/statistics"
                   element={<DataOperatorStatistics />}
+                />
+                <Route
+                  path="/data-operator/social-feed-reports"
+                  element={<SocialFeedReportMng />}
                 />
                 <Route
                   path="/market-prices"

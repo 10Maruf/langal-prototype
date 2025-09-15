@@ -170,3 +170,40 @@ export const FEED_FILTERS: FeedFilter[] = [
         userTypes: ["expert"]
     }
 ];
+
+// Report Management Types
+export type ReportType = "post" | "comment";
+export type ReportStatus = "pending" | "accepted" | "declined";
+
+export interface ReportDetail {
+    id: string;
+    reportType: ReportType;
+    contentId: string; // Post ID or Comment ID
+    postId?: string; // Only for comment reports
+    reportedBy: {
+        id: string;
+        name: string;
+        userType: UserType;
+    };
+    reason: PostReportReason | CommentReportReason;
+    description?: string;
+    reportedAt: string;
+    status: ReportStatus;
+    reviewedBy?: string;
+    reviewedAt?: string;
+    content: {
+        text: string;
+        author: PostAuthor;
+        postedAt: string;
+        images?: string[];
+    };
+}
+
+export interface ReportStats {
+    totalReports: number;
+    pendingReports: number;
+    acceptedReports: number;
+    declinedReports: number;
+    postReports: number;
+    commentReports: number;
+}
