@@ -28,6 +28,7 @@ import CropVerification from "@/components/data-operator/CropVerification";
 import DashboardStats from "@/components/data-operator/DashboardStats";
 import RegisterFarmer from "@/components/data-operator/RegisterFarmer";
 import FieldDataCollection from "@/components/data-operator/FieldDataCollection";
+import ReportManagement from "@/components/data-operator/ReportManagement";
 
 const DataOperatorDashboard = () => {
     const [activeTab, setActiveTab] = useState("home-dashboard");
@@ -88,6 +89,15 @@ const DataOperatorDashboard = () => {
             bgColor: "bg-teal-500",
             hoverColor: "hover:bg-teal-600",
             count: 20
+        },
+        {
+            id: "report-management",
+            title: "রিপোর্ট ব্যবস্থাপনা",
+            description: "সোশ্যাল ফিডের রিপোর্ট পর্যালোচনা ও সমাধান",
+            icon: Shield,
+            bgColor: "bg-red-500",
+            hoverColor: "hover:bg-red-600",
+            count: 5
         }
     ];
 
@@ -461,6 +471,10 @@ const DataOperatorDashboard = () => {
                             <MapPin className="h-4 w-4" />
                             <span className="hidden sm:inline">আবহাওয়া তথ্য</span>
                         </TabsTrigger>
+                        <TabsTrigger value="report-management" className="flex items-center gap-2">
+                            <Shield className="h-4 w-4" />
+                            <span className="hidden sm:inline">রিপোর্ট ব্যবস্থাপনা</span>
+                        </TabsTrigger>
                     </TabsList>          {/* কৃষকের প্রফাইল ভেরিফাই */}
 
                     {/* হোম ড্যাশবোর্ড */}
@@ -713,6 +727,11 @@ const DataOperatorDashboard = () => {
                                 </div>
                             </CardContent>
                         </Card>
+                    </TabsContent>
+                    
+                    {/* রিপোর্ট ব্যবস্থাপনা */}
+                    <TabsContent value="report-management" className="space-y-4">
+                        <ReportManagement />
                     </TabsContent>
                 </Tabs>
             </div>
